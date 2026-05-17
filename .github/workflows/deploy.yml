@@ -1,0 +1,114 @@
+name: Next Workflow Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      PROJECT_NAME: ${{ github.event.repository.name }}
+
+    steps:
+      # 1. Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Detectar package manager
+      - name: Detect package manager
+        id: pm
+        run: |
+          if [ -f "pnpm-lock.yaml" ]; then
+            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "install_cmd=pnpm install --frozen-lockfile" >> $GITHUB_OUTPUT
+            echo "📦 Detected: pnpm"
+          elif [ -f "package-lock.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "install_cmd=npm ci" >> $GITHUB_OUTPUT
+            echo "📦 Detected: npm"
+          else
+            echo "❌ No lockfile found (pnpm-lock.yaml or package-lock.json)"
+            exit 1
+          fi
+
+      # 3. Setup pnpm (somente se necessário)
+      - name: Setup pnpm
+        if: steps.pm.outputs.manager == 'pnpm'
+        uses: pnpm/action-setup@v4
+
+      # 4. Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: ${{ steps.pm.outputs.manager }}
+
+      # 5. Remove Git metadata
+      - name: Remove Git metadata
+        run: rm -rf .git
+
+      # 6. Validar secrets
+      - name: Validate environment
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "❌ VERCEL_TOKEN not found"
+            exit 1
+          fi
+          if [ -z "$VERCEL_ORG_ID" ]; then
+            echo "❌ VERCEL_ORG_ID not found"
+            exit 1
+          fi
+          echo "✅ Environment OK"
+          echo "Project: $PROJECT_NAME"
+          echo "Package manager: ${{ steps.pm.outputs.manager }}"
+
+      # 7. Instalar Vercel CLI
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      # 8. Link ou cria projeto automaticamente
+      - name: Link or create project
+        run: |
+          echo "🔗 Linking project: $PROJECT_NAME"
+          vercel link \
+            --yes \
+            --token="$VERCEL_TOKEN" \
+            --scope="$VERCEL_ORG_ID" \
+            --project="$PROJECT_NAME"
+
+          echo "📦 Reading project info"
+          cat .vercel/project.json
+
+          PROJECT_ID=$(node -p "require('./.vercel/project.json').projectId")
+          ORG_ID=$(node -p "require('./.vercel/project.json').orgId")
+
+          echo "VERCEL_PROJECT_ID=$PROJECT_ID" >> $GITHUB_ENV
+          echo "VERCEL_ORG_ID=$ORG_ID" >> $GITHUB_ENV
+
+      # 9. Pull das variáveis da Vercel
+      - name: Pull environment
+        run: |
+          vercel pull \
+            --yes \
+            --environment=production \
+            --token="$VERCEL_TOKEN"
+
+      # 10. Build
+      - name: Build project
+        run: |
+          vercel build \
+            --prod \
+            --token="$VERCEL_TOKEN"
+
+      # 11. Deploy (forçado)
+      - name: Deploy to production
+        run: |
+          vercel deploy \
+            --prebuilt \
+            --prod \
+            --token="$VERCEL_TOKEN" \
+            --force
