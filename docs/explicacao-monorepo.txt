@@ -1,0 +1,171 @@
+================================================================================
+EXPLICACAO — MONOREPO, PACKAGES E TURBOREPO (WI.UI)
+================================================================================
+
+O QUE E MONOREPO?
+-----------------
+Monorepo = varios projetos/pacotes dentro de 1 repositorio so.
+No nosso caso: o site Next.js + CLI + registry = tudo no mesmo repo.
+
+Vantagem: compartilhar codigo, versionar junto, CI/CD unico.
+
+
+PNPM WORKSPACES (pnpm-workspace.yaml)
+--------------------------------------
+Arquivo: pnpm-workspace.yaml
+
+```yaml
+packages:
+  - "packages/*"
+```
+
+Isso diz pro pnpm: "olha, dentro de packages/ tem sub-projetos com package.json proprio."
+Cada pasta em packages/ vira um pacote independente que pode ser importado por outros.
+
+Na pratica:
+- packages/cli/ → @wi-ui/cli (o CLI que usuario instala)
+- packages/registry/ → @wi-ui/registry (onde moram os componentes source)
+- raiz/ → site Next.js (app principal)
+
+Quando roda `pnpm install` na raiz, ele instala deps de TODOS os packages.
+
+
+PACKAGES/CLI (@wi-ui/cli)
+--------------------------
+Arquivo: packages/cli/package.json
+
+O que e: CLI que usuario final usa pra adicionar componentes no projeto dele.
+Comandos futuros: `npx wi-ui init`, `npx wi-ui add button`, `npx wi-ui list`
+
+Detalhes:
+- "bin": { "wi-ui": "./dist/index.js" } → quando usuario instala, cria comando `wi-ui`
+- Usa `citty` como framework CLI (alternativa ao commander, so 5KB, TypeScript nativo)
+- Build com `tsc` → gera dist/
+- Sera publicado no npm como @wi-ui/cli
+
+Estrutura:
+  packages/cli/
+  ├── package.json
+  ├── src/
+  │   ├── index.ts        ← entry point (define comandos)
+  │   └── commands/
+  │       └── add.ts      ← comando "add" (placeholder)
+  └── dist/               ← output build (gitignored)
+
+
+PACKAGES/REGISTRY (@wi-ui/registry)
+-------------------------------------
+Arquivo: packages/registry/package.json
+
+O que e: "source of truth" dos componentes. Aqui ficam os arquivos .tsx reais
+dos componentes (Button, Card, Countdown, etc.) + metadata (deps, categoria).
+
+O site le daqui pra mostrar docs/previews.
+A API registry serve os arquivos daqui pro CLI baixar.
+
+Estrutura futura:
+  packages/registry/
+  ├── ui/
+  │   ├── button/
+  │   │   ├── button.tsx
+  │   │   └── meta.json
+  │   └── card/
+  ├── fomo/
+  │   ├── countdown-timer/
+  │   └── social-proof-popup/
+  ├── animation/
+  │   └── animated-text/
+  └── blocks/
+      └── hero-centered/
+
+
+TURBOREPO (turbo.json)
+-----------------------
+Arquivo: turbo.json
+
+O que e: ferramenta que orquestra builds/scripts em monorepos.
+Em vez de rodar `pnpm build` em cada package manualmente, Turbo faz tudo em paralelo
+respeitando dependencias entre packages.
+
+```json
+{
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],        ← primeiro builda dependencias, depois o pacote
+      "outputs": [".next/**", "dist/**"]  ← cacheia output (proximo build = instantaneo se nada mudou)
+    },
+    "lint": { "dependsOn": ["^lint"] },
+    "dev": { "cache": false, "persistent": true },  ← dev server nao cacheia
+    "test": { "dependsOn": ["^build"] }  ← testa so depois de buildar
+  }
+}
+```
+
+Beneficios:
+- Cache inteligente: se nada mudou, build pula (0ms)
+- Paralelismo: roda lint de todos packages ao mesmo tempo
+- Ordem correta: se CLI depende de registry, builda registry primeiro
+- CI mais rapido: remote cache compartilha entre machines
+
+Exemplo pratico:
+  `pnpm build` na raiz → Turbo detecta 3 packages → builda registry primeiro →
+  depois cli (depende de registry) → depois site Next.js → tudo cacheado
+
+
+PATH ALIASES (tsconfig.json)
+-----------------------------
+Adicionamos atalhos de import:
+
+- @/features/* → src/features/*
+- @/shared/*   → src/shared/*
+- @/lib/*      → src/lib/*
+
+Em vez de: import { User } from "../../../features/auth/domain/entities/user"
+Escreve:   import { User } from "@/features/auth/domain/entities/user"
+
+Mais limpo, menos quebra quando move arquivos.
+
+
+ESTRUTURA DDD (src/features/)
+------------------------------
+Cada feature e um "bounded context" isolado:
+
+src/features/auth/
+├── domain/         ← regras de negocio puras (entities, value objects, interfaces)
+├── application/    ← use cases (orquestram logica)
+├── infrastructure/ ← implementacoes externas (DB, APIs, adapters)
+└── presentation/   ← UI (components, hooks)
+
+Regra de ouro: domain NAO importa nada de infrastructure.
+Infrastructure implementa interfaces definidas no domain (inversao de dependencia).
+
+
+FIXES QUE FORAM NECESSARIOS
+-----------------------------
+1. .npmrc (public-hoist-pattern): Windows + pnpm + workspaces = TypeScript nao resolve
+   bem via symlinks. Hoist coloca no node_modules raiz.
+
+2. lint-staged: ESLint do Next.js nao funciona em arquivos de packages/*.
+   Solucao: glob especifico src/**/*.ts pra ESLint, packages/**/*.ts so prettier.
+
+3. next.config.ts (turbopack.root): Next.js 16 detecta monorepo e tenta adivinhar root.
+   Setando explicitamente evita warning.
+
+
+RESUMO VISUAL
+--------------
+
+wi-ui/ (raiz = site Next.js)
+├── src/                    ← codigo do site
+│   ├── app/                ← paginas Next.js
+│   ├── features/           ← DDD bounded contexts
+│   ├── shared/             ← codigo compartilhado
+│   └── lib/                ← utils
+├── packages/
+│   ├── cli/                ← @wi-ui/cli (publicado npm)
+│   └── registry/           ← source dos componentes
+├── turbo.json              ← orquestra builds
+├── pnpm-workspace.yaml     ← define monorepo
+└── package.json            ← root package
+
+================================================================================

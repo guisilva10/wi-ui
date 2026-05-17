@@ -1,3 +1,4 @@
 {
-  "*.ts?(x)": ["eslint --fix", "prettier --write"]
+  "src/**/*.ts?(x)": ["eslint --fix", "prettier --write"],
+  "packages/**/*.ts?(x)": ["prettier --write"]
 }

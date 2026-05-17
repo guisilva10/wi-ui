@@ -1,0 +1,25 @@
+{
+  "name": "@wi-ui/cli",
+  "version": "0.1.0",
+  "description": "CLI para adicionar componentes WI.UI ao seu projeto",
+  "type": "module",
+  "bin": {
+    "wi-ui": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "citty": "^0.1.6"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
