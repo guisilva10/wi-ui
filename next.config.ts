@@ -1,14 +1,17 @@
+import path from "path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: process.env.NODE_ENV === "production",
 
-  // Compilar apenas quando necessário
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
 
-  // Performance
+  turbopack: {
+    root: path.resolve(__dirname),
+  },
+
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion", "recharts"],
   },
