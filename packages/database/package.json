@@ -1,0 +1,25 @@
+{
+  "name": "@wi-ui/database",
+  "version": "0.1.0",
+  "description": "Prisma client e schema do WI.UI",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "db:generate": "prisma generate",
+    "db:push": "dotenv -e ../../.env -- prisma db push",
+    "db:studio": "dotenv -e ../../.env -- prisma studio",
+    "db:migrate": "dotenv -e ../../.env -- prisma migrate dev",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0"
+  },
+  "devDependencies": {
+    "dotenv-cli": "^8.0.0",
+    "prisma": "^6.9.0",
+    "typescript": "^5"
+  }
+}
