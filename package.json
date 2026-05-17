@@ -8,9 +8,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:generate": "pnpm --filter @wi-ui/database db:generate",
+    "db:push": "pnpm --filter @wi-ui/database db:push",
+    "db:studio": "pnpm --filter @wi-ui/database db:studio",
+    "db:migrate": "pnpm --filter @wi-ui/database db:migrate"
   },
   "dependencies": {
+    "@wi-ui/database": "workspace:*",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
