@@ -20,6 +20,7 @@ packages/*/node_modules
 
 # production
 /build
+packages/*/dist
 
 # misc
 .DS_Store
