@@ -6,9 +6,18 @@ import fsExtra from "fs-extra";
 const { pathExists } = fsExtra;
 import { registry, type RegistryEntry } from "@wi-ui/registry";
 import { loadConfig } from "../utils/config.js";
+import { DEFAULT_REGISTRY_URL } from "../utils/config.js";
 import { detectPackageManager } from "../utils/detect.js";
 import { installPackages } from "../utils/installer.js";
 import { copyComponentFiles, createCnUtil } from "../utils/files.js";
+import {
+  fetchRegistryList,
+  fetchComponent,
+  type RemoteRegistryEntry,
+} from "../utils/remote-registry.js";
+import { writeRemoteComponentFiles } from "../utils/files-remote.js";
+
+type InstallableEntry = RegistryEntry | RemoteRegistryEntry;
 
 export const addCommand = defineCommand({
   meta: {
@@ -45,88 +54,227 @@ export const addCommand = defineCommand({
       process.exit(1);
     }
 
+    const registryUrl = config.registry ?? DEFAULT_REGISTRY_URL;
     const pm = await detectPackageManager(cwd);
     const targetDir = join(cwd, config.componentsDir);
 
-    // Resolve o grafo de dependências entre componentes
-    const toInstall = resolveComponentDeps(componentNames, registry);
+    // Tenta buscar do registry remoto primeiro, fallback para local
+    const useRemote = await tryUseRemoteRegistry(registryUrl, componentNames);
 
-    if (toInstall.length === 0) {
-      consola.error(
-        `Componente(s) não encontrado(s): ${componentNames.join(", ")}`,
-      );
-      consola.info("Use `wi-ui list` para ver os componentes disponíveis.");
-      process.exit(1);
-    }
-
-    // Separa novos de já existentes
-    const { toAdd, skipped } = await partitionExisting(
-      toInstall,
-      targetDir,
-      args.overwrite,
-    );
-
-    if (skipped.length > 0) {
-      consola.warn(
-        `Já existe(m): ${skipped.map((e) => e.name).join(", ")}. Use --overwrite para substituir.`,
-      );
-    }
-
-    if (toAdd.length === 0) {
-      consola.info("Nenhum componente novo para adicionar.");
-      return;
-    }
-
-    // Garante cn.ts no targetDir
-    const cnPath = await createCnUtil(targetDir);
-    const cnRelative = cnPath.replace(cwd + "/", "");
-    if (cnRelative !== cnPath) {
-      consola.info(`cn.ts garantido em: ${cnRelative}`);
-    }
-
-    const allCreatedFiles: string[] = [];
-    const allDeps = new Set<string>();
-
-    for (const entry of toAdd) {
-      consola.start(`Adicionando ${entry.name}...`);
-
-      const createdFiles = await copyComponentFiles(
-        entry.files,
+    if (useRemote) {
+      await addRemote(
+        componentNames,
+        registryUrl,
         targetDir,
-        entry.name,
+        cwd,
+        pm,
+        args.overwrite,
       );
-
-      allCreatedFiles.push(...createdFiles);
-      entry.dependencies?.forEach((dep) => allDeps.add(dep));
-
-      consola.success(`${entry.name} adicionado`);
+    } else {
+      await addLocal(componentNames, targetDir, cwd, pm, args.overwrite);
     }
-
-    // Instala dependências npm coletadas
-    const missingDeps = await filterMissingPackages(cwd, Array.from(allDeps));
-
-    if (missingDeps.length > 0) {
-      await installPackages(cwd, pm, missingDeps);
-    }
-
-    // Resumo final
-    const relativeFiles = allCreatedFiles.map((f) =>
-      f.replace(cwd + "/", "").replace(cwd.replace(/\\/g, "/") + "/", ""),
-    );
-
-    consola.box(
-      [
-        `${toAdd.length} componente(s) adicionado(s) com sucesso!`,
-        "",
-        "Arquivos criados:",
-        ...relativeFiles.map((f) => `  + ${f}`),
-        ...(missingDeps.length > 0
-          ? ["", `Dependências instaladas: ${missingDeps.join(", ")}`]
-          : []),
-      ].join("\n"),
-    );
   },
 });
+
+async function tryUseRemoteRegistry(
+  registryUrl: string,
+  componentNames: string[],
+): Promise<boolean> {
+  if (registryUrl === DEFAULT_REGISTRY_URL) {
+    // Verifica se ao menos 1 componente existe remotamente
+    const remoteList = await fetchRegistryList(registryUrl);
+    if (!remoteList) return false;
+
+    const remoteNames = new Set(remoteList.map((c) => c.name));
+    return componentNames.some((name) => remoteNames.has(name));
+  }
+
+  // Registry customizado — sempre tenta remoto
+  const remoteList = await fetchRegistryList(registryUrl);
+  return remoteList !== null;
+}
+
+async function addRemote(
+  componentNames: string[],
+  registryUrl: string,
+  targetDir: string,
+  cwd: string,
+  pm: "pnpm" | "npm" | "yarn" | "bun",
+  overwrite: boolean,
+): Promise<void> {
+  consola.info(`Buscando componentes do registry remoto: ${registryUrl}`);
+
+  const toAdd: RemoteRegistryEntry[] = [];
+  const notFound: string[] = [];
+
+  for (const name of componentNames) {
+    // Auto-adiciona spinner se button for solicitado
+    if (name === "button") {
+      const spinner = await fetchComponent(registryUrl, "spinner");
+      if (spinner) {
+        const exists =
+          !overwrite && (await pathExists(join(targetDir, "spinner")));
+        if (!exists) toAdd.push(spinner);
+      }
+    }
+
+    const entry = await fetchComponent(registryUrl, name);
+    if (!entry) {
+      notFound.push(name);
+    } else {
+      const exists = !overwrite && (await pathExists(join(targetDir, name)));
+      if (!exists) toAdd.push(entry);
+      else
+        consola.warn(`"${name}" já existe. Use --overwrite para substituir.`);
+    }
+  }
+
+  if (notFound.length > 0) {
+    consola.warn(
+      `Componente(s) não encontrado(s) no registry remoto: ${notFound.join(", ")}`,
+    );
+    consola.info("Tentando fallback local...");
+    await addLocal(notFound, targetDir, cwd, pm, overwrite);
+  }
+
+  if (toAdd.length === 0) {
+    consola.info("Nenhum componente novo para adicionar.");
+    return;
+  }
+
+  await ensureCnUtil(targetDir, cwd);
+
+  const allCreatedFiles: string[] = [];
+  const allDeps = new Set<string>();
+
+  for (const entry of toAdd) {
+    consola.start(`Adicionando ${entry.name} (remoto)...`);
+
+    const remoteData = await fetchComponent(registryUrl, entry.name);
+    if (!remoteData) {
+      consola.warn(`Falha ao baixar "${entry.name}". Pulando.`);
+      continue;
+    }
+
+    const createdFiles = await writeRemoteComponentFiles(
+      remoteData.files as Array<{
+        name: string;
+        path: string;
+        content: string;
+      }>,
+      targetDir,
+      entry.name,
+    );
+
+    allCreatedFiles.push(...createdFiles);
+    entry.dependencies.forEach((dep) => allDeps.add(dep));
+
+    consola.success(`${entry.name} adicionado`);
+  }
+
+  await installMissingDeps(cwd, pm, Array.from(allDeps));
+  printSummary(toAdd.length, allCreatedFiles, cwd, Array.from(allDeps));
+}
+
+async function addLocal(
+  componentNames: string[],
+  targetDir: string,
+  cwd: string,
+  pm: "pnpm" | "npm" | "yarn" | "bun",
+  overwrite: boolean,
+): Promise<void> {
+  const toInstall = resolveComponentDeps(componentNames, registry);
+
+  if (toInstall.length === 0) {
+    consola.error(
+      `Componente(s) não encontrado(s): ${componentNames.join(", ")}`,
+    );
+    consola.info("Use `wi-ui list` para ver os componentes disponíveis.");
+    process.exit(1);
+  }
+
+  const { toAdd, skipped } = await partitionExisting(
+    toInstall,
+    targetDir,
+    overwrite,
+  );
+
+  if (skipped.length > 0) {
+    consola.warn(
+      `Já existe(m): ${skipped.map((e) => e.name).join(", ")}. Use --overwrite para substituir.`,
+    );
+  }
+
+  if (toAdd.length === 0) {
+    consola.info("Nenhum componente novo para adicionar.");
+    return;
+  }
+
+  await ensureCnUtil(targetDir, cwd);
+
+  const allCreatedFiles: string[] = [];
+  const allDeps = new Set<string>();
+
+  for (const entry of toAdd) {
+    consola.start(`Adicionando ${entry.name} (local)...`);
+
+    const createdFiles = await copyComponentFiles(
+      entry.files,
+      targetDir,
+      entry.name,
+    );
+
+    allCreatedFiles.push(...createdFiles);
+    entry.dependencies?.forEach((dep) => allDeps.add(dep));
+
+    consola.success(`${entry.name} adicionado`);
+  }
+
+  await installMissingDeps(cwd, pm, Array.from(allDeps));
+  printSummary(toAdd.length, allCreatedFiles, cwd, Array.from(allDeps));
+}
+
+async function ensureCnUtil(targetDir: string, cwd: string): Promise<void> {
+  const cnPath = await createCnUtil(targetDir);
+  const cnRelative = cnPath.replace(cwd + "/", "");
+  if (cnRelative !== cnPath) {
+    consola.info(`cn.ts garantido em: ${cnRelative}`);
+  }
+}
+
+async function installMissingDeps(
+  cwd: string,
+  pm: "pnpm" | "npm" | "yarn" | "bun",
+  deps: string[],
+): Promise<void> {
+  const missingDeps = await filterMissingPackages(cwd, deps);
+  if (missingDeps.length > 0) {
+    await installPackages(cwd, pm, missingDeps);
+  }
+}
+
+function printSummary(
+  count: number,
+  createdFiles: string[],
+  cwd: string,
+  installedDeps: string[],
+): void {
+  const relativeFiles = createdFiles.map((f) =>
+    f.replace(cwd + "/", "").replace(cwd.replace(/\\/g, "/") + "/", ""),
+  );
+
+  consola.box(
+    [
+      `${count} componente(s) adicionado(s) com sucesso!`,
+      "",
+      "Arquivos criados:",
+      ...relativeFiles.map((f) => `  + ${f}`),
+      ...(installedDeps.length > 0
+        ? ["", `Dependências instaladas: ${installedDeps.join(", ")}`]
+        : []),
+    ].join("\n"),
+  );
+}
 
 function resolveComponentDeps(
   names: string[],
@@ -146,7 +294,6 @@ function resolveComponentDeps(
     resolve(name);
   }
 
-  // Ordena: dependências primeiro (ex: spinner antes de button)
   const order: RegistryEntry[] = [];
   const visited = new Set<string>();
 
@@ -158,8 +305,6 @@ function resolveComponentDeps(
     order.push(entry);
   }
 
-  // Adiciona spinner antes de button se button foi solicitado
-  // (button depende de spinner via import)
   const spinnerNeeded = names.includes("button") && !names.includes("spinner");
   if (spinnerNeeded && entryMap.has("spinner")) {
     resolve("spinner");
@@ -174,12 +319,12 @@ function resolveComponentDeps(
 }
 
 async function partitionExisting(
-  entries: RegistryEntry[],
+  entries: InstallableEntry[],
   targetDir: string,
   overwrite: boolean,
-): Promise<{ toAdd: RegistryEntry[]; skipped: RegistryEntry[] }> {
-  const toAdd: RegistryEntry[] = [];
-  const skipped: RegistryEntry[] = [];
+): Promise<{ toAdd: InstallableEntry[]; skipped: InstallableEntry[] }> {
+  const toAdd: InstallableEntry[] = [];
+  const skipped: InstallableEntry[] = [];
 
   for (const entry of entries) {
     const componentDir = join(targetDir, entry.name);

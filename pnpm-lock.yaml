@@ -11,6 +11,9 @@ importers:
       '@wi-ui/database':
         specifier: workspace:*
         version: link:packages/database
+      '@wi-ui/registry':
+        specifier: workspace:*
+        version: link:packages/registry
       better-auth:
         specifier: ^1.6.11
         version: 1.6.11(@prisma/client@6.19.3(prisma@6.19.3(typescript@5.9.3))(typescript@5.9.3))(next@16.2.6(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(prisma@6.19.3(typescript@5.9.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
