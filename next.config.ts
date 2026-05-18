@@ -4,6 +4,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactCompiler: process.env.NODE_ENV === "production",
 
+  transpilePackages: ["@wi-ui/registry"],
+
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

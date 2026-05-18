@@ -87,4 +87,89 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/card/card.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
+  {
+    name: "countdown-timer",
+    description:
+      "Timer regressivo com urgência visual. Muda automaticamente para vermelho/pulsante quando < 1h. Animação flip nos dígitos.",
+    version: "1.0.0",
+    category: "fomo",
+    files: [
+      "src/shared/ui/components/countdown-timer/countdown-timer.tsx",
+      "src/shared/ui/components/countdown-timer/countdown-timer.variants.ts",
+    ],
+    dependencies: [
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "motion",
+    ],
+  },
+  {
+    name: "social-proof",
+    description:
+      'Notificação flutuante de prova social: "X acabou de comprar". Auto-rotaciona entre items. Variantes: full, compact, minimal.',
+    version: "1.0.0",
+    category: "fomo",
+    files: ["src/shared/ui/components/social-proof/social-proof.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "scarcity-badge",
+    description:
+      'Badge de escassez com barra de progresso. Muda automaticamente para "critical" quando < 20% disponível.',
+    version: "1.0.0",
+    category: "fomo",
+    files: [
+      "src/shared/ui/components/scarcity-badge/scarcity-badge.tsx",
+      "src/shared/ui/components/scarcity-badge/scarcity-badge.variants.ts",
+    ],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "testimonial-carousel",
+    description:
+      "Carrossel de depoimentos com auto-play, rating por estrelas e 3 variantes: card, bubble, minimal.",
+    version: "1.0.0",
+    category: "fomo",
+    files: [
+      "src/shared/ui/components/testimonial-carousel/testimonial-carousel.tsx",
+    ],
+    dependencies: ["clsx", "tailwind-merge", "motion", "lucide-react"],
+  },
+  {
+    name: "pricing-card",
+    description:
+      "Card de preço com ancoragem (preço riscado + desconto calculado), badge destacado e lista de features com check/x.",
+    version: "1.0.0",
+    category: "fomo",
+    files: ["src/shared/ui/components/pricing-card/pricing-card.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
+  },
+  {
+    name: "urgency-banner",
+    description:
+      "Banner full-width com countdown inline e animação slide-down. Variantes: info, warning, critical. Dispensável.",
+    version: "1.0.0",
+    category: "fomo",
+    files: [
+      "src/shared/ui/components/urgency-banner/urgency-banner.tsx",
+      "src/shared/ui/components/urgency-banner/urgency-banner.variants.ts",
+    ],
+    dependencies: [
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react",
+    ],
+  },
+  {
+    name: "visitor-counter",
+    description:
+      'Indicador "X pessoas vendo agora" com dot pulsante. Modo simulateActivity oscila o contador para demos.',
+    version: "1.0.0",
+    category: "fomo",
+    files: ["src/shared/ui/components/visitor-counter/visitor-counter.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
 ];
