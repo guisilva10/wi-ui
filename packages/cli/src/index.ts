@@ -7,7 +7,9 @@ const main = defineCommand({
     description: "Adicione componentes WI.UI ao seu projeto",
   },
   subCommands: {
-    add: () => import("./commands/add").then((m) => m.addCommand),
+    init: () => import("./commands/init.js").then((m) => m.initCommand),
+    add: () => import("./commands/add.js").then((m) => m.addCommand),
+    list: () => import("./commands/list.js").then((m) => m.listCommand),
   },
 });
 
