@@ -18,14 +18,16 @@ function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="bg-background/80 border-border sticky top-0 z-50 w-full border-b backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+    <header className="bg-background/80 border-border/50 sticky top-0 z-50 w-full border-b backdrop-blur-md">
+      <div className="flex h-14 items-center justify-between px-4 lg:px-6">
         {/* Logo */}
         <Link
           href="/"
           className="text-foreground text-lg font-bold tracking-tight select-none"
         >
-          WI.UI
+          <span className="text-primary">WI</span>
+          <span className="text-muted-foreground">.</span>
+          <span>UI</span>
         </Link>
 
         {/* Desktop nav */}
@@ -40,6 +42,8 @@ function Header() {
             </Link>
           ))}
 
+          <div className="bg-border mx-1 h-4 w-px" />
+
           <a
             href="https://github.com/guisilva10/wi-ui"
             target="_blank"
@@ -50,7 +54,7 @@ function Header() {
             )}
           >
             <SiGithub className="size-4" />
-            GitHub
+            <span className="sr-only sm:not-sr-only">GitHub</span>
           </a>
 
           <button
@@ -101,7 +105,7 @@ function Header() {
       {/* Mobile menu */}
       <div
         className={cn(
-          "border-border bg-background border-b px-4 pb-4 md:hidden",
+          "border-border/50 bg-background border-b px-4 pb-4 md:hidden",
           mobileOpen ? "block" : "hidden",
         )}
       >

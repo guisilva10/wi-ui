@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { Button } from "@/shared/ui/components/button";
@@ -9,41 +9,49 @@ const BREADCRUMBS = [
   { label: "Button" },
 ];
 
+const TOC = [
+  { id: "variantes", label: "Variantes", level: 2 },
+  { id: "tamanhos", label: "Tamanhos", level: 2 },
+  { id: "loading", label: "Loading", level: 2 },
+  { id: "desabilitado", label: "Desabilitado", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "variant",
     type: '"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
     default: '"default"',
-    description: "Estilo visual do botão",
+    description: "Estilo visual do botao",
   },
   {
     name: "size",
     type: '"sm" | "md" | "lg" | "icon"',
     default: '"md"',
-    description: "Tamanho do botão",
+    description: "Tamanho do botao",
   },
   {
     name: "isLoading",
     type: "boolean",
     default: "false",
-    description: "Exibe spinner e desabilita o botão",
+    description: "Exibe spinner e desabilita o botao",
   },
   {
     name: "loadingText",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Texto exibido durante loading",
   },
   {
     name: "disabled",
     type: "boolean",
     default: "false",
-    description: "Desabilita o botão",
+    description: "Desabilita o botao",
   },
   {
     name: "className",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Classes CSS adicionais",
   },
 ];
@@ -52,12 +60,13 @@ export default function ButtonPage() {
   return (
     <DocPage
       title="Button"
-      description="Botão acessível com múltiplas variantes, tamanhos e suporte a estado de loading."
+      description="Botao acessivel com multiplas variantes, tamanhos e suporte a estado de loading."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
       {/* Variantes */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Variantes</h2>
+      <DocSection id="variantes" title="Variantes">
         <ComponentPreview
           code={`<Button variant="default">Default</Button>
 <Button variant="secondary">Secondary</Button>
@@ -75,11 +84,10 @@ export default function ButtonPage() {
             <Button variant="link">Link</Button>
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
       {/* Tamanhos */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Tamanhos</h2>
+      <DocSection id="tamanhos" title="Tamanhos">
         <ComponentPreview
           code={`<Button size="sm">Small</Button>
 <Button size="md">Medium</Button>
@@ -91,11 +99,10 @@ export default function ButtonPage() {
             <Button size="lg">Large</Button>
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
       {/* Loading */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Loading</h2>
+      <DocSection id="loading" title="Loading">
         <ComponentPreview
           code={`<Button isLoading loadingText="Salvando...">Salvar</Button>
 <Button isLoading variant="outline">Carregando</Button>`}
@@ -109,11 +116,10 @@ export default function ButtonPage() {
             </Button>
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
       {/* Disabled */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Desabilitado</h2>
+      <DocSection id="desabilitado" title="Desabilitado">
         <ComponentPreview
           code={`<Button disabled>Desabilitado</Button>
 <Button disabled variant="outline">Outline</Button>`}
@@ -125,13 +131,12 @@ export default function ButtonPage() {
             </Button>
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
       {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

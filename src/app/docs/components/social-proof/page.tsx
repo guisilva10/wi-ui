@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { SocialProofDemo } from "./social-proof-demo";
@@ -9,19 +9,26 @@ const BREADCRUMBS = [
   { label: "SocialProof" },
 ];
 
+const TOC = [
+  { id: "full", label: "Full (padrao)", level: 2 },
+  { id: "compact", label: "Compact", level: 2 },
+  { id: "minimal", label: "Minimal", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "data",
     type: "SocialProofData | SocialProofData[]",
-    default: "—",
     description:
-      "Item único ou array de items. Rotaciona automaticamente se array",
+      "Item unico ou array de items. Rotaciona automaticamente se array",
+    required: true,
   },
   {
     name: "type",
     type: '"purchase" | "signup" | "viewing"',
     default: '"purchase"',
-    description: "Tipo de ação — define texto e ícone padrão",
+    description: "Tipo de acao — define texto e icone padrao",
   },
   {
     name: "variant",
@@ -33,7 +40,7 @@ const PROPS = [
     name: "position",
     type: '"bottom-left" | "bottom-right" | "top-left" | "top-right"',
     default: '"bottom-left"',
-    description: "Posição quando fixed=true",
+    description: "Posicao quando fixed=true",
   },
   {
     name: "autoRotate",
@@ -45,7 +52,7 @@ const PROPS = [
     name: "interval",
     type: "number",
     default: "4000",
-    description: "Intervalo em ms entre rotações",
+    description: "Intervalo em ms entre rotacoes",
   },
   {
     name: "fixed",
@@ -59,27 +66,27 @@ export default function SocialProofPage() {
   return (
     <DocPage
       title="SocialProof"
-      description='Popup flutuante de prova social. "Ana acabou de comprar" — aumenta confiança e urgência na hora da decisão.'
+      description='"Ana acabou de comprar" — popup flutuante de prova social. Aumenta confianca e urgencia na hora da decisao.'
       breadcrumbs={BREADCRUMBS}
+      badge="FOMO"
+      toc={TOC}
     >
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Full (padrão)</h2>
+      <DocSection id="full" title="Full (padrao)">
         <ComponentPreview
           code={`<SocialProof
   fixed={false}
   type="purchase"
   data={[
-    { name: "Ana Lima", time: "há 2 min", avatar: "" },
-    { name: "Carlos M.", time: "há 5 min" },
+    { name: "Ana Lima", time: "ha 2 min", avatar: "" },
+    { name: "Carlos M.", time: "ha 5 min" },
   ]}
 />`}
         >
           <SocialProofDemo variant="full" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Compact</h2>
+      <DocSection id="compact" title="Compact">
         <ComponentPreview
           code={`<SocialProof
   fixed={false}
@@ -90,10 +97,9 @@ export default function SocialProofPage() {
         >
           <SocialProofDemo variant="compact" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Minimal</h2>
+      <DocSection id="minimal" title="Minimal">
         <ComponentPreview
           code={`<SocialProof
   fixed={false}
@@ -104,12 +110,11 @@ export default function SocialProofPage() {
         >
           <SocialProofDemo variant="minimal" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

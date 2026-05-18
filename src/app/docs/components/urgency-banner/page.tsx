@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { UrgencyBannerDemo } from "./urgency-banner-demo";
@@ -9,18 +9,24 @@ const BREADCRUMBS = [
   { label: "UrgencyBanner" },
 ];
 
+const TOC = [
+  { id: "warning", label: "Warning (padrao)", level: 2 },
+  { id: "critical", label: "Critical", level: 2 },
+  { id: "info", label: "Info", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "message",
     type: "string",
-    default: "—",
     description:
       'Texto do banner. Use {countdown} para inserir o timer inline (ex: "Oferta encerra em {countdown}")',
+    required: true,
   },
   {
     name: "targetDate",
     type: "Date | string",
-    default: "—",
     description: "Data alvo para countdown inline",
   },
   {
@@ -33,13 +39,12 @@ const PROPS = [
     name: "dismissable",
     type: "boolean",
     default: "true",
-    description: "Exibe botão de fechar",
+    description: "Exibe botao de fechar",
   },
   {
     name: "cta",
     type: "UrgencyBannerCta",
-    default: "—",
-    description: "{ label, href?, onClick? } — link de ação inline",
+    description: "{ label, href?, onClick? } — link de acao inline",
   },
   {
     name: "sticky",
@@ -53,59 +58,55 @@ export default function UrgencyBannerPage() {
   return (
     <DocPage
       title="UrgencyBanner"
-      description="Banner full-width com countdown inline e animação slide-down. Ideal como aviso de oferta no topo da página."
+      description="Banner full-width com countdown inline e animacao slide-down. Ideal como aviso de oferta no topo da pagina."
       breadcrumbs={BREADCRUMBS}
+      badge="FOMO"
+      toc={TOC}
     >
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Warning (padrão)
-        </h2>
+      <DocSection id="warning" title="Warning (padrao)">
         <ComponentPreview
           code={`const target = new Date(Date.now() + 2 * 60 * 60 * 1000);
 
 <UrgencyBanner
   sticky={false}
-  message="Oferta especial encerra em {countdown} — não perca!"
+  message="Oferta especial encerra em {countdown} — nao perca!"
   targetDate={target}
   variant="warning"
 />`}
         >
           <UrgencyBannerDemo variant="warning" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Critical</h2>
+      <DocSection id="critical" title="Critical">
         <ComponentPreview
           code={`<UrgencyBanner
   sticky={false}
-  message="Últimas vagas! Restam apenas 3 lugares nesta turma."
+  message="Ultimas vagas! Restam apenas 3 lugares nesta turma."
   variant="critical"
   cta={{ label: "Garantir vaga", href: "#" }}
 />`}
         >
           <UrgencyBannerDemo variant="critical" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Info</h2>
+      <DocSection id="info" title="Info">
         <ComponentPreview
           code={`<UrgencyBanner
   sticky={false}
-  message="Novo: componentes FOMO disponíveis agora."
+  message="Novo: componentes FOMO disponiveis agora."
   variant="info"
   cta={{ label: "Ver componentes", href: "/docs" }}
 />`}
         >
           <UrgencyBannerDemo variant="info" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

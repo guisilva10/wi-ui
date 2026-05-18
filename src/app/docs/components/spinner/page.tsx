@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { Spinner } from "@/shared/ui/components/spinner";
@@ -7,6 +7,13 @@ const BREADCRUMBS = [
   { label: "Docs", href: "/docs" },
   { label: "Componentes" },
   { label: "Spinner" },
+];
+
+const TOC = [
+  { id: "tamanhos", label: "Tamanhos", level: 2 },
+  { id: "label-customizado", label: "Com label customizado", level: 2 },
+  { id: "cor-customizada", label: "Cor customizada", level: 2 },
+  { id: "props", label: "Props", level: 2 },
 ];
 
 const PROPS = [
@@ -20,12 +27,12 @@ const PROPS = [
     name: "label",
     type: "string",
     default: '"Carregando..."',
-    description: "Texto acessível para leitores de tela (aria-label)",
+    description: "Texto acessivel para leitores de tela (aria-label)",
   },
   {
     name: "className",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Classes CSS adicionais",
   },
 ];
@@ -34,12 +41,12 @@ export default function SpinnerPage() {
   return (
     <DocPage
       title="Spinner"
-      description="Indicador de carregamento animado. Semântico e acessível com aria-label."
+      description="Indicador de carregamento animado. Semantico e acessivel com aria-label."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
-      {/* Tamanhos */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Tamanhos</h2>
+      <DocSection id="tamanhos" title="Tamanhos">
         <ComponentPreview
           code={`<Spinner size="sm" />
 <Spinner size="md" />
@@ -53,13 +60,9 @@ export default function SpinnerPage() {
             <Spinner size="xl" />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Com label customizado */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Com label customizado
-        </h2>
+      <DocSection id="label-customizado" title="Com label customizado">
         <ComponentPreview
           code={`<Spinner label="Enviando dados..." />
 <Spinner label="Autenticando..." size="lg" />`}
@@ -69,13 +72,9 @@ export default function SpinnerPage() {
             <Spinner label="Autenticando..." size="lg" />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Cor via CSS */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Cor customizada
-        </h2>
+      <DocSection id="cor-customizada" title="Cor customizada">
         <ComponentPreview
           code={`<Spinner className="text-blue-500" />
 <Spinner className="text-green-500" />
@@ -87,13 +86,11 @@ export default function SpinnerPage() {
             <Spinner className="text-red-500" />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

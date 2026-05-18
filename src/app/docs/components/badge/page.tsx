@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { Badge } from "@/shared/ui/components/badge";
@@ -7,6 +7,12 @@ const BREADCRUMBS = [
   { label: "Docs", href: "/docs" },
   { label: "Componentes" },
   { label: "Badge" },
+];
+
+const TOC = [
+  { id: "variantes", label: "Variantes", level: 2 },
+  { id: "uso-semantico", label: "Uso semantico", level: 2 },
+  { id: "props", label: "Props", level: 2 },
 ];
 
 const PROPS = [
@@ -19,7 +25,7 @@ const PROPS = [
   {
     name: "className",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Classes CSS adicionais",
   },
 ];
@@ -28,12 +34,12 @@ export default function BadgePage() {
   return (
     <DocPage
       title="Badge"
-      description="Elemento inline para labels, status e categorias. Múltiplas variantes semânticas."
+      description="Elemento inline para labels, status e categorias. Multiplas variantes semanticas."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
-      {/* Todas variantes */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Variantes</h2>
+      <DocSection id="variantes" title="Variantes">
         <ComponentPreview
           code={`<Badge variant="default">Default</Badge>
 <Badge variant="secondary">Secondary</Badge>
@@ -51,11 +57,9 @@ export default function BadgePage() {
             <Badge variant="warning">Warning</Badge>
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Uso semântico */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Uso semântico</h2>
+      <DocSection id="uso-semantico" title="Uso semantico">
         <ComponentPreview
           code={`<Badge variant="success">Ativo</Badge>
 <Badge variant="destructive">Inativo</Badge>
@@ -69,13 +73,11 @@ export default function BadgePage() {
             <Badge variant="secondary">Rascunho</Badge>
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

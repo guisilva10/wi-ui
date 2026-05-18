@@ -1,5 +1,5 @@
 import { Search, Mail } from "lucide-react";
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { Input } from "@/shared/ui/components/input";
@@ -8,6 +8,14 @@ const BREADCRUMBS = [
   { label: "Docs", href: "/docs" },
   { label: "Componentes" },
   { label: "Input" },
+];
+
+const TOC = [
+  { id: "default", label: "Default", level: 2 },
+  { id: "com-icones", label: "Com icones", level: 2 },
+  { id: "estado-erro", label: "Estado de erro", level: 2 },
+  { id: "desabilitado", label: "Desabilitado", level: 2 },
+  { id: "props", label: "Props", level: 2 },
 ];
 
 const PROPS = [
@@ -20,14 +28,14 @@ const PROPS = [
   {
     name: "startIcon",
     type: "React.ReactNode",
-    default: "—",
-    description: "Ícone exibido à esquerda",
+    default: "--",
+    description: "Icone exibido a esquerda",
   },
   {
     name: "endIcon",
     type: "React.ReactNode",
-    default: "—",
-    description: "Ícone exibido à direita",
+    default: "--",
+    description: "Icone exibido a direita",
   },
   {
     name: "disabled",
@@ -38,7 +46,7 @@ const PROPS = [
   {
     name: "placeholder",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Texto placeholder",
   },
   {
@@ -53,22 +61,20 @@ export default function InputPage() {
   return (
     <DocPage
       title="Input"
-      description="Campo de texto acessível com suporte a estados de erro, ícones e disabled."
+      description="Campo de texto acessivel com suporte a estados de erro, icones e disabled."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
-      {/* Default */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Default</h2>
+      <DocSection id="default" title="Default">
         <ComponentPreview code={`<Input placeholder="Nome completo" />`}>
           <div className="w-full max-w-sm">
             <Input placeholder="Nome completo" />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Com ícones */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Com ícones</h2>
+      <DocSection id="com-icones" title="Com icones">
         <ComponentPreview
           code={`<Input startIcon={<Search className="size-4" />} placeholder="Buscar..." />
 <Input endIcon={<Mail className="size-4" />} placeholder="Email" type="email" />`}
@@ -85,37 +91,29 @@ export default function InputPage() {
             />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Erro */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Estado de erro
-        </h2>
-        <ComponentPreview code={`<Input placeholder="Email inválido" error />`}>
+      <DocSection id="estado-erro" title="Estado de erro">
+        <ComponentPreview code={`<Input placeholder="Email invalido" error />`}>
           <div className="w-full max-w-sm">
-            <Input placeholder="Email inválido" error />
+            <Input placeholder="Email invalido" error />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Disabled */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Desabilitado</h2>
+      <DocSection id="desabilitado" title="Desabilitado">
         <ComponentPreview
-          code={`<Input placeholder="Não editável" disabled />`}
+          code={`<Input placeholder="Nao editavel" disabled />`}
         >
           <div className="w-full max-w-sm">
-            <Input placeholder="Não editável" disabled />
+            <Input placeholder="Nao editavel" disabled />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }
