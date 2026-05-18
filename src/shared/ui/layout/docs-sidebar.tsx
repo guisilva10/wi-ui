@@ -13,7 +13,7 @@ const SIDEBAR_ITEMS = [
     links: [{ label: "Getting Started", href: "/docs" }],
   },
   {
-    section: "Componentes",
+    section: "Componentes Base",
     links: [
       { label: "Button", href: "/docs/components/button" },
       { label: "Input", href: "/docs/components/input" },
@@ -23,6 +23,21 @@ const SIDEBAR_ITEMS = [
       { label: "Separator", href: "/docs/components/separator" },
       { label: "Spinner", href: "/docs/components/spinner" },
       { label: "Textarea", href: "/docs/components/textarea" },
+    ],
+  },
+  {
+    section: "FOMO & Conversão",
+    links: [
+      { label: "CountdownTimer", href: "/docs/components/countdown-timer" },
+      { label: "SocialProof", href: "/docs/components/social-proof" },
+      { label: "ScarcityBadge", href: "/docs/components/scarcity-badge" },
+      {
+        label: "TestimonialCarousel",
+        href: "/docs/components/testimonial-carousel",
+      },
+      { label: "PricingCard", href: "/docs/components/pricing-card" },
+      { label: "UrgencyBanner", href: "/docs/components/urgency-banner" },
+      { label: "VisitorCounter", href: "/docs/components/visitor-counter" },
     ],
   },
 ] as const;
