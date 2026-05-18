@@ -18,7 +18,7 @@ function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="bg-background/80 border-border/50 sticky top-0 z-50 w-full border-b backdrop-blur-md">
+    <header className="bg-background/80 sticky top-0 z-50 w-full backdrop-blur-md">
       <div className="flex h-14 items-center justify-between px-4 lg:px-6">
         {/* Logo */}
         <Link

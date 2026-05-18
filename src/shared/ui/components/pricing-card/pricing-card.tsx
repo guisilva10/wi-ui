@@ -68,7 +68,7 @@ function PricingCard({
       className={cn(
         "border-border bg-card relative flex flex-col rounded-xl border p-6 shadow-sm transition-transform duration-200",
         highlighted &&
-          "border-primary ring-primary scale-[1.02] shadow-lg ring-2",
+          "border-foreground ring-foreground scale-[1.02] shadow-lg ring-2",
         className,
       )}
       {...props}
@@ -94,7 +94,7 @@ function PricingCard({
           <span
             className={cn(
               "text-4xl font-extrabold tracking-tight",
-              highlighted ? "text-primary" : "text-foreground",
+              highlighted ? "text-foreground" : "text-foreground",
             )}
           >
             {price}
