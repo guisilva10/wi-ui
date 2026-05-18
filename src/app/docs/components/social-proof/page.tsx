@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { SocialProofDemo } from "./social-proof-demo";
 
 const BREADCRUMBS = [
@@ -13,6 +15,8 @@ const TOC = [
   { id: "full", label: "Full (padrao)", level: 2 },
   { id: "compact", label: "Compact", level: 2 },
   { id: "minimal", label: "Minimal", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -110,6 +114,14 @@ export default function SocialProofPage() {
         >
           <SocialProofDemo variant="minimal" />
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="social-proof" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="social-proof" />
       </DocSection>
 
       <DocSection id="props" title="Props">

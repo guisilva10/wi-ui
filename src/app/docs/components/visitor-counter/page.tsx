@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { VisitorCounterDemo } from "./visitor-counter-demo";
 
 const BREADCRUMBS = [
@@ -13,6 +15,8 @@ const TOC = [
   { id: "dot", label: "Dot (padrao)", level: 2 },
   { id: "pulse", label: "Pulse", level: 2 },
   { id: "bar", label: "Bar", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -74,6 +78,14 @@ export default function VisitorCounterPage() {
         >
           <VisitorCounterDemo variant="bar" />
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="visitor-counter" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="visitor-counter" />
       </DocSection>
 
       <DocSection id="props" title="Props">

@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { UrgencyBannerDemo } from "./urgency-banner-demo";
 
 const BREADCRUMBS = [
@@ -13,6 +15,8 @@ const TOC = [
   { id: "warning", label: "Warning (padrao)", level: 2 },
   { id: "critical", label: "Critical", level: 2 },
   { id: "info", label: "Info", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -102,6 +106,14 @@ export default function UrgencyBannerPage() {
         >
           <UrgencyBannerDemo variant="info" />
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="urgency-banner" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="urgency-banner" />
       </DocSection>
 
       <DocSection id="props" title="Props">

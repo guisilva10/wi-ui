@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { Textarea } from "@/shared/ui/components/textarea";
 
 const BREADCRUMBS = [
@@ -14,6 +16,8 @@ const TOC = [
   { id: "estado-erro", label: "Estado de erro", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
   { id: "opcoes-resize", label: "Opcoes de resize", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -105,6 +109,14 @@ export default function TextareaPage() {
             <Textarea placeholder='resize="both"' resize="both" rows={2} />
           </div>
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="textarea" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="textarea" />
       </DocSection>
 
       <DocSection id="props" title="Props">

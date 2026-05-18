@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { Avatar } from "@/shared/ui/components/avatar";
 
 const BREADCRUMBS = [
@@ -13,6 +15,8 @@ const TOC = [
   { id: "tamanhos", label: "Tamanhos", level: 2 },
   { id: "com-imagem", label: "Com imagem", level: 2 },
   { id: "fallback-iniciais", label: "Fallback com iniciais", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -94,6 +98,14 @@ export default function AvatarPage() {
             <Avatar fallback="Lorraine Dev" />
           </div>
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="avatar" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="avatar" />
       </DocSection>
 
       <DocSection id="props" title="Props">
