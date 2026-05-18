@@ -2,6 +2,8 @@ import { Search, Mail } from "lucide-react";
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { Input } from "@/shared/ui/components/input";
 
 const BREADCRUMBS = [
@@ -15,6 +17,8 @@ const TOC = [
   { id: "com-icones", label: "Com icones", level: 2 },
   { id: "estado-erro", label: "Estado de erro", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -109,6 +113,14 @@ export default function InputPage() {
             <Input placeholder="Nao editavel" disabled />
           </div>
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="input" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="input" />
       </DocSection>
 
       <DocSection id="props" title="Props">

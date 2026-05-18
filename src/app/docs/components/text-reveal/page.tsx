@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { TextRevealDemo } from "./text-reveal-demo";
 
 const BREADCRUMBS = [
@@ -12,6 +14,8 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "por-palavra", label: "Por palavra", level: 2 },
   { id: "por-caractere", label: "Por caractere", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -96,6 +100,14 @@ export default function TextRevealPage() {
         >
           <TextRevealDemo by="character" text="WI.UI Components" />
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="text-reveal" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="text-reveal" />
       </DocSection>
 
       <DocSection id="props" title="Props">

@@ -1,6 +1,8 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
+import { InstallCommand } from "@/shared/ui/docs/install-command";
+import { ComponentSource } from "@/shared/ui/docs/component-source";
 import { ScarcityBadge } from "@/shared/ui/components/scarcity-badge";
 
 const BREADCRUMBS = [
@@ -14,6 +16,8 @@ const TOC = [
   { id: "critical", label: "Critical", level: 2 },
   { id: "esgotado", label: "Esgotado", level: 2 },
   { id: "sem-barra", label: "Sem barra", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -93,6 +97,14 @@ export default function ScarcityBadgePage() {
         >
           <ScarcityBadge total={50} remaining={3} showBar={false} />
         </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="scarcity-badge" />
+      </DocSection>
+
+      <DocSection id="codigo-fonte" title="Codigo fonte">
+        <ComponentSource componentName="scarcity-badge" />
       </DocSection>
 
       <DocSection id="props" title="Props">
