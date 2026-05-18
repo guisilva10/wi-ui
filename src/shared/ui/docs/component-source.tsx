@@ -1,7 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { registry } from "@/features/registry/domain/registry-data";
-import { SourceTabs } from "./source-tabs";
+import { CollapsibleSource } from "./collapsible-source";
 
 interface ComponentSourceProps {
   componentName: string;
@@ -34,7 +34,7 @@ function ComponentSource({ componentName, className }: ComponentSourceProps) {
     return { filename, content, path: filePath };
   });
 
-  return <SourceTabs files={files} className={className} />;
+  return <CollapsibleSource files={files} className={className} />;
 }
 
 export { ComponentSource, type ComponentSourceProps };
