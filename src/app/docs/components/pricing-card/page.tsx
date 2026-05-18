@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { PricingCard } from "@/shared/ui/components/pricing-card";
@@ -9,120 +9,123 @@ const BREADCRUMBS = [
   { label: "PricingCard" },
 ];
 
+const TOC = [
+  { id: "basico", label: "Basico", level: 2 },
+  { id: "destacado", label: "Destacado com ancoragem", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "title",
     type: "string",
-    default: "—",
     description: "Nome do plano",
+    required: true,
   },
   {
     name: "description",
     type: "string",
-    default: "—",
-    description: "Descrição curta do plano",
+    description: "Descricao curta do plano",
   },
   {
     name: "price",
     type: "string",
-    default: "—",
-    description: "Preço atual (ex: R$ 97)",
+    description: "Preco atual (ex: R$ 97)",
+    required: true,
   },
   {
     name: "originalPrice",
     type: "string",
-    default: "—",
-    description: "Preço original riscado. Calcula o desconto automaticamente",
+    description: "Preco original riscado. Calcula o desconto automaticamente",
   },
   {
     name: "period",
     type: "string",
-    default: '"/mês"',
-    description: "Período de cobrança",
+    default: '"/mes"',
+    description: "Periodo de cobranca",
   },
   {
     name: "features",
     type: "(string | PricingFeature)[]",
-    default: "—",
     description:
-      "Lista de features. String = incluído. PricingFeature = controla included",
+      "Lista de features. String = incluido. PricingFeature = controla included",
+    required: true,
   },
   {
     name: "badge",
     type: "string",
-    default: "—",
     description: "Texto do badge no topo do card (ex: Mais Popular)",
   },
   {
     name: "highlighted",
     type: "boolean",
     default: "false",
-    description: "Destaca o card com borda primária e scale",
+    description: "Destaca o card com borda primaria e scale",
   },
   {
     name: "cta",
     type: "PricingCardCta",
-    default: "—",
     description: "{ label, onClick?, href? }",
+    required: true,
   },
 ];
 
 const FEATURES_BASICO = [
-  "Até 5 projetos",
+  "Ate 5 projetos",
   "1 GB de armazenamento",
-  { text: "Domínio customizado", included: false },
-  { text: "Suporte prioritário", included: false },
+  { text: "Dominio customizado", included: false },
+  { text: "Suporte prioritario", included: false },
 ];
 
 const FEATURES_PRO = [
   "Projetos ilimitados",
   "50 GB de armazenamento",
-  "Domínio customizado",
-  "Suporte prioritário 24h",
-  "Analytics avançado",
+  "Dominio customizado",
+  "Suporte prioritario 24h",
+  "Analytics avancado",
 ];
 
 export default function PricingCardPage() {
   return (
     <DocPage
       title="PricingCard"
-      description="Card de preço com ancoragem psicológica (preço riscado + desconto automático), badge de destaque e lista de features."
+      description="Card de preco com ancoragem psicologica (preco riscado + desconto automatico), badge de destaque e lista de features."
       breadcrumbs={BREADCRUMBS}
+      badge="FOMO"
+      toc={TOC}
     >
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Básico</h2>
+      <DocSection id="basico" title="Basico">
         <ComponentPreview
           code={`<PricingCard
-  title="Básico"
+  title="Basico"
   price="R$ 29"
-  period="/mês"
-  features={["Até 5 projetos", "1 GB de armazenamento"]}
-  cta={{ label: "Começar grátis" }}
+  period="/mes"
+  features={["Ate 5 projetos", "1 GB de armazenamento"]}
+  cta={{ label: "Comecar gratis" }}
 />`}
         >
           <div className="w-full max-w-xs">
             <PricingCard
-              title="Básico"
-              description="Para quem está começando"
+              title="Basico"
+              description="Para quem esta comecando"
               price="R$ 29"
-              period="/mês"
+              period="/mes"
               features={FEATURES_BASICO}
-              cta={{ label: "Começar grátis" }}
+              cta={{ label: "Comecar gratis" }}
             />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Destacado com ancoragem
-        </h2>
+      <DocSection id="destacado" title="Destacado com ancoragem">
         <p className="text-muted-foreground text-sm">
-          O desconto percentual é calculado automaticamente a partir dos valores
+          O desconto percentual e calculado automaticamente a partir dos valores
           de{" "}
-          <code className="bg-muted rounded px-1 font-mono text-xs">price</code>{" "}
+          <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
+            price
+          </code>{" "}
           e{" "}
-          <code className="bg-muted rounded px-1 font-mono text-xs">
+          <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
             originalPrice
           </code>
           .
@@ -132,7 +135,7 @@ export default function PricingCardPage() {
   title="Pro"
   price="R$ 97"
   originalPrice="R$ 197"
-  period="/mês"
+  period="/mes"
   badge="Mais Popular"
   highlighted
   features={["Projetos ilimitados", "50 GB"]}
@@ -145,7 +148,7 @@ export default function PricingCardPage() {
               description="Para times que precisam escalar"
               price="R$ 97"
               originalPrice="R$ 197"
-              period="/mês"
+              period="/mes"
               badge="Mais Popular"
               highlighted
               features={FEATURES_PRO}
@@ -153,12 +156,11 @@ export default function PricingCardPage() {
             />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

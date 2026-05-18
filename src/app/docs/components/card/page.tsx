@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import {
@@ -19,11 +19,18 @@ const BREADCRUMBS = [
   { label: "Card" },
 ];
 
+const TOC = [
+  { id: "basico", label: "Basico", level: 2 },
+  { id: "com-footer", label: "Com Footer e acoes", level: 2 },
+  { id: "com-avatar-badge", label: "Com Avatar e Badge", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "className",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Classes CSS adicionais para o Card",
   },
 ];
@@ -32,45 +39,41 @@ export default function CardPage() {
   return (
     <DocPage
       title="Card"
-      description="Container de conteúdo com borda, fundo e sombra. Composto por Card, CardHeader, CardTitle, CardDescription, CardContent e CardFooter."
+      description="Container de conteudo com borda, fundo e sombra. Composto por Card, CardHeader, CardTitle, CardDescription, CardContent e CardFooter."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
-      {/* Básico */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Básico</h2>
+      <DocSection id="basico" title="Basico">
         <ComponentPreview
           code={`<Card>
   <CardHeader>
-    <CardTitle>Título do Card</CardTitle>
-    <CardDescription>Descrição complementar</CardDescription>
+    <CardTitle>Titulo do Card</CardTitle>
+    <CardDescription>Descricao complementar</CardDescription>
   </CardHeader>
   <CardContent>
-    <p>Conteúdo do card.</p>
+    <p>Conteudo do card.</p>
   </CardContent>
 </Card>`}
         >
           <Card className="w-full max-w-sm">
             <CardHeader>
-              <CardTitle>Título do Card</CardTitle>
-              <CardDescription>Descrição complementar</CardDescription>
+              <CardTitle>Titulo do Card</CardTitle>
+              <CardDescription>Descricao complementar</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground text-sm">Conteúdo do card.</p>
+              <p className="text-muted-foreground text-sm">Conteudo do card.</p>
             </CardContent>
           </Card>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Com Footer */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Com Footer e ações
-        </h2>
+      <DocSection id="com-footer" title="Com Footer e acoes">
         <ComponentPreview
           code={`<Card>
   <CardHeader>
-    <CardTitle>Confirmar ação</CardTitle>
-    <CardDescription>Esta ação não pode ser desfeita.</CardDescription>
+    <CardTitle>Confirmar acao</CardTitle>
+    <CardDescription>Esta acao nao pode ser desfeita.</CardDescription>
   </CardHeader>
   <CardFooter className="gap-2">
     <Button size="sm">Confirmar</Button>
@@ -80,9 +83,9 @@ export default function CardPage() {
         >
           <Card className="w-full max-w-sm">
             <CardHeader>
-              <CardTitle>Confirmar ação</CardTitle>
+              <CardTitle>Confirmar acao</CardTitle>
               <CardDescription>
-                Esta ação não pode ser desfeita.
+                Esta acao nao pode ser desfeita.
               </CardDescription>
             </CardHeader>
             <CardFooter className="gap-2">
@@ -93,13 +96,9 @@ export default function CardPage() {
             </CardFooter>
           </Card>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Com Avatar e Badge */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Com Avatar e Badge
-        </h2>
+      <DocSection id="com-avatar-badge" title="Com Avatar e Badge">
         <ComponentPreview
           code={`<Card>
   <CardHeader>
@@ -112,7 +111,7 @@ export default function CardPage() {
     </div>
   </CardHeader>
   <CardContent className="flex gap-2">
-    <Badge variant="success">Estável</Badge>
+    <Badge variant="success">Estavel</Badge>
     <Badge variant="secondary">Open Source</Badge>
   </CardContent>
 </Card>`}
@@ -128,23 +127,23 @@ export default function CardPage() {
               </div>
             </CardHeader>
             <CardContent className="flex gap-2">
-              <Badge variant="success">Estável</Badge>
+              <Badge variant="success">Estavel</Badge>
               <Badge variant="secondary">Open Source</Badge>
             </CardContent>
           </Card>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <p className="text-muted-foreground text-sm">
           Todos os sub-componentes aceitam{" "}
-          <code className="bg-muted rounded px-1 text-xs">className</code> e as
-          props HTML nativas do elemento correspondente.
+          <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
+            className
+          </code>{" "}
+          e as props HTML nativas do elemento correspondente.
         </p>
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

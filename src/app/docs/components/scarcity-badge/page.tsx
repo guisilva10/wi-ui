@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { ScarcityBadge } from "@/shared/ui/components/scarcity-badge";
@@ -9,25 +9,33 @@ const BREADCRUMBS = [
   { label: "ScarcityBadge" },
 ];
 
+const TOC = [
+  { id: "default", label: "Default", level: 2 },
+  { id: "critical", label: "Critical", level: 2 },
+  { id: "esgotado", label: "Esgotado", level: 2 },
+  { id: "sem-barra", label: "Sem barra", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "total",
     type: "number",
-    default: "—",
-    description: "Total de vagas/unidades disponíveis",
+    description: "Total de vagas/unidades disponiveis",
+    required: true,
   },
   {
     name: "remaining",
     type: "number",
-    default: "—",
     description: "Vagas/unidades restantes",
+    required: true,
   },
   {
     name: "variant",
     type: '"default" | "critical" | "soldout"',
     default: "auto",
     description:
-      "Força variante visual. Por padrão é automático: critical quando ≤ 20%, soldout quando 0",
+      "Forca variante visual. Por padrao e automatico: critical quando <= 20%, soldout quando 0",
   },
   {
     name: "showBar",
@@ -39,7 +47,7 @@ const PROPS = [
     name: "label",
     type: "string",
     default: "auto",
-    description: "Texto customizado. Por padrão gera automaticamente",
+    description: "Texto customizado. Por padrao gera automaticamente",
   },
   {
     name: "soldoutLabel",
@@ -53,50 +61,43 @@ export default function ScarcityBadgePage() {
   return (
     <DocPage
       title="ScarcityBadge"
-      description="Badge de escassez com barra de progresso. Muda automaticamente para vermelho quando ≤ 20% disponível. Poderoso para criar urgência real."
+      description="Badge de escassez com barra de progresso. Muda automaticamente para vermelho quando <= 20% disponivel. Poderoso para criar urgencia real."
       breadcrumbs={BREADCRUMBS}
+      badge="FOMO"
+      toc={TOC}
     >
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Default (bastante disponível)
-        </h2>
+      <DocSection id="default" title="Default (bastante disponivel)">
         <ComponentPreview code={`<ScarcityBadge total={100} remaining={60} />`}>
           <ScarcityBadge total={100} remaining={60} />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Critical (≤ 20%)
-        </h2>
+      <DocSection id="critical" title="Critical (<= 20%)">
         <p className="text-muted-foreground text-sm">
           Ativa automaticamente quando restam 20% ou menos.
         </p>
         <ComponentPreview code={`<ScarcityBadge total={100} remaining={8} />`}>
           <ScarcityBadge total={100} remaining={8} />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Esgotado</h2>
+      <DocSection id="esgotado" title="Esgotado">
         <ComponentPreview code={`<ScarcityBadge total={100} remaining={0} />`}>
           <ScarcityBadge total={100} remaining={0} />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Sem barra</h2>
+      <DocSection id="sem-barra" title="Sem barra">
         <ComponentPreview
           code={`<ScarcityBadge total={50} remaining={3} showBar={false} />`}
         >
           <ScarcityBadge total={50} remaining={3} showBar={false} />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

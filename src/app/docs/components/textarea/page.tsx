@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { Textarea } from "@/shared/ui/components/textarea";
@@ -7,6 +7,14 @@ const BREADCRUMBS = [
   { label: "Docs", href: "/docs" },
   { label: "Componentes" },
   { label: "Textarea" },
+];
+
+const TOC = [
+  { id: "default", label: "Default", level: 2 },
+  { id: "estado-erro", label: "Estado de erro", level: 2 },
+  { id: "desabilitado", label: "Desabilitado", level: 2 },
+  { id: "opcoes-resize", label: "Opcoes de resize", level: 2 },
+  { id: "props", label: "Props", level: 2 },
 ];
 
 const PROPS = [
@@ -31,13 +39,13 @@ const PROPS = [
   {
     name: "rows",
     type: "number",
-    default: "—",
-    description: "Número de linhas visíveis",
+    default: "--",
+    description: "Numero de linhas visiveis",
   },
   {
     name: "className",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Classes CSS adicionais",
   },
 ];
@@ -46,12 +54,12 @@ export default function TextareaPage() {
   return (
     <DocPage
       title="Textarea"
-      description="Área de texto com suporte a estados de erro, resize customizado e disabled."
+      description="Area de texto com suporte a estados de erro, resize customizado e disabled."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
-      {/* Default */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Default</h2>
+      <DocSection id="default" title="Default">
         <ComponentPreview
           code={`<Textarea placeholder="Escreva sua mensagem..." rows={4} />`}
         >
@@ -59,61 +67,49 @@ export default function TextareaPage() {
             <Textarea placeholder="Escreva sua mensagem..." rows={4} />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Erro */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Estado de erro
-        </h2>
+      <DocSection id="estado-erro" title="Estado de erro">
         <ComponentPreview
-          code={`<Textarea placeholder="Campo obrigatório" error rows={3} />`}
+          code={`<Textarea placeholder="Campo obrigatorio" error rows={3} />`}
         >
           <div className="w-full max-w-sm">
-            <Textarea placeholder="Campo obrigatório" error rows={3} />
+            <Textarea placeholder="Campo obrigatorio" error rows={3} />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Disabled */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Desabilitado</h2>
+      <DocSection id="desabilitado" title="Desabilitado">
         <ComponentPreview
-          code={`<Textarea placeholder="Não editável" disabled rows={3} />`}
+          code={`<Textarea placeholder="Nao editavel" disabled rows={3} />`}
         >
           <div className="w-full max-w-sm">
-            <Textarea placeholder="Não editável" disabled rows={3} />
+            <Textarea placeholder="Nao editavel" disabled rows={3} />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Resize options */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Opções de resize
-        </h2>
+      <DocSection id="opcoes-resize" title="Opcoes de resize">
         <ComponentPreview
           code={`<Textarea placeholder='resize="none"' resize="none" rows={2} />
-<Textarea placeholder='resize="vertical" (padrão)' resize="vertical" rows={2} />
+<Textarea placeholder='resize="vertical" (padrao)' resize="vertical" rows={2} />
 <Textarea placeholder='resize="both"' resize="both" rows={2} />`}
         >
           <div className="w-full max-w-sm space-y-3">
             <Textarea placeholder='resize="none"' resize="none" rows={2} />
             <Textarea
-              placeholder='resize="vertical" (padrão)'
+              placeholder='resize="vertical" (padrao)'
               resize="vertical"
               rows={2}
             />
             <Textarea placeholder='resize="both"' resize="both" rows={2} />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

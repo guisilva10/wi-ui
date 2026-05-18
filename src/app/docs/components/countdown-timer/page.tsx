@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { CountdownTimerDemo } from "./countdown-timer-demo";
@@ -9,12 +9,19 @@ const BREADCRUMBS = [
   { label: "CountdownTimer" },
 ];
 
+const TOC = [
+  { id: "padrao", label: "Padrao", level: 2 },
+  { id: "urgente", label: "Urgente", level: 2 },
+  { id: "minimal", label: "Minimal", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "targetDate",
     type: "Date | string",
-    default: "—",
-    description: "Data alvo para o countdown (obrigatório)",
+    description: "Data alvo para o countdown (obrigatorio)",
+    required: true,
   },
   {
     name: "variant",
@@ -27,7 +34,7 @@ const PROPS = [
     name: "size",
     type: '"sm" | "md" | "lg"',
     default: '"md"',
-    description: "Tamanho dos dígitos",
+    description: "Tamanho dos digitos",
   },
   {
     name: "showDays",
@@ -62,7 +69,6 @@ const PROPS = [
   {
     name: "onExpire",
     type: "() => void",
-    default: "—",
     description: "Callback chamado quando o timer chega a zero",
   },
 ];
@@ -71,11 +77,12 @@ export default function CountdownTimerPage() {
   return (
     <DocPage
       title="CountdownTimer"
-      description="Timer regressivo com urgência visual automática. Ideal para ofertas, lançamentos e promoções com prazo."
+      description="Timer regressivo com urgencia visual automatica. Ideal para ofertas, lancamentos e promocoes com prazo."
       breadcrumbs={BREADCRUMBS}
+      badge="FOMO"
+      toc={TOC}
     >
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Padrão</h2>
+      <DocSection id="padrao" title="Padrao">
         <ComponentPreview
           code={`const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
 
@@ -83,14 +90,13 @@ export default function CountdownTimerPage() {
         >
           <CountdownTimerDemo variant="default" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Urgente</h2>
+      <DocSection id="urgente" title="Urgente">
         <p className="text-muted-foreground text-sm">
-          Ativa automaticamente quando restam menos de 1 hora. Pode ser forçado
+          Ativa automaticamente quando restam menos de 1 hora. Pode ser forcado
           com{" "}
-          <code className="bg-muted rounded px-1 font-mono text-xs">
+          <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
             variant=&quot;urgent&quot;
           </code>
           .
@@ -102,10 +108,9 @@ export default function CountdownTimerPage() {
         >
           <CountdownTimerDemo variant="urgent" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Minimal</h2>
+      <DocSection id="minimal" title="Minimal">
         <ComponentPreview
           code={`const target = new Date(Date.now() + 3 * 60 * 60 * 1000);
 
@@ -113,12 +118,11 @@ export default function CountdownTimerPage() {
         >
           <CountdownTimerDemo variant="minimal" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { VisitorCounterDemo } from "./visitor-counter-demo";
@@ -9,12 +9,19 @@ const BREADCRUMBS = [
   { label: "VisitorCounter" },
 ];
 
+const TOC = [
+  { id: "dot", label: "Dot (padrao)", level: 2 },
+  { id: "pulse", label: "Pulse", level: 2 },
+  { id: "bar", label: "Bar", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "count",
     type: "number",
-    default: "—",
-    description: "Número de visitantes atual",
+    description: "Numero de visitantes atual",
+    required: true,
   },
   {
     name: "variant",
@@ -26,13 +33,13 @@ const PROPS = [
     name: "label",
     type: "string",
     default: '"pessoas vendo agora"',
-    description: "Texto após o contador",
+    description: "Texto apos o contador",
   },
   {
     name: "simulateActivity",
     type: "boolean",
     default: "false",
-    description: "Oscila o contador ±3 a cada 5s para demonstrações",
+    description: "Oscila o contador +/-3 a cada 5s para demonstracoes",
   },
 ];
 
@@ -40,40 +47,38 @@ export default function VisitorCounterPage() {
   return (
     <DocPage
       title="VisitorCounter"
-      description='"X pessoas vendo agora" — indicador live compacto e não-intrusivo. Aumenta pressão social sutil na conversão.'
+      description='"X pessoas vendo agora" — indicador live compacto e nao-intrusivo. Aumenta pressao social sutil na conversao.'
       breadcrumbs={BREADCRUMBS}
+      badge="FOMO"
+      toc={TOC}
     >
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Dot (padrão)</h2>
+      <DocSection id="dot" title="Dot (padrao)">
         <ComponentPreview
           code={`<VisitorCounter count={47} variant="dot" simulateActivity />`}
         >
           <VisitorCounterDemo variant="dot" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Pulse</h2>
+      <DocSection id="pulse" title="Pulse">
         <ComponentPreview
           code={`<VisitorCounter count={47} variant="pulse" simulateActivity />`}
         >
           <VisitorCounterDemo variant="pulse" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Bar</h2>
+      <DocSection id="bar" title="Bar">
         <ComponentPreview
           code={`<VisitorCounter count={47} variant="bar" simulateActivity />`}
         >
           <VisitorCounterDemo variant="bar" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }

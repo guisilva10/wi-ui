@@ -1,4 +1,4 @@
-import { DocPage } from "@/shared/ui/docs/doc-page";
+import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { Avatar } from "@/shared/ui/components/avatar";
@@ -9,11 +9,18 @@ const BREADCRUMBS = [
   { label: "Avatar" },
 ];
 
+const TOC = [
+  { id: "tamanhos", label: "Tamanhos", level: 2 },
+  { id: "com-imagem", label: "Com imagem", level: 2 },
+  { id: "fallback-iniciais", label: "Fallback com iniciais", level: 2 },
+  { id: "props", label: "Props", level: 2 },
+];
+
 const PROPS = [
   {
     name: "src",
     type: "string",
-    default: "—",
+    default: "--",
     description: "URL da imagem do avatar",
   },
   {
@@ -26,7 +33,7 @@ const PROPS = [
     name: "fallback",
     type: "string",
     default: '""',
-    description: "Nome para gerar iniciais quando não há imagem",
+    description: "Nome para gerar iniciais quando nao ha imagem",
   },
   {
     name: "size",
@@ -37,7 +44,7 @@ const PROPS = [
   {
     name: "className",
     type: "string",
-    default: "—",
+    default: "--",
     description: "Classes CSS adicionais",
   },
 ];
@@ -46,42 +53,36 @@ export default function AvatarPage() {
   return (
     <DocPage
       title="Avatar"
-      description="Componente de avatar com suporte a imagem, fallback com iniciais e múltiplos tamanhos."
+      description="Componente de avatar com suporte a imagem, fallback com iniciais e multiplos tamanhos."
       breadcrumbs={BREADCRUMBS}
+      badge="Base"
+      toc={TOC}
     >
-      {/* Tamanhos */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Tamanhos</h2>
+      <DocSection id="tamanhos" title="Tamanhos">
         <ComponentPreview
-          code={`<Avatar size="sm" fallback="João Silva" />
+          code={`<Avatar size="sm" fallback="Joao Silva" />
 <Avatar size="md" fallback="Maria Oliveira" />
 <Avatar size="lg" fallback="Pedro Costa" />
 <Avatar size="xl" fallback="Ana Lima" />`}
         >
           <div className="flex items-end gap-4">
-            <Avatar size="sm" fallback="João Silva" />
+            <Avatar size="sm" fallback="Joao Silva" />
             <Avatar size="md" fallback="Maria Oliveira" />
             <Avatar size="lg" fallback="Pedro Costa" />
             <Avatar size="xl" fallback="Ana Lima" />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Com imagem */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Com imagem</h2>
+      <DocSection id="com-imagem" title="Com imagem">
         <ComponentPreview
-          code={`<Avatar src="https://i.pravatar.cc/80" alt="Usuário" size="lg" />`}
+          code={`<Avatar src="https://i.pravatar.cc/80" alt="Usuario" size="lg" />`}
         >
-          <Avatar src="https://i.pravatar.cc/80" alt="Usuário" size="lg" />
+          <Avatar src="https://i.pravatar.cc/80" alt="Usuario" size="lg" />
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Fallback com iniciais */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">
-          Fallback com iniciais
-        </h2>
+      <DocSection id="fallback-iniciais" title="Fallback com iniciais">
         <ComponentPreview
           code={`<Avatar fallback="Guilherme Silva" />
 <Avatar fallback="WI UI" />
@@ -93,13 +94,11 @@ export default function AvatarPage() {
             <Avatar fallback="Lorraine Dev" />
           </div>
         </ComponentPreview>
-      </section>
+      </DocSection>
 
-      {/* Props */}
-      <section className="space-y-4">
-        <h2 className="text-foreground text-lg font-semibold">Props</h2>
+      <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
-      </section>
+      </DocSection>
     </DocPage>
   );
 }
