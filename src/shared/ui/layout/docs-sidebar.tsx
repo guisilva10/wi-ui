@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 type CategoryTag = "base" | "fomo" | "animation" | "block";
@@ -137,7 +137,7 @@ function SidebarSearch() {
   );
 }
 
-function SidebarSection({
+function SidebarSectionItem({
   section,
   onLinkClick,
 }: {
@@ -145,58 +145,40 @@ function SidebarSection({
   onLinkClick?: () => void;
 }) {
   const pathname = usePathname();
-  const hasActiveChild = section.links.some((link) => pathname === link.href);
-  const [isOpen, setIsOpen] = useState(section.defaultOpen ?? hasActiveChild);
 
   return (
     <div>
-      <button
-        onClick={() => setIsOpen((o) => !o)}
-        className="text-foreground/80 hover:text-foreground flex w-full items-center gap-1 py-1.5 text-xs font-semibold tracking-wide uppercase transition-colors"
-      >
-        <ChevronDown
-          className={cn(
-            "size-2 shrink-0 transition-transform duration-200",
-            !isOpen && "-rotate-90",
-          )}
-        />
+      <div className="text-foreground/80 flex items-center gap-1 py-1.5 text-xs font-semibold tracking-wide uppercase">
         <span>{section.section}</span>
         {section.tag && <CategoryBadge tag={section.tag} />}
-      </button>
-
-      <div
-        className={cn(
-          "overflow-hidden transition-all duration-200",
-          isOpen ? "mt-1 max-h-[500px] opacity-100" : "max-h-0 opacity-0",
-        )}
-      >
-        <ul className="border-border/50 ml-1 space-y-px border-l pl-3">
-          {section.links.map(({ label, href, isNew }) => {
-            const isActive = pathname === href;
-            return (
-              <li key={href}>
-                <Link
-                  href={href}
-                  onClick={onLinkClick}
-                  className={cn(
-                    "relative -ml-px block border-l py-1.5 pl-3 text-[13px] transition-colors",
-                    isActive
-                      ? "border-primary text-primary font-medium"
-                      : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
-                  )}
-                >
-                  {label}
-                  {isNew && (
-                    <span className="ml-1.5 inline-flex rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[10px] leading-none font-medium text-emerald-600 dark:text-emerald-400">
-                      New
-                    </span>
-                  )}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
       </div>
+
+      <ul className="border-border/50 mt-1 ml-1 space-y-px border-l pl-3">
+        {section.links.map(({ label, href, isNew }) => {
+          const isActive = pathname === href;
+          return (
+            <li key={href}>
+              <Link
+                href={href}
+                onClick={onLinkClick}
+                className={cn(
+                  "relative -ml-px block border-l py-1.5 pl-3 text-[13px] transition-colors",
+                  isActive
+                    ? "border-primary text-primary font-medium"
+                    : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
+                )}
+              >
+                {label}
+                {isNew && (
+                  <span className="ml-1.5 inline-flex rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[10px] leading-none font-medium text-emerald-600 dark:text-emerald-400">
+                    New
+                  </span>
+                )}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
@@ -205,7 +187,7 @@ function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
   return (
     <nav className="space-y-5">
       {SIDEBAR_ITEMS.map((section) => (
-        <SidebarSection
+        <SidebarSectionItem
           key={section.section}
           section={section}
           onLinkClick={onLinkClick}
