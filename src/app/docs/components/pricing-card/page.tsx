@@ -12,10 +12,11 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "basico", label: "Basico", level: 2 },
-  { id: "destacado", label: "Destacado com ancoragem", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "basico", label: "Basico", level: 2 },
+  { id: "destacado", label: "Destacado", level: 2 },
+  { id: "com-ancoragem", label: "Com ancoragem de preco", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -98,13 +99,46 @@ export default function PricingCardPage() {
       badge="FOMO"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="pricing-card" />
+        <ComponentSource componentName="pricing-card" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { PricingCard } from "@/components/pricing-card";
+
+<PricingCard
+  title="Pro"
+  price="R$ 97"
+  features={["Feature A", "Feature B"]}
+  cta={{ label: "Assinar" }}
+/>`}
+        >
+          <div className="w-full max-w-xs">
+            <PricingCard
+              title="Pro"
+              price="R$ 97"
+              features={["Feature A", "Feature B"]}
+              cta={{ label: "Assinar" }}
+            />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="basico" title="Basico">
         <ComponentPreview
           code={`<PricingCard
   title="Basico"
+  description="Para quem esta comecando"
   price="R$ 29"
   period="/mes"
-  features={["Ate 5 projetos", "1 GB de armazenamento"]}
+  features={[
+    "Ate 5 projetos",
+    "1 GB de armazenamento",
+    { text: "Dominio customizado", included: false },
+    { text: "Suporte prioritario", included: false },
+  ]}
   cta={{ label: "Comecar gratis" }}
 />`}
         >
@@ -121,7 +155,35 @@ export default function PricingCardPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="destacado" title="Destacado com ancoragem">
+      <DocSection id="destacado" title="Destacado">
+        <ComponentPreview
+          code={`<PricingCard
+  title="Pro"
+  description="Para times que precisam escalar"
+  price="R$ 97"
+  period="/mes"
+  badge="Mais Popular"
+  highlighted
+  features={["Projetos ilimitados", "50 GB"]}
+  cta={{ label: "Assinar agora" }}
+/>`}
+        >
+          <div className="w-full max-w-xs pt-4">
+            <PricingCard
+              title="Pro"
+              description="Para times que precisam escalar"
+              price="R$ 97"
+              period="/mes"
+              badge="Mais Popular"
+              highlighted
+              features={FEATURES_PRO}
+              cta={{ label: "Assinar agora" }}
+            />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="com-ancoragem" title="Com ancoragem de preco">
         <p className="text-muted-foreground text-sm">
           O desconto percentual e calculado automaticamente a partir dos valores
           de{" "}
@@ -160,14 +222,6 @@ export default function PricingCardPage() {
             />
           </div>
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="pricing-card" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="pricing-card" />
       </DocSection>
 
       <DocSection id="props" title="Props">

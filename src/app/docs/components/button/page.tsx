@@ -12,12 +12,17 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "variantes", label: "Variantes", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "default", label: "Default", level: 2 },
+  { id: "secondary", label: "Secondary", level: 2 },
+  { id: "outline", label: "Outline", level: 2 },
+  { id: "ghost", label: "Ghost", level: 2 },
+  { id: "destructive", label: "Destructive", level: 2 },
+  { id: "link", label: "Link", level: 2 },
   { id: "tamanhos", label: "Tamanhos", level: 2 },
   { id: "loading", label: "Loading", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -69,28 +74,61 @@ export default function ButtonPage() {
       badge="Base"
       toc={TOC}
     >
-      {/* Variantes */}
-      <DocSection id="variantes" title="Variantes">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="button" />
+        <ComponentSource componentName="button" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
         <ComponentPreview
-          code={`<Button variant="default">Default</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="outline">Outline</Button>
-<Button variant="ghost">Ghost</Button>
-<Button variant="destructive">Destructive</Button>
-<Button variant="link">Link</Button>`}
+          code={`import { Button } from "@/components/button";
+
+<Button>Clique aqui</Button>`}
         >
-          <div className="flex flex-wrap gap-3">
-            <Button variant="default">Default</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Destructive</Button>
-            <Button variant="link">Link</Button>
-          </div>
+          <Button>Clique aqui</Button>
         </ComponentPreview>
       </DocSection>
 
-      {/* Tamanhos */}
+      <DocSection id="default" title="Default">
+        <ComponentPreview code={`<Button variant="default">Default</Button>`}>
+          <Button variant="default">Default</Button>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="secondary" title="Secondary">
+        <ComponentPreview
+          code={`<Button variant="secondary">Secondary</Button>`}
+        >
+          <Button variant="secondary">Secondary</Button>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="outline" title="Outline">
+        <ComponentPreview code={`<Button variant="outline">Outline</Button>`}>
+          <Button variant="outline">Outline</Button>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="ghost" title="Ghost">
+        <ComponentPreview code={`<Button variant="ghost">Ghost</Button>`}>
+          <Button variant="ghost">Ghost</Button>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="destructive" title="Destructive">
+        <ComponentPreview
+          code={`<Button variant="destructive">Destructive</Button>`}
+        >
+          <Button variant="destructive">Destructive</Button>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="link" title="Link">
+        <ComponentPreview code={`<Button variant="link">Link</Button>`}>
+          <Button variant="link">Link</Button>
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="tamanhos" title="Tamanhos">
         <ComponentPreview
           code={`<Button size="sm">Small</Button>
@@ -105,7 +143,6 @@ export default function ButtonPage() {
         </ComponentPreview>
       </DocSection>
 
-      {/* Loading */}
       <DocSection id="loading" title="Loading">
         <ComponentPreview
           code={`<Button isLoading loadingText="Salvando...">Salvar</Button>
@@ -122,7 +159,6 @@ export default function ButtonPage() {
         </ComponentPreview>
       </DocSection>
 
-      {/* Disabled */}
       <DocSection id="desabilitado" title="Desabilitado">
         <ComponentPreview
           code={`<Button disabled>Desabilitado</Button>
@@ -137,15 +173,6 @@ export default function ButtonPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="button" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="button" />
-      </DocSection>
-
-      {/* Props */}
       <DocSection id="props" title="Props">
         <PropsTable props={PROPS} />
       </DocSection>

@@ -12,7 +12,9 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "full", label: "Full (padrao)", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "full", label: "Full", level: 2 },
   { id: "compact", label: "Compact", level: 2 },
   { id: "minimal", label: "Minimal", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -75,13 +77,31 @@ export default function SocialProofPage() {
       badge="FOMO"
       toc={TOC}
     >
-      <DocSection id="full" title="Full (padrao)">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="social-proof" />
+        <ComponentSource componentName="social-proof" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { SocialProof } from "@/components/social-proof";
+
+<SocialProof
+  type="purchase"
+  data={{ name: "Ana Lima", time: "ha 2 min" }}
+/>`}
+        >
+          <SocialProofDemo variant="full" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="full" title="Full">
         <ComponentPreview
           code={`<SocialProof
   fixed={false}
   type="purchase"
   data={[
-    { name: "Ana Lima", time: "ha 2 min", avatar: "" },
+    { name: "Ana Lima", time: "ha 2 min" },
     { name: "Carlos M.", time: "ha 5 min" },
   ]}
 />`}

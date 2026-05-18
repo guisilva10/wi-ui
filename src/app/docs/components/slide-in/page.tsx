@@ -12,11 +12,13 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "esquerda", label: "Da esquerda", level: 2 },
-  { id: "direita", label: "Da direita", level: 2 },
-  { id: "distancia", label: "Distancia customizada", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "left", label: "Left", level: 2 },
+  { id: "right", label: "Right", level: 2 },
+  { id: "top", label: "Top", level: 2 },
+  { id: "bottom", label: "Bottom", level: 2 },
+  { id: "distancia-customizada", label: "Distancia customizada", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -73,7 +75,24 @@ export default function SlideInPage() {
       badge="Animation"
       toc={TOC}
     >
-      <DocSection id="esquerda" title="Da esquerda">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="slide-in" />
+        <ComponentSource componentName="slide-in" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { SlideIn } from "@/components/slide-in";
+
+<SlideIn>
+  <div>Entra deslizando da esquerda</div>
+</SlideIn>`}
+        >
+          <SlideInDemo direction="left" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="left" title="Left">
         <ComponentPreview
           code={`<SlideIn direction="left">
   <div>Entra deslizando da esquerda</div>
@@ -83,7 +102,7 @@ export default function SlideInPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="direita" title="Da direita">
+      <DocSection id="right" title="Right">
         <ComponentPreview
           code={`<SlideIn direction="right">
   <div>Entra deslizando da direita</div>
@@ -93,7 +112,27 @@ export default function SlideInPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="distancia" title="Distancia customizada">
+      <DocSection id="top" title="Top">
+        <ComponentPreview
+          code={`<SlideIn direction="top">
+  <div>Entra de cima</div>
+</SlideIn>`}
+        >
+          <SlideInDemo direction="top" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="bottom" title="Bottom">
+        <ComponentPreview
+          code={`<SlideIn direction="bottom">
+  <div>Entra de baixo</div>
+</SlideIn>`}
+        >
+          <SlideInDemo direction="bottom" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="distancia-customizada" title="Distancia customizada">
         <p className="text-muted-foreground text-sm">
           Controle o quanto o elemento se desloca com a prop{" "}
           <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
@@ -108,14 +147,6 @@ export default function SlideInPage() {
         >
           <SlideInDemo direction="bottom" distance={80} />
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="slide-in" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="slide-in" />
       </DocSection>
 
       <DocSection id="props" title="Props">

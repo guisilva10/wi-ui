@@ -22,8 +22,10 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "basico", label: "Basico", level: 2 },
-  { id: "com-footer", label: "Com Footer e acoes", level: 2 },
+  { id: "com-footer", label: "Com Footer", level: 2 },
   { id: "com-avatar-badge", label: "Com Avatar e Badge", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
@@ -48,6 +50,33 @@ export default function CardPage() {
       badge="Base"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="card" />
+        <ComponentSource componentName="card" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { Card, CardHeader, CardTitle, CardContent } from "@/components/card";
+
+<Card>
+  <CardHeader>
+    <CardTitle>Titulo</CardTitle>
+  </CardHeader>
+  <CardContent>Conteudo</CardContent>
+</Card>`}
+        >
+          <Card className="w-full max-w-sm">
+            <CardHeader>
+              <CardTitle>Titulo</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm">Conteudo</p>
+            </CardContent>
+          </Card>
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="basico" title="Basico">
         <ComponentPreview
           code={`<Card>
@@ -72,7 +101,7 @@ export default function CardPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="com-footer" title="Com Footer e acoes">
+      <DocSection id="com-footer" title="Com Footer">
         <ComponentPreview
           code={`<Card>
   <CardHeader>

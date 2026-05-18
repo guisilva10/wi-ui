@@ -12,11 +12,13 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "tamanhos", label: "Tamanhos", level: 2 },
-  { id: "com-imagem", label: "Com imagem", level: 2 },
-  { id: "fallback-iniciais", label: "Fallback com iniciais", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "sm", label: "Small", level: 2 },
+  { id: "md", label: "Medium", level: 2 },
+  { id: "lg", label: "Large", level: 2 },
+  { id: "xl", label: "Extra Large", level: 2 },
+  { id: "com-imagem", label: "Com imagem", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -62,19 +64,44 @@ export default function AvatarPage() {
       badge="Base"
       toc={TOC}
     >
-      <DocSection id="tamanhos" title="Tamanhos">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="avatar" />
+        <ComponentSource componentName="avatar" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
         <ComponentPreview
-          code={`<Avatar size="sm" fallback="Joao Silva" />
-<Avatar size="md" fallback="Maria Oliveira" />
-<Avatar size="lg" fallback="Pedro Costa" />
-<Avatar size="xl" fallback="Ana Lima" />`}
+          code={`import { Avatar } from "@/components/avatar";
+
+<Avatar fallback="Joao Silva" />`}
         >
-          <div className="flex items-end gap-4">
-            <Avatar size="sm" fallback="Joao Silva" />
-            <Avatar size="md" fallback="Maria Oliveira" />
-            <Avatar size="lg" fallback="Pedro Costa" />
-            <Avatar size="xl" fallback="Ana Lima" />
-          </div>
+          <Avatar fallback="Joao Silva" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="sm" title="Small">
+        <ComponentPreview code={`<Avatar size="sm" fallback="Joao Silva" />`}>
+          <Avatar size="sm" fallback="Joao Silva" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="md" title="Medium">
+        <ComponentPreview
+          code={`<Avatar size="md" fallback="Maria Oliveira" />`}
+        >
+          <Avatar size="md" fallback="Maria Oliveira" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="lg" title="Large">
+        <ComponentPreview code={`<Avatar size="lg" fallback="Pedro Costa" />`}>
+          <Avatar size="lg" fallback="Pedro Costa" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="xl" title="Extra Large">
+        <ComponentPreview code={`<Avatar size="xl" fallback="Ana Lima" />`}>
+          <Avatar size="xl" fallback="Ana Lima" />
         </ComponentPreview>
       </DocSection>
 
@@ -84,28 +111,6 @@ export default function AvatarPage() {
         >
           <Avatar src="https://i.pravatar.cc/80" alt="Usuario" size="lg" />
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="fallback-iniciais" title="Fallback com iniciais">
-        <ComponentPreview
-          code={`<Avatar fallback="Guilherme Silva" />
-<Avatar fallback="WI UI" />
-<Avatar fallback="Lorraine Dev" />`}
-        >
-          <div className="flex gap-3">
-            <Avatar fallback="Guilherme Silva" />
-            <Avatar fallback="WI UI" />
-            <Avatar fallback="Lorraine Dev" />
-          </div>
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="avatar" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="avatar" />
       </DocSection>
 
       <DocSection id="props" title="Props">

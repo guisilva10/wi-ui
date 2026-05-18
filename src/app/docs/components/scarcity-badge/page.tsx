@@ -12,9 +12,11 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "default", label: "Default", level: 2 },
   { id: "critical", label: "Critical", level: 2 },
-  { id: "esgotado", label: "Esgotado", level: 2 },
+  { id: "soldout", label: "Esgotado", level: 2 },
   { id: "sem-barra", label: "Sem barra", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
@@ -70,13 +72,28 @@ export default function ScarcityBadgePage() {
       badge="FOMO"
       toc={TOC}
     >
-      <DocSection id="default" title="Default (bastante disponivel)">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="scarcity-badge" />
+        <ComponentSource componentName="scarcity-badge" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { ScarcityBadge } from "@/components/scarcity-badge";
+
+<ScarcityBadge total={100} remaining={60} />`}
+        >
+          <ScarcityBadge total={100} remaining={60} />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="default" title="Default">
         <ComponentPreview code={`<ScarcityBadge total={100} remaining={60} />`}>
           <ScarcityBadge total={100} remaining={60} />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="critical" title="Critical (<= 20%)">
+      <DocSection id="critical" title="Critical">
         <p className="text-muted-foreground text-sm">
           Ativa automaticamente quando restam 20% ou menos.
         </p>
@@ -85,7 +102,7 @@ export default function ScarcityBadgePage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="esgotado" title="Esgotado">
+      <DocSection id="soldout" title="Esgotado">
         <ComponentPreview code={`<ScarcityBadge total={100} remaining={0} />`}>
           <ScarcityBadge total={100} remaining={0} />
         </ComponentPreview>

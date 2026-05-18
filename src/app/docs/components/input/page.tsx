@@ -13,8 +13,11 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "default", label: "Default", level: 2 },
-  { id: "com-icones", label: "Com icones", level: 2 },
+  { id: "com-icone-esquerda", label: "Com icone a esquerda", level: 2 },
+  { id: "com-icone-direita", label: "Com icone a direita", level: 2 },
   { id: "estado-erro", label: "Estado de erro", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -70,6 +73,23 @@ export default function InputPage() {
       badge="Base"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="input" />
+        <ComponentSource componentName="input" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { Input } from "@/components/input";
+
+<Input placeholder="Nome completo" />`}
+        >
+          <div className="w-full max-w-sm">
+            <Input placeholder="Nome completo" />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="default" title="Default">
         <ComponentPreview code={`<Input placeholder="Nome completo" />`}>
           <div className="w-full max-w-sm">
@@ -78,16 +98,24 @@ export default function InputPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="com-icones" title="Com icones">
+      <DocSection id="com-icone-esquerda" title="Com icone a esquerda">
         <ComponentPreview
-          code={`<Input startIcon={<Search className="size-4" />} placeholder="Buscar..." />
-<Input endIcon={<Mail className="size-4" />} placeholder="Email" type="email" />`}
+          code={`<Input startIcon={<Search className="size-4" />} placeholder="Buscar..." />`}
         >
-          <div className="w-full max-w-sm space-y-3">
+          <div className="w-full max-w-sm">
             <Input
               startIcon={<Search className="size-4" />}
               placeholder="Buscar..."
             />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="com-icone-direita" title="Com icone a direita">
+        <ComponentPreview
+          code={`<Input endIcon={<Mail className="size-4" />} placeholder="Email" type="email" />`}
+        >
+          <div className="w-full max-w-sm">
             <Input
               endIcon={<Mail className="size-4" />}
               placeholder="Email"

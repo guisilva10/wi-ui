@@ -12,7 +12,9 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "card", label: "Card (padrao)", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "card", label: "Card", level: 2 },
   { id: "bubble", label: "Bubble", level: 2 },
   { id: "minimal", label: "Minimal", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -104,7 +106,28 @@ export default function TestimonialCarouselPage() {
       badge="FOMO"
       toc={TOC}
     >
-      <DocSection id="card" title="Card (padrao)">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="testimonial-carousel" />
+        <ComponentSource componentName="testimonial-carousel" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { TestimonialCarousel } from "@/components/testimonial-carousel";
+
+<TestimonialCarousel
+  testimonials={[
+    { name: "Ana Lima", content: "Produto incrivel!", rating: 5 },
+  ]}
+/>`}
+        >
+          <div className="w-full max-w-md">
+            <TestimonialCarouselDemo variant="card" />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="card" title="Card">
         <ComponentPreview
           code={`<TestimonialCarousel
   variant="card"
