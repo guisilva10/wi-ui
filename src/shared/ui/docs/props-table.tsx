@@ -1,8 +1,11 @@
+import { cn } from "@/lib/cn";
+
 interface PropDef {
   name: string;
   type: string;
   default?: string;
   description: string;
+  required?: boolean;
 }
 
 interface PropsTableProps {
@@ -11,56 +14,81 @@ interface PropsTableProps {
 
 function PropsTable({ props }: PropsTableProps) {
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="border-border w-full min-w-[600px] border-collapse border text-sm">
-        <thead>
-          <tr className="bg-muted/50">
-            <th className="border-border border px-4 py-2 text-left font-semibold">
-              Prop
-            </th>
-            <th className="border-border border px-4 py-2 text-left font-semibold">
-              Tipo
-            </th>
-            <th className="border-border border px-4 py-2 text-left font-semibold">
-              Default
-            </th>
-            <th className="border-border border px-4 py-2 text-left font-semibold">
-              Descrição
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.map((prop, i) => (
-            <tr
-              key={prop.name}
-              className={i % 2 === 0 ? "bg-background" : "bg-muted/20"}
-            >
-              <td className="border-border border px-4 py-2">
-                <code className="bg-muted rounded px-1 py-0.5 font-mono text-xs">
+    <div className="space-y-2">
+      {/* Header row - desktop only */}
+      <div className="text-muted-foreground hidden grid-cols-[180px_1fr_100px] gap-4 px-4 pb-2 text-xs font-medium tracking-wide uppercase md:grid">
+        <span>Prop</span>
+        <span>Tipo / Descricao</span>
+        <span className="text-right">Default</span>
+      </div>
+
+      {/* Prop rows */}
+      <div className="border-border/40 divide-border/40 divide-y rounded-xl border">
+        {props.map((prop) => (
+          <div
+            key={prop.name}
+            className="hover:bg-muted/30 group p-4 transition-colors"
+          >
+            {/* Desktop layout */}
+            <div className="hidden grid-cols-[180px_1fr_100px] items-start gap-4 md:grid">
+              <div className="flex items-center gap-2">
+                <code className="bg-muted text-foreground rounded-md px-2 py-1 font-mono text-[13px] font-medium">
                   {prop.name}
                 </code>
-              </td>
-              <td className="border-border border px-4 py-2">
-                <code className="text-muted-foreground font-mono text-xs">
+                {prop.required && (
+                  <span className="text-destructive text-xs font-medium">
+                    *
+                  </span>
+                )}
+              </div>
+              <div className="space-y-1">
+                <code className="text-primary/80 font-mono text-xs">
                   {prop.type}
                 </code>
-              </td>
-              <td className="border-border border px-4 py-2">
+                <p className="text-muted-foreground text-[13px] leading-relaxed">
+                  {prop.description}
+                </p>
+              </div>
+              <div className="text-right">
                 {prop.default ? (
-                  <code className="text-muted-foreground font-mono text-xs">
+                  <code className="bg-muted text-muted-foreground rounded px-1.5 py-0.5 font-mono text-xs">
                     {prop.default}
                   </code>
                 ) : (
-                  <span className="text-muted-foreground">—</span>
+                  <span className="text-muted-foreground/50 text-xs">--</span>
                 )}
-              </td>
-              <td className="text-muted-foreground border-border border px-4 py-2 text-xs">
+              </div>
+            </div>
+
+            {/* Mobile layout */}
+            <div className="space-y-2 md:hidden">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <code className="bg-muted text-foreground rounded-md px-2 py-1 font-mono text-[13px] font-medium">
+                    {prop.name}
+                  </code>
+                  {prop.required && (
+                    <span className="text-destructive text-xs font-medium">
+                      *
+                    </span>
+                  )}
+                </div>
+                {prop.default && (
+                  <code className="bg-muted text-muted-foreground rounded px-1.5 py-0.5 font-mono text-xs">
+                    {prop.default}
+                  </code>
+                )}
+              </div>
+              <code className="text-primary/80 block font-mono text-xs">
+                {prop.type}
+              </code>
+              <p className="text-muted-foreground text-[13px] leading-relaxed">
                 {prop.description}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
