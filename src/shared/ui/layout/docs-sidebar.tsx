@@ -1,19 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-const SIDEBAR_ITEMS = [
+type CategoryTag = "base" | "fomo" | "animation" | "block";
+
+interface SidebarLink {
+  label: string;
+  href: string;
+  isNew?: boolean;
+}
+
+interface SidebarSection {
+  section: string;
+  tag?: CategoryTag;
+  links: SidebarLink[];
+  defaultOpen?: boolean;
+}
+
+const CATEGORY_STYLES: Record<CategoryTag, { bg: string; text: string }> = {
+  base: {
+    bg: "bg-primary/10",
+    text: "text-primary",
+  },
+  fomo: {
+    bg: "bg-orange-500/10",
+    text: "text-orange-600 dark:text-orange-400",
+  },
+  animation: {
+    bg: "bg-violet-500/10",
+    text: "text-violet-600 dark:text-violet-400",
+  },
+  block: {
+    bg: "bg-emerald-500/10",
+    text: "text-emerald-600 dark:text-emerald-400",
+  },
+};
+
+const SIDEBAR_ITEMS: SidebarSection[] = [
   {
-    section: "Início",
+    section: "Inicio",
+    defaultOpen: true,
     links: [{ label: "Getting Started", href: "/docs" }],
   },
   {
     section: "Componentes Base",
+    tag: "base",
+    defaultOpen: true,
     links: [
       { label: "Button", href: "/docs/components/button" },
       { label: "Input", href: "/docs/components/input" },
@@ -26,7 +62,9 @@ const SIDEBAR_ITEMS = [
     ],
   },
   {
-    section: "FOMO & Conversão",
+    section: "FOMO & Conversao",
+    tag: "fomo",
+    defaultOpen: true,
     links: [
       { label: "CountdownTimer", href: "/docs/components/countdown-timer" },
       { label: "SocialProof", href: "/docs/components/social-proof" },
@@ -40,42 +78,177 @@ const SIDEBAR_ITEMS = [
       { label: "VisitorCounter", href: "/docs/components/visitor-counter" },
     ],
   },
-] as const;
+];
 
-function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
-  const pathname = usePathname();
+function CategoryBadge({ tag }: { tag: CategoryTag }) {
+  const style = CATEGORY_STYLES[tag];
+  const labels: Record<CategoryTag, string> = {
+    base: "Base",
+    fomo: "FOMO",
+    animation: "Motion",
+    block: "Block",
+  };
 
   return (
-    <nav className="space-y-6">
-      {SIDEBAR_ITEMS.map(({ section, links }) => (
-        <div key={section}>
-          <p className="text-muted-foreground mb-2 px-2 text-xs font-semibold tracking-wider uppercase">
-            {section}
-          </p>
-          <ul className="space-y-0.5">
-            {links.map(({ label, href }) => {
-              const isActive = pathname === href;
-              return (
-                <li key={href}>
-                  <Link
-                    href={href}
-                    onClick={onLinkClick}
-                    className={cn(
-                      "block rounded-md px-2 py-1.5 text-sm transition-colors",
-                      isActive
-                        ? "bg-primary/10 text-primary font-medium"
-                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
-                    )}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+    <span
+      className={cn(
+        "ml-auto rounded-full px-1.5 py-0.5 text-[10px] leading-none font-medium",
+        style.bg,
+        style.text,
+      )}
+    >
+      {labels[tag]}
+    </span>
+  );
+}
+
+function SidebarSearch() {
+  return (
+    <button
+      className="border-border bg-muted/50 text-muted-foreground hover:bg-muted flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors"
+      aria-label="Buscar componentes"
+    >
+      <Search className="size-4 shrink-0 opacity-50" />
+      <span className="flex-1 text-left">Buscar...</span>
+      <kbd className="bg-background border-border pointer-events-none hidden rounded border px-1.5 py-0.5 font-mono text-[10px] font-medium sm:inline-block">
+        Ctrl K
+      </kbd>
+    </button>
+  );
+}
+
+function SidebarSection({
+  section,
+  onLinkClick,
+}: {
+  section: SidebarSection;
+  onLinkClick?: () => void;
+}) {
+  const pathname = usePathname();
+  const hasActiveChild = section.links.some((link) => pathname === link.href);
+  const [isOpen, setIsOpen] = useState(section.defaultOpen ?? hasActiveChild);
+
+  return (
+    <div>
+      <button
+        onClick={() => setIsOpen((o) => !o)}
+        className="text-foreground/80 hover:text-foreground flex w-full items-center gap-1 py-1.5 text-xs font-semibold tracking-wide uppercase transition-colors"
+      >
+        <ChevronDown
+          className={cn(
+            "size-3 shrink-0 transition-transform duration-200",
+            !isOpen && "-rotate-90",
+          )}
+        />
+        <span>{section.section}</span>
+        {section.tag && <CategoryBadge tag={section.tag} />}
+      </button>
+
+      <div
+        className={cn(
+          "overflow-hidden transition-all duration-200",
+          isOpen ? "mt-1 max-h-[500px] opacity-100" : "max-h-0 opacity-0",
+        )}
+      >
+        <ul className="border-border/50 ml-1 space-y-px border-l pl-3">
+          {section.links.map(({ label, href, isNew }) => {
+            const isActive = pathname === href;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={onLinkClick}
+                  className={cn(
+                    "relative -ml-px block border-l py-1.5 pl-3 text-[13px] transition-colors",
+                    isActive
+                      ? "border-primary text-primary font-medium"
+                      : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
+                  )}
+                >
+                  {label}
+                  {isNew && (
+                    <span className="ml-1.5 inline-flex rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[10px] leading-none font-medium text-emerald-600 dark:text-emerald-400">
+                      New
+                    </span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
+  return (
+    <nav className="space-y-5">
+      {SIDEBAR_ITEMS.map((section) => (
+        <SidebarSection
+          key={section.section}
+          section={section}
+          onLinkClick={onLinkClick}
+        />
       ))}
     </nav>
+  );
+}
+
+function DesktopSidebarScroll() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showTop, setShowTop] = useState(false);
+  const [showBottom, setShowBottom] = useState(false);
+
+  const checkScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setShowTop(el.scrollTop > 8);
+    setShowBottom(el.scrollTop + el.clientHeight < el.scrollHeight - 8);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    checkScroll();
+    el.addEventListener("scroll", checkScroll, { passive: true });
+    const ro = new ResizeObserver(checkScroll);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      ro.disconnect();
+    };
+  }, [checkScroll]);
+
+  return (
+    <div className="border-border/50 fixed top-14 left-0 h-[calc(100vh-3.5rem)] w-60 border-r">
+      {/* Top fade */}
+      <div
+        className={cn(
+          "from-background pointer-events-none absolute top-0 right-0 left-0 z-10 h-8 bg-gradient-to-b to-transparent transition-opacity duration-200",
+          showTop ? "opacity-100" : "opacity-0",
+        )}
+      />
+
+      {/* Scrollable content */}
+      <div
+        ref={scrollRef}
+        className="h-full scrollbar-thin overflow-y-auto p-5"
+      >
+        <div className="mb-5">
+          <SidebarSearch />
+        </div>
+        <SidebarContent />
+      </div>
+
+      {/* Bottom fade */}
+      <div
+        className={cn(
+          "from-background pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-8 bg-gradient-to-t to-transparent transition-opacity duration-200",
+          showBottom ? "opacity-100" : "opacity-0",
+        )}
+      />
+    </div>
   );
 }
 
@@ -85,55 +258,62 @@ function DocsSidebar() {
   return (
     <>
       {/* Mobile toggle bar */}
-      <div className="border-border bg-background flex items-center border-b px-4 py-2 lg:hidden">
+      <div className="border-border/50 bg-background/80 sticky top-14 z-30 flex items-center gap-2 border-b px-4 py-2 backdrop-blur-md lg:hidden">
         <button
           onClick={() => setMobileOpen((o) => !o)}
           aria-label={mobileOpen ? "Fechar sidebar" : "Abrir sidebar"}
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "gap-2",
-          )}
+          className="text-muted-foreground hover:text-foreground flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
         >
           {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-          <span className="text-sm">Menu</span>
+          <span>Menu</span>
         </button>
       </div>
 
       {/* Mobile overlay */}
       {mobileOpen && (
         <div
-          className="bg-background/80 fixed inset-0 z-40 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
           onClick={() => setMobileOpen(false)}
+          aria-hidden="true"
         />
       )}
 
       {/* Mobile drawer */}
       <aside
         className={cn(
-          "border-border bg-background fixed top-0 left-0 z-50 h-full w-64 overflow-y-auto border-r p-6 transition-transform lg:hidden",
+          "bg-background border-border/50 fixed top-0 left-0 z-50 h-full w-72 overflow-y-auto border-r p-5 shadow-xl transition-transform duration-300 ease-out lg:hidden",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <div className="mb-6 flex items-center justify-between">
-          <span className="font-bold">WI.UI</span>
+        <div className="mb-5 flex items-center justify-between">
+          <Link
+            href="/"
+            className="text-foreground text-base font-bold tracking-tight"
+          >
+            WI.UI
+          </Link>
           <button
             onClick={() => setMobileOpen(false)}
-            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            aria-label="Fechar sidebar"
+            className="text-muted-foreground hover:text-foreground rounded-md p-1 transition-colors"
           >
-            <X className="size-4" />
+            <X className="size-5" />
           </button>
         </div>
+
+        <div className="mb-5">
+          <SidebarSearch />
+        </div>
+
         <SidebarContent onLinkClick={() => setMobileOpen(false)} />
       </aside>
 
-      {/* Desktop sidebar — sticky, sempre visível abaixo do header (h-14 = 3.5rem) */}
-      <aside className="border-border bg-background hidden w-56 shrink-0 border-r lg:block">
-        <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto p-6">
-          <SidebarContent />
-        </div>
+      {/* Desktop sidebar - fixed, always visible below header */}
+      <aside className="hidden w-60 shrink-0 lg:block">
+        <DesktopSidebarScroll />
       </aside>
     </>
   );
 }
 
-export { DocsSidebar };
+export { DocsSidebar, SIDEBAR_ITEMS, type SidebarLink, type SidebarSection };
