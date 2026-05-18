@@ -48,7 +48,7 @@ function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
                     className={cn(
                       "block rounded-md px-2 py-1.5 text-sm transition-colors",
                       isActive
-                        ? "bg-muted text-foreground font-medium"
+                        ? "bg-primary/10 text-primary font-medium"
                         : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
                     )}
                   >
@@ -69,7 +69,7 @@ function DocsSidebar() {
 
   return (
     <>
-      {/* Mobile toggle */}
+      {/* Mobile toggle bar */}
       <div className="border-border bg-background flex items-center border-b px-4 py-2 lg:hidden">
         <button
           onClick={() => setMobileOpen((o) => !o)}
@@ -111,9 +111,11 @@ function DocsSidebar() {
         <SidebarContent onLinkClick={() => setMobileOpen(false)} />
       </aside>
 
-      {/* Desktop sidebar */}
-      <aside className="border-border bg-background hidden w-56 shrink-0 border-r p-6 lg:block">
-        <SidebarContent />
+      {/* Desktop sidebar — sticky, sempre visível abaixo do header (h-14 = 3.5rem) */}
+      <aside className="border-border bg-background hidden w-56 shrink-0 border-r lg:block">
+        <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto p-6">
+          <SidebarContent />
+        </div>
       </aside>
     </>
   );

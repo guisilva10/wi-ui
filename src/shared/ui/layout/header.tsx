@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { buttonVariants } from "@/shared/ui/components/button/button.variants";
-import { GithubIcon } from "@/shared/ui/icons/github-icon";
+import { SiGithub } from "react-icons/si";
 import { useTheme } from "./theme-provider";
 import { cn } from "@/lib/cn";
 
@@ -49,7 +49,7 @@ function Header() {
               "gap-1.5",
             )}
           >
-            <GithubIcon className="size-4" />
+            <SiGithub className="size-4" />
             GitHub
           </a>
 
@@ -129,7 +129,7 @@ function Header() {
               "justify-start gap-1.5",
             )}
           >
-            <GithubIcon className="size-4" />
+            <SiGithub className="size-4" />
             GitHub
           </a>
         </nav>
