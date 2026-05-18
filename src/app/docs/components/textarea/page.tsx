@@ -12,12 +12,13 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "default", label: "Default", level: 2 },
   { id: "estado-erro", label: "Estado de erro", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
-  { id: "opcoes-resize", label: "Opcoes de resize", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
+  { id: "resize-none", label: "Resize none", level: 2 },
+  { id: "resize-both", label: "Resize both", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -63,6 +64,23 @@ export default function TextareaPage() {
       badge="Base"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="textarea" />
+        <ComponentSource componentName="textarea" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { Textarea } from "@/components/textarea";
+
+<Textarea placeholder="Escreva sua mensagem..." />`}
+        >
+          <div className="w-full max-w-sm">
+            <Textarea placeholder="Escreva sua mensagem..." rows={3} />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="default" title="Default">
         <ComponentPreview
           code={`<Textarea placeholder="Escreva sua mensagem..." rows={4} />`}
@@ -93,30 +111,24 @@ export default function TextareaPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="opcoes-resize" title="Opcoes de resize">
+      <DocSection id="resize-none" title="Resize none">
         <ComponentPreview
-          code={`<Textarea placeholder='resize="none"' resize="none" rows={2} />
-<Textarea placeholder='resize="vertical" (padrao)' resize="vertical" rows={2} />
-<Textarea placeholder='resize="both"' resize="both" rows={2} />`}
+          code={`<Textarea placeholder="Sem resize" resize="none" rows={3} />`}
         >
-          <div className="w-full max-w-sm space-y-3">
-            <Textarea placeholder='resize="none"' resize="none" rows={2} />
-            <Textarea
-              placeholder='resize="vertical" (padrao)'
-              resize="vertical"
-              rows={2}
-            />
-            <Textarea placeholder='resize="both"' resize="both" rows={2} />
+          <div className="w-full max-w-sm">
+            <Textarea placeholder="Sem resize" resize="none" rows={3} />
           </div>
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="textarea" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="textarea" />
+      <DocSection id="resize-both" title="Resize both">
+        <ComponentPreview
+          code={`<Textarea placeholder="Resize livre" resize="both" rows={3} />`}
+        >
+          <div className="w-full max-w-sm">
+            <Textarea placeholder="Resize livre" resize="both" rows={3} />
+          </div>
+        </ComponentPreview>
       </DocSection>
 
       <DocSection id="props" title="Props">

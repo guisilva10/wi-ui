@@ -12,6 +12,8 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "padrao", label: "Padrao", level: 2 },
   { id: "sutil", label: "Sutil", level: 2 },
   { id: "dramatico", label: "Dramatico", level: 2 },
@@ -68,15 +70,32 @@ export default function ScaleInPage() {
       badge="Animation"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="scale-in" />
+        <ComponentSource componentName="scale-in" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { ScaleIn } from "@/components/scale-in";
+
+<ScaleIn>
+  <div>Conteudo com scale in</div>
+</ScaleIn>`}
+        >
+          <ScaleInDemo />
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="padrao" title="Padrao">
         <ComponentPreview
-          code={`<ScaleIn>
+          code={`<ScaleIn initialScale={0.9}>
   <div className="bg-muted rounded-xl p-8">
     Conteudo com scale in
   </div>
 </ScaleIn>`}
         >
-          <ScaleInDemo />
+          <ScaleInDemo initialScale={0.9} />
         </ComponentPreview>
       </DocSection>
 
@@ -90,7 +109,7 @@ export default function ScaleInPage() {
         </p>
         <ComponentPreview
           code={`<ScaleIn initialScale={0.95} duration={0.3}>
-  <div>Entrada sutil, quase imperceptivel</div>
+  <div>Entrada sutil</div>
 </ScaleIn>`}
         >
           <ScaleInDemo initialScale={0.95} duration={0.3} />
@@ -107,7 +126,7 @@ export default function ScaleInPage() {
         </p>
         <ComponentPreview
           code={`<ScaleIn initialScale={0.7} duration={0.5}>
-  <div>Entrada dramatica de modal</div>
+  <div>Entrada dramatica</div>
 </ScaleIn>`}
         >
           <ScaleInDemo initialScale={0.7} duration={0.5} />

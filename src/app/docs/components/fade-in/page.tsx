@@ -12,11 +12,13 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "padrao", label: "Padrao (up)", level: 2 },
-  { id: "direcoes", label: "Direcoes", level: 2 },
-  { id: "sem-direcao", label: "Sem direcao", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "up", label: "Up (padrao)", level: 2 },
+  { id: "down", label: "Down", level: 2 },
+  { id: "left", label: "Left", level: 2 },
+  { id: "right", label: "Right", level: 2 },
+  { id: "none", label: "None (sem movimento)", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -67,44 +69,64 @@ export default function FadeInPage() {
       badge="Animation"
       toc={TOC}
     >
-      <DocSection id="padrao" title="Padrao (up)">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="fade-in" />
+        <ComponentSource componentName="fade-in" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
         <ComponentPreview
-          code={`<FadeIn direction="up">
-  <div className="bg-muted rounded-xl p-8 text-center">
-    Conteudo animado
-  </div>
+          code={`import { FadeIn } from "@/components/fade-in";
+
+<FadeIn>
+  <div>Conteudo animado</div>
 </FadeIn>`}
         >
           <FadeInDemo direction="up" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="direcoes" title="Direcoes">
-        <p className="text-muted-foreground text-sm">
-          Use{" "}
-          <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
-            direction
-          </code>{" "}
-          para controlar de onde o elemento entra na tela.
-        </p>
+      <DocSection id="up" title="Up (padrao)">
+        <ComponentPreview
+          code={`<FadeIn direction="up">
+  <div>Entra de baixo para cima</div>
+</FadeIn>`}
+        >
+          <FadeInDemo direction="up" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="down" title="Down">
+        <ComponentPreview
+          code={`<FadeIn direction="down">
+  <div>Entra de cima para baixo</div>
+</FadeIn>`}
+        >
+          <FadeInDemo direction="down" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="left" title="Left">
         <ComponentPreview
           code={`<FadeIn direction="left">
-  <p>Entra da esquerda</p>
-</FadeIn>
-
-<FadeIn direction="right" delay={0.1}>
-  <p>Entra da direita</p>
-</FadeIn>
-
-<FadeIn direction="down" delay={0.2}>
-  <p>Entra de cima</p>
+  <div>Entra da esquerda</div>
 </FadeIn>`}
         >
           <FadeInDemo direction="left" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="sem-direcao" title="Sem direcao">
+      <DocSection id="right" title="Right">
+        <ComponentPreview
+          code={`<FadeIn direction="right">
+  <div>Entra da direita</div>
+</FadeIn>`}
+        >
+          <FadeInDemo direction="right" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="none" title="None (sem movimento)">
         <p className="text-muted-foreground text-sm">
           Use{" "}
           <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
@@ -119,14 +141,6 @@ export default function FadeInPage() {
         >
           <FadeInDemo direction="none" />
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="fade-in" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="fade-in" />
       </DocSection>
 
       <DocSection id="props" title="Props">

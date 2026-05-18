@@ -12,7 +12,9 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "dot", label: "Dot (padrao)", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "dot", label: "Dot", level: 2 },
   { id: "pulse", label: "Pulse", level: 2 },
   { id: "bar", label: "Bar", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -56,7 +58,22 @@ export default function VisitorCounterPage() {
       badge="FOMO"
       toc={TOC}
     >
-      <DocSection id="dot" title="Dot (padrao)">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="visitor-counter" />
+        <ComponentSource componentName="visitor-counter" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { VisitorCounter } from "@/components/visitor-counter";
+
+<VisitorCounter count={47} />`}
+        >
+          <VisitorCounterDemo variant="dot" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="dot" title="Dot">
         <ComponentPreview
           code={`<VisitorCounter count={47} variant="dot" simulateActivity />`}
         >

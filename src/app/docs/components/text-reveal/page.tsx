@@ -12,6 +12,8 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "por-palavra", label: "Por palavra", level: 2 },
   { id: "por-caractere", label: "Por caractere", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -67,6 +69,23 @@ export default function TextRevealPage() {
       badge="Animation"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="text-reveal" />
+        <ComponentSource componentName="text-reveal" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { TextReveal } from "@/components/text-reveal";
+
+<h1>
+  <TextReveal text="Titulo animado" by="word" />
+</h1>`}
+        >
+          <TextRevealDemo by="word" />
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="por-palavra" title="Por palavra">
         <ComponentPreview
           code={`<h1>

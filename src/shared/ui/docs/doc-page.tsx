@@ -64,7 +64,7 @@ function DocPage({
                 {title}
               </h1>
               {badge && (
-                <span className="bg-primary/10 text-primary rounded-full px-2.5 py-1 text-xs font-medium">
+                <span className="bg-muted text-muted-foreground rounded-full px-2.5 py-1 text-xs font-medium">
                   {badge}
                 </span>
               )}
@@ -111,7 +111,7 @@ function DocSection({
       <h2 className="group text-foreground flex items-center gap-2 text-lg font-semibold tracking-tight">
         <a
           href={`#${id}`}
-          className="hover:text-primary flex items-center gap-2 no-underline transition-colors"
+          className="hover:text-foreground flex items-center gap-2 no-underline transition-colors"
         >
           {title}
           <Hash className="size-4 opacity-0 transition-opacity group-hover:opacity-40" />

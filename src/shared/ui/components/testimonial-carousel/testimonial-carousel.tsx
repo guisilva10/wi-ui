@@ -151,7 +151,7 @@ function TestimonialCarousel({
       <div className="bg-card border-border space-y-4 rounded-xl border p-6 shadow-sm">
         <span
           aria-hidden
-          className="text-primary block text-4xl leading-none font-bold opacity-30"
+          className="text-foreground block text-4xl leading-none font-bold opacity-20"
         >
           &ldquo;
         </span>
@@ -216,7 +216,7 @@ function TestimonialCarousel({
                   className={cn(
                     "h-1.5 rounded-full transition-all duration-300",
                     i === current
-                      ? "bg-primary w-4"
+                      ? "bg-foreground w-4"
                       : "bg-muted-foreground/30 hover:bg-muted-foreground/60 w-1.5",
                   )}
                 />

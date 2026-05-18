@@ -12,7 +12,9 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "warning", label: "Warning (padrao)", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "warning", label: "Warning", level: 2 },
   { id: "critical", label: "Critical", level: 2 },
   { id: "info", label: "Info", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -67,7 +69,27 @@ export default function UrgencyBannerPage() {
       badge="FOMO"
       toc={TOC}
     >
-      <DocSection id="warning" title="Warning (padrao)">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="urgency-banner" />
+        <ComponentSource componentName="urgency-banner" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { UrgencyBanner } from "@/components/urgency-banner";
+
+const target = new Date(Date.now() + 2 * 60 * 60 * 1000);
+
+<UrgencyBanner
+  message="Oferta encerra em {countdown}"
+  targetDate={target}
+/>`}
+        >
+          <UrgencyBannerDemo variant="warning" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="warning" title="Warning">
         <ComponentPreview
           code={`const target = new Date(Date.now() + 2 * 60 * 60 * 1000);
 

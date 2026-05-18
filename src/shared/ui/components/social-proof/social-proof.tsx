@@ -124,7 +124,7 @@ function SocialProof({
               transition={{ duration: 0.3 }}
               className="bg-card border-border flex items-center gap-2 rounded-lg border px-3 py-2 shadow-sm"
             >
-              <span className="text-primary text-base">
+              <span className="text-foreground text-base">
                 {type === "purchase" ? "🛒" : type === "signup" ? "👋" : "👀"}
               </span>
               <div className="min-w-0 flex-1">

@@ -5,7 +5,7 @@ export const urgencyBannerVariants = cva(
   {
     variants: {
       variant: {
-        info: "bg-primary/10 text-primary border-b border-primary/20",
+        info: "bg-muted text-foreground border-b border-border",
         warning:
           "bg-amber-50 text-amber-900 border-b border-amber-200 dark:bg-amber-950/40 dark:text-amber-200 dark:border-amber-800",
         critical:

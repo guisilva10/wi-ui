@@ -12,10 +12,14 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "variantes", label: "Variantes", level: 2 },
-  { id: "uso-semantico", label: "Uso semantico", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "default", label: "Default", level: 2 },
+  { id: "secondary", label: "Secondary", level: 2 },
+  { id: "outline", label: "Outline", level: 2 },
+  { id: "destructive", label: "Destructive", level: 2 },
+  { id: "success", label: "Success", level: 2 },
+  { id: "warning", label: "Warning", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -43,48 +47,57 @@ export default function BadgePage() {
       badge="Base"
       toc={TOC}
     >
-      <DocSection id="variantes" title="Variantes">
-        <ComponentPreview
-          code={`<Badge variant="default">Default</Badge>
-<Badge variant="secondary">Secondary</Badge>
-<Badge variant="outline">Outline</Badge>
-<Badge variant="destructive">Destructive</Badge>
-<Badge variant="success">Success</Badge>
-<Badge variant="warning">Warning</Badge>`}
-        >
-          <div className="flex flex-wrap gap-3">
-            <Badge variant="default">Default</Badge>
-            <Badge variant="secondary">Secondary</Badge>
-            <Badge variant="outline">Outline</Badge>
-            <Badge variant="destructive">Destructive</Badge>
-            <Badge variant="success">Success</Badge>
-            <Badge variant="warning">Warning</Badge>
-          </div>
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="uso-semantico" title="Uso semantico">
-        <ComponentPreview
-          code={`<Badge variant="success">Ativo</Badge>
-<Badge variant="destructive">Inativo</Badge>
-<Badge variant="warning">Pendente</Badge>
-<Badge variant="secondary">Rascunho</Badge>`}
-        >
-          <div className="flex flex-wrap gap-3">
-            <Badge variant="success">Ativo</Badge>
-            <Badge variant="destructive">Inativo</Badge>
-            <Badge variant="warning">Pendente</Badge>
-            <Badge variant="secondary">Rascunho</Badge>
-          </div>
-        </ComponentPreview>
-      </DocSection>
-
       <DocSection id="instalacao" title="Instalacao">
         <InstallCommand componentName="badge" />
+        <ComponentSource componentName="badge" />
       </DocSection>
 
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="badge" />
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { Badge } from "@/components/badge";
+
+<Badge>Badge</Badge>`}
+        >
+          <Badge>Badge</Badge>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="default" title="Default">
+        <ComponentPreview code={`<Badge variant="default">Default</Badge>`}>
+          <Badge variant="default">Default</Badge>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="secondary" title="Secondary">
+        <ComponentPreview code={`<Badge variant="secondary">Secondary</Badge>`}>
+          <Badge variant="secondary">Secondary</Badge>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="outline" title="Outline">
+        <ComponentPreview code={`<Badge variant="outline">Outline</Badge>`}>
+          <Badge variant="outline">Outline</Badge>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="destructive" title="Destructive">
+        <ComponentPreview
+          code={`<Badge variant="destructive">Destructive</Badge>`}
+        >
+          <Badge variant="destructive">Destructive</Badge>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="success" title="Success">
+        <ComponentPreview code={`<Badge variant="success">Success</Badge>`}>
+          <Badge variant="success">Success</Badge>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="warning" title="Warning">
+        <ComponentPreview code={`<Badge variant="warning">Warning</Badge>`}>
+          <Badge variant="warning">Warning</Badge>
+        </ComponentPreview>
       </DocSection>
 
       <DocSection id="props" title="Props">

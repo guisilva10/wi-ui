@@ -12,6 +12,8 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "horizontal", label: "Horizontal", level: 2 },
   { id: "vertical", label: "Vertical", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
@@ -50,6 +52,23 @@ export default function SeparatorPage() {
       badge="Base"
       toc={TOC}
     >
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="separator" />
+        <ComponentSource componentName="separator" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
+        <ComponentPreview
+          code={`import { Separator } from "@/components/separator";
+
+<Separator />`}
+        >
+          <div className="w-full max-w-sm">
+            <Separator />
+          </div>
+        </ComponentPreview>
+      </DocSection>
+
       <DocSection id="horizontal" title="Horizontal">
         <ComponentPreview
           code={`<div>

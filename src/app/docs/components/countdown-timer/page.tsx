@@ -12,8 +12,10 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "padrao", label: "Padrao", level: 2 },
-  { id: "urgente", label: "Urgente", level: 2 },
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
+  { id: "default", label: "Default", level: 2 },
+  { id: "urgent", label: "Urgent", level: 2 },
   { id: "minimal", label: "Minimal", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
@@ -86,9 +88,16 @@ export default function CountdownTimerPage() {
       badge="FOMO"
       toc={TOC}
     >
-      <DocSection id="padrao" title="Padrao">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="countdown-timer" />
+        <ComponentSource componentName="countdown-timer" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
         <ComponentPreview
-          code={`const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
+          code={`import { CountdownTimer } from "@/components/countdown-timer";
+
+const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
 
 <CountdownTimer targetDate={target} />`}
         >
@@ -96,7 +105,17 @@ export default function CountdownTimerPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="urgente" title="Urgente">
+      <DocSection id="default" title="Default">
+        <ComponentPreview
+          code={`const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
+
+<CountdownTimer targetDate={target} variant="default" />`}
+        >
+          <CountdownTimerDemo variant="default" />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="urgent" title="Urgent">
         <p className="text-muted-foreground text-sm">
           Ativa automaticamente quando restam menos de 1 hora. Pode ser forcado
           com{" "}
@@ -120,7 +139,7 @@ export default function CountdownTimerPage() {
 
 <CountdownTimer targetDate={target} variant="minimal" showDays={false} />`}
         >
-          <CountdownTimerDemo variant="minimal" />
+          <CountdownTimerDemo variant="minimal" showDays={false} />
         </ComponentPreview>
       </DocSection>
 

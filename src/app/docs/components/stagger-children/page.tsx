@@ -12,6 +12,8 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
+  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "uso", label: "Uso", level: 2 },
   { id: "padrao", label: "Padrao", level: 2 },
   { id: "rapido", label: "Rapido", level: 2 },
   { id: "lento", label: "Lento e suave", level: 2 },
@@ -61,11 +63,28 @@ export default function StaggerChildrenPage() {
       badge="Animation"
       toc={TOC}
     >
-      <DocSection id="padrao" title="Padrao">
+      <DocSection id="instalacao" title="Instalacao">
+        <InstallCommand componentName="stagger-children" />
+        <ComponentSource componentName="stagger-children" />
+      </DocSection>
+
+      <DocSection id="uso" title="Uso">
         <ComponentPreview
-          code={`const items = ["Item 1", "Item 2", "Item 3", "Item 4"];
+          code={`import { StaggerChildren } from "@/components/stagger-children";
 
 <StaggerChildren className="space-y-2">
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</StaggerChildren>`}
+        >
+          <StaggerChildrenDemo staggerDelay={0.1} />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="padrao" title="Padrao">
+        <ComponentPreview
+          code={`<StaggerChildren staggerDelay={0.1} className="space-y-2">
   {items.map((item) => (
     <div key={item} className="bg-muted rounded-lg px-4 py-3 text-sm">
       {item}

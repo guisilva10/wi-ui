@@ -82,7 +82,7 @@ function SourceTabs({ files, className }: SourceTabsProps) {
 
       {/* Code area */}
       <div className="bg-[oklch(0.16_0_0)] dark:bg-[oklch(0.12_0_0)]">
-        <pre className="scrollbar-thin overflow-x-auto p-5 text-[13px] leading-relaxed">
+        <pre className="overflow-x-auto p-5 text-[13px] leading-relaxed [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <code className="font-mono text-[oklch(0.85_0_0)]">
             {currentFile?.content ?? ""}
           </code>
