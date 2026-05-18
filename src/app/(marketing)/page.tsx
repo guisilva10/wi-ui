@@ -13,7 +13,7 @@ import {
   Separator,
   Spinner,
 } from "@/shared/ui/components";
-import { GithubIcon } from "@/shared/ui/icons/github-icon";
+import { SiGithub } from "react-icons/si";
 import { cn } from "@/lib/cn";
 
 const COMPONENT_SHOWCASE = [
@@ -162,7 +162,7 @@ export default function LandingPage() {
               "gap-2",
             )}
           >
-            <GithubIcon className="size-4" />
+            <SiGithub className="size-4" />
             GitHub
           </a>
         </div>
