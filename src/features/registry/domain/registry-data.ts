@@ -172,4 +172,49 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/visitor-counter/visitor-counter.tsx"],
     dependencies: ["clsx", "tailwind-merge", "motion"],
   },
+  {
+    name: "fade-in",
+    description:
+      "Wrapper que anima a entrada de qualquer elemento com fade + direção (up, down, left, right, none). Usa IntersectionObserver. Respeita prefers-reduced-motion.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/fade-in/fade-in.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "slide-in",
+    description:
+      "Slide entrance com direção customizável (left, right, top, bottom) e distância configurável. Combina translate + opacity. Respeita prefers-reduced-motion.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/slide-in/slide-in.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "scale-in",
+    description:
+      "Scale entrance animation com spring physics. Ideal para cards, modals e popovers. initialScale configurável. Respeita prefers-reduced-motion.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/scale-in/scale-in.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "stagger-children",
+    description:
+      "Container que anima children em sequência com delay incremental. Ideal para listas e grids. staggerDelay configurável. Respeita prefers-reduced-motion.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/stagger-children/stagger-children.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "text-reveal",
+    description:
+      "Revela texto palavra por palavra ou caractere por caractere com stagger elegante. Ideal para headings e hero text. Respeita prefers-reduced-motion.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/text-reveal/text-reveal.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
 ];
