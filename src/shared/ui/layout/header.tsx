@@ -11,6 +11,7 @@ import { cn } from "@/lib/cn";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Docs", href: "/docs" },
+  { label: "Playground", href: "/playground" },
 ] as const;
 
 function Header() {
@@ -18,7 +19,7 @@ function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="bg-background/80 sticky top-0 z-50 w-full backdrop-blur-md">
+    <header className="bg-background/80 border-border sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <div className="flex h-14 items-center justify-between px-4 lg:px-6">
         {/* Logo */}
         <Link
