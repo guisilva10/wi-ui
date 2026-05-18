@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { cn } from "@/lib/cn";
 import { Copy, Check, Terminal, Package } from "lucide-react";
+import { SiNextdotjs, SiVite, SiRemix, SiAstro } from "react-icons/si";
 
 const TOC = [
   { id: "o-que-e", label: "O que é WI.UI?", level: 2 },
@@ -127,17 +128,28 @@ export default function DocsPage() {
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { name: "Next.js", desc: "App Router & Pages" },
-            { name: "Vite", desc: "React + Vite" },
-            { name: "Remix", desc: "Remix / React Router" },
-            { name: "Astro", desc: "Com React islands" },
+            {
+              name: "Next.js",
+              desc: "App Router & Pages",
+              icon: SiNextdotjs,
+            },
+            { name: "Vite", desc: "React + Vite", icon: SiVite },
+            {
+              name: "Remix",
+              desc: "Remix / React Router",
+              icon: SiRemix,
+            },
+            { name: "Astro", desc: "Com React islands", icon: SiAstro },
           ].map((fw) => (
             <div
               key={fw.name}
-              className="border-border rounded-lg border p-3 text-center"
+              className="border-border hover:bg-muted/30 flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors"
             >
-              <p className="text-foreground text-sm font-medium">{fw.name}</p>
-              <p className="text-muted-foreground text-xs">{fw.desc}</p>
+              <fw.icon className="text-foreground size-8" />
+              <div>
+                <p className="text-foreground text-sm font-medium">{fw.name}</p>
+                <p className="text-muted-foreground text-xs">{fw.desc}</p>
+              </div>
             </div>
           ))}
         </div>
