@@ -78,6 +78,26 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
       { label: "VisitorCounter", href: "/docs/components/visitor-counter" },
     ],
   },
+  {
+    section: "Animacao",
+    tag: "animation",
+    defaultOpen: true,
+    links: [
+      { label: "FadeIn", href: "/docs/components/fade-in", isNew: true },
+      { label: "SlideIn", href: "/docs/components/slide-in", isNew: true },
+      { label: "ScaleIn", href: "/docs/components/scale-in", isNew: true },
+      {
+        label: "StaggerChildren",
+        href: "/docs/components/stagger-children",
+        isNew: true,
+      },
+      {
+        label: "TextReveal",
+        href: "/docs/components/text-reveal",
+        isNew: true,
+      },
+    ],
+  },
 ];
 
 function CategoryBadge({ tag }: { tag: CategoryTag }) {
@@ -136,7 +156,7 @@ function SidebarSection({
       >
         <ChevronDown
           className={cn(
-            "size-3 shrink-0 transition-transform duration-200",
+            "size-2 shrink-0 transition-transform duration-200",
             !isOpen && "-rotate-90",
           )}
         />
