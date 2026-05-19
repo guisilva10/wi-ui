@@ -39,7 +39,7 @@ function Dialog({ open, onOpenChange, children }: DialogProps) {
     <div
       ref={overlayRef}
       data-slot="dialog-overlay"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+      className="animate-in fade-in-0 fixed inset-0 z-50 flex items-center justify-center bg-black/80 duration-200"
       onClick={(e) => {
         if (e.target === overlayRef.current) onOpenChange(false);
       }}
@@ -59,7 +59,7 @@ function DialogContent({
       data-slot="dialog-content"
       className={cn(
         "bg-background border-border relative w-full max-w-lg rounded-lg border p-6 shadow-lg",
-        "animate-in fade-in-0 zoom-in-95",
+        "animate-in fade-in-0 zoom-in-95 duration-200",
         className,
       )}
       {...props}

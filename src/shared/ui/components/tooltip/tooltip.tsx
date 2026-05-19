@@ -53,7 +53,7 @@ function Tooltip({
         <div
           role="tooltip"
           className={cn(
-            "bg-foreground text-background absolute z-50 rounded-md px-3 py-1.5 text-xs whitespace-nowrap shadow-md",
+            "bg-foreground text-background animate-in fade-in-0 zoom-in-95 absolute z-50 rounded-md px-3 py-1.5 text-xs whitespace-nowrap shadow-md duration-100",
             positionClasses[side],
             className,
           )}

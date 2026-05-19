@@ -1,45 +1,67 @@
 "use client";
 
 import { useState, useRef, useEffect, createContext, useContext } from "react";
+import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
+
+interface Position {
+  top: number;
+  left: number;
+  minWidth: number;
+}
 
 interface DropdownContextValue {
   open: boolean;
   setOpen: (open: boolean) => void;
+  triggerRef: React.RefObject<HTMLButtonElement | null>;
+  position: Position;
+  updatePosition: (align: "start" | "end") => void;
 }
 
 const DropdownContext = createContext<DropdownContextValue>({
   open: false,
   setOpen: () => {},
+  triggerRef: { current: null },
+  position: { top: 0, left: 0, minWidth: 0 },
+  updatePosition: () => {},
 });
 
 function DropdownMenu({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState<Position>({
+    top: 0,
+    left: 0,
+    minWidth: 0,
+  });
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  function updatePosition(align: "start" | "end") {
+    const el = triggerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setPosition({
+      top: rect.bottom + 6 + window.scrollY,
+      left:
+        align === "end"
+          ? rect.right + window.scrollX
+          : rect.left + window.scrollX,
+      minWidth: rect.width,
+    });
+  }
 
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node))
-        setOpen(false);
-    }
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
     }
-    document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleEscape);
-    };
+    return () => document.removeEventListener("keydown", handleEscape);
   }, []);
 
   return (
-    <DropdownContext.Provider value={{ open, setOpen }}>
-      <div
-        ref={ref}
-        data-slot="dropdown-menu"
-        className="relative inline-block"
-      >
+    <DropdownContext.Provider
+      value={{ open, setOpen, triggerRef, position, updatePosition }}
+    >
+      <div data-slot="dropdown-menu" className="relative inline-block">
         {children}
       </div>
     </DropdownContext.Provider>
@@ -51,13 +73,18 @@ function DropdownMenuTrigger({
   children,
   ...props
 }: React.ComponentProps<"button">) {
-  const { open, setOpen } = useContext(DropdownContext);
+  const { open, setOpen, triggerRef, updatePosition } =
+    useContext(DropdownContext);
   return (
     <button
+      ref={triggerRef}
       type="button"
       data-slot="dropdown-menu-trigger"
       aria-expanded={open}
-      onClick={() => setOpen(!open)}
+      onClick={() => {
+        if (!open) updatePosition("end");
+        setOpen(!open);
+      }}
       className={className}
       {...props}
     >
@@ -69,22 +96,53 @@ function DropdownMenuTrigger({
 function DropdownMenuContent({
   className,
   children,
+  align = "end",
   ...props
-}: React.ComponentProps<"div">) {
-  const { open } = useContext(DropdownContext);
+}: React.ComponentProps<"div"> & { align?: "start" | "end" }) {
+  const { open, setOpen, triggerRef, position } = useContext(DropdownContext);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function handleClickOutside(e: MouseEvent) {
+      const target = e.target as Node;
+      if (
+        contentRef.current &&
+        !contentRef.current.contains(target) &&
+        triggerRef.current &&
+        !triggerRef.current.contains(target)
+      ) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open, setOpen, triggerRef]);
+
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div
+      ref={contentRef}
       data-slot="dropdown-menu-content"
+      style={{
+        position: "absolute",
+        top: position.top,
+        ...(align === "end"
+          ? { right: `calc(100vw - ${position.left}px)` }
+          : { left: position.left }),
+        minWidth: position.minWidth,
+      }}
       className={cn(
-        "bg-popover text-popover-foreground absolute top-full right-0 z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md",
+        "bg-popover text-popover-foreground border-border z-50 min-w-[8rem] overflow-hidden rounded-lg border p-1 shadow-lg backdrop-blur-xl",
+        "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2 duration-150",
         className,
       )}
       {...props}
     >
       {children}
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -103,10 +161,12 @@ function DropdownMenuItem({
         setOpen(false);
       }}
       className={cn(
-        "relative flex w-full cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm transition-colors outline-none select-none",
+        "relative flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none select-none",
         "hover:bg-accent hover:text-accent-foreground",
-        "focus:bg-accent focus:text-accent-foreground",
+        "focus-visible:bg-accent focus-visible:text-accent-foreground",
         "disabled:pointer-events-none disabled:opacity-50",
+        "transition-colors duration-100",
+        "[&_svg]:text-muted-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         className,
       )}
       {...props}
@@ -121,7 +181,7 @@ function DropdownMenuSeparator({
   return (
     <div
       data-slot="dropdown-menu-separator"
-      className={cn("bg-muted -mx-1 my-1 h-px", className)}
+      className={cn("bg-border -mx-1 my-1 h-px", className)}
       {...props}
     />
   );
@@ -134,7 +194,10 @@ function DropdownMenuLabel({
   return (
     <div
       data-slot="dropdown-menu-label"
-      className={cn("px-2 py-1.5 text-sm font-semibold", className)}
+      className={cn(
+        "text-muted-foreground px-2 py-1.5 text-xs font-medium",
+        className,
+      )}
       {...props}
     />
   );
