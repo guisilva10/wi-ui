@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { buttonVariants } from "@/shared/ui/components/button/button.variants";
 import { SiGithub } from "react-icons/si";
@@ -41,13 +42,14 @@ function Header({ extraRight }: HeaderProps) {
       >
         <div className="relative flex h-14 items-center justify-between px-4 lg:px-6">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-foreground text-lg font-bold tracking-tight select-none"
-          >
-            <span className="text-primary">WI</span>
-            <span className="text-muted-foreground">.</span>
-            <span>UI</span>
+          <Link href="/" className="flex items-center gap-2 select-none">
+            <Image
+              src="/logo.png"
+              alt="WI.UI"
+              width={28}
+              height={28}
+              className="size-7"
+            />
           </Link>
 
           {/* Desktop nav */}
