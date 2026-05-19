@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { buttonVariants } from "@/shared/ui/components/button/button.variants";
 import { SiGithub } from "react-icons/si";
@@ -9,6 +10,38 @@ import { useTheme } from "./theme-provider";
 import { cn } from "@/lib/cn";
 import { CardSpotlight } from "../components/card-spotlight";
 import { CanvasRevealEffect } from "../components/canvas-reveal-effect";
+
+function ThemeSwitcher() {
+  const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
+
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
+      className="border-border bg-muted/50 relative flex h-7 w-14 items-center rounded-full border p-0.5 transition-colors"
+    >
+      <span
+        className={cn(
+          "bg-background absolute size-6 rounded-full shadow-sm transition-transform duration-200",
+          isDark ? "translate-x-[26px]" : "translate-x-0",
+        )}
+      />
+      <Sun
+        className={cn(
+          "relative z-10 ml-[3px] size-3.5 transition-colors",
+          isDark ? "text-muted-foreground/50" : "text-foreground",
+        )}
+      />
+      <Moon
+        className={cn(
+          "relative z-10 ml-[11px] size-3.5 transition-colors",
+          isDark ? "text-foreground" : "text-muted-foreground/50",
+        )}
+      />
+    </button>
+  );
+}
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -21,11 +54,10 @@ interface HeaderProps {
 }
 
 function Header({ extraRight }: HeaderProps) {
-  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="bg-background/80 border-border relative sticky top-0 z-50 w-full border-b backdrop-blur-md">
+    <header className="bg-background/80 border-border sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <CardSpotlight
         overlay={
           <CanvasRevealEffect
@@ -41,13 +73,14 @@ function Header({ extraRight }: HeaderProps) {
       >
         <div className="relative flex h-14 items-center justify-between px-4 lg:px-6">
           {/* Logo */}
-          <Link
-            href="/"
-            className="text-foreground text-lg font-bold tracking-tight select-none"
-          >
-            <span className="text-primary">WI</span>
-            <span className="text-muted-foreground">.</span>
-            <span>UI</span>
+          <Link href="/" className="flex items-center select-none">
+            <Image
+              src="/logo.png"
+              alt="WI.UI"
+              width={28}
+              height={28}
+              className="size-8 rounded-lg"
+            />
           </Link>
 
           {/* Desktop nav */}
@@ -56,7 +89,7 @@ function Header({ extraRight }: HeaderProps) {
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+                className={cn(buttonVariants({ variant: "link", size: "sm" }))}
               >
                 {link.label}
               </Link>
@@ -77,19 +110,7 @@ function Header({ extraRight }: HeaderProps) {
               <span className="sr-only sm:not-sr-only">GitHub</span>
             </a>
 
-            <button
-              onClick={toggleTheme}
-              aria-label={
-                theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"
-              }
-              className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
-            >
-              {theme === "dark" ? (
-                <Sun className="size-4" />
-              ) : (
-                <Moon className="size-4" />
-              )}
-            </button>
+            <ThemeSwitcher />
 
             {extraRight && (
               <>
@@ -103,19 +124,7 @@ function Header({ extraRight }: HeaderProps) {
           <div className="flex items-center gap-1 md:hidden">
             {extraRight}
 
-            <button
-              onClick={toggleTheme}
-              aria-label={
-                theme === "dark" ? "Ativar modo claro" : "Ativar modo escuro"
-              }
-              className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
-            >
-              {theme === "dark" ? (
-                <Sun className="size-4" />
-              ) : (
-                <Moon className="size-4" />
-              )}
-            </button>
+            <ThemeSwitcher />
 
             <button
               onClick={() => setMobileOpen((o) => !o)}
