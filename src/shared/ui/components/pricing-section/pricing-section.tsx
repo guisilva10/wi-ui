@@ -89,10 +89,10 @@ function PricingSection({
               <div
                 key={i}
                 className={cn(
-                  "relative flex flex-col rounded-xl border p-8 shadow-sm md:p-10",
+                  "relative flex flex-col rounded-xl border p-8 shadow-sm transition-all duration-300 md:p-10",
                   plan.highlighted
-                    ? "border-foreground/20 bg-foreground text-background"
-                    : "border-border bg-card",
+                    ? "border-foreground/20 bg-foreground text-background ring-foreground/10 scale-[1.02] shadow-lg ring-1"
+                    : "border-border/60 bg-card hover:border-border hover:shadow-md",
                 )}
               >
                 {plan.badge && (

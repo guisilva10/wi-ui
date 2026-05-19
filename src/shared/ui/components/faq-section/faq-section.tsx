@@ -93,18 +93,22 @@ function FAQSection({
                 </dt>
                 <dd
                   className={cn(
-                    "overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
-                    isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+                    "grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
+                    isOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0",
                   )}
                 >
-                  <p
-                    className={cn(
-                      "text-muted-foreground pb-5 text-sm leading-relaxed",
-                      "border-foreground/30 -ml-4 border-l-2 pl-4",
-                    )}
-                  >
-                    {item.answer}
-                  </p>
+                  <div className="overflow-hidden">
+                    <p
+                      className={cn(
+                        "text-muted-foreground pb-5 text-sm leading-relaxed",
+                        "border-foreground/20 -ml-4 border-l-2 pl-4",
+                      )}
+                    >
+                      {item.answer}
+                    </p>
+                  </div>
                 </dd>
               </div>
             );

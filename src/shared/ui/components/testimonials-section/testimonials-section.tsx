@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { Marquee } from "@/shared/ui/components/marquee/marquee";
 
 interface TestimonialItem {
   quote: string;
@@ -15,6 +16,7 @@ interface TestimonialsSectionProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   description?: string;
   testimonials: TestimonialItem[];
+  layout?: "grid" | "marquee";
   columns?: 2 | 3;
 }
 
@@ -28,10 +30,10 @@ function StarRating({ rating }: { rating: number }) {
         <svg
           key={i}
           className={cn(
-            "size-4",
+            "size-3.5",
             i < rating
-              ? "fill-foreground/70 text-foreground/70"
-              : "fill-border text-border",
+              ? "fill-amber-400 text-amber-400"
+              : "fill-muted text-muted",
           )}
           viewBox="0 0 20 20"
           aria-hidden
@@ -43,11 +45,66 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+function TestimonialCard({
+  item,
+  fixed,
+}: {
+  item: TestimonialItem;
+  fixed?: boolean;
+}) {
+  return (
+    <figure
+      className={cn(
+        "border-border/60 bg-card/80 hover:border-border hover:bg-card group relative flex flex-col gap-4 rounded-xl border p-5 shadow-sm backdrop-blur-sm transition-all duration-300",
+        fixed && "w-[320px] shrink-0 sm:w-[360px]",
+      )}
+    >
+      {item.rating !== undefined && <StarRating rating={item.rating} />}
+
+      <blockquote className="flex-1">
+        <p className="text-foreground/90 text-sm leading-relaxed">
+          &ldquo;{item.quote}&rdquo;
+        </p>
+      </blockquote>
+
+      <figcaption className="border-border/50 flex items-center gap-3 border-t pt-4">
+        {item.avatar ? (
+          <Image
+            src={item.avatar}
+            alt={item.author}
+            width={36}
+            height={36}
+            className="ring-border/50 size-9 rounded-full object-cover ring-1"
+            unoptimized={item.avatar.startsWith("http")}
+          />
+        ) : (
+          <div className="bg-foreground/5 text-foreground/60 border-border/50 flex size-9 shrink-0 items-center justify-center rounded-full border text-xs font-semibold">
+            {item.author
+              .split(" ")
+              .slice(0, 2)
+              .map((n) => n[0])
+              .join("")}
+          </div>
+        )}
+        <div>
+          <p className="text-foreground text-sm font-medium">{item.author}</p>
+          {(item.role ?? item.company) && (
+            <p className="text-muted-foreground text-xs">
+              {[item.role, item.company].filter(Boolean).join(" · ")}
+            </p>
+          )}
+        </div>
+      </figcaption>
+    </figure>
+  );
+}
+
 function TestimonialsSection({
   eyebrow,
   title,
   description,
   testimonials,
+  layout = "marquee",
   columns = 3,
   className,
   ...props
@@ -56,6 +113,10 @@ function TestimonialsSection({
     2: "sm:grid-cols-2",
     3: "sm:grid-cols-2 lg:grid-cols-3",
   }[columns];
+
+  const half = Math.ceil(testimonials.length / 2);
+  const row1 = testimonials.slice(0, half);
+  const row2 = testimonials.slice(half);
 
   return (
     <section className={cn("w-full py-24", className)} {...props}>
@@ -75,62 +136,40 @@ function TestimonialsSection({
             </p>
           )}
         </div>
-
-        <div className={cn("grid grid-cols-1 gap-6", colClass)}>
-          {testimonials.map((item, i) => (
-            <figure
-              key={i}
-              className="border-border bg-card/50 hover:bg-muted/50 relative flex flex-col gap-4 rounded-xl border p-6 shadow-sm transition-colors"
-            >
-              <span
-                aria-hidden
-                className="text-foreground/10 pointer-events-none absolute -top-2 -left-1 text-[4rem] leading-none select-none"
-              >
-                &ldquo;
-              </span>
-
-              {item.rating !== undefined && <StarRating rating={item.rating} />}
-
-              <blockquote className="relative flex-1">
-                <p className="text-foreground text-base leading-[1.75] italic">
-                  {item.quote}
-                </p>
-              </blockquote>
-
-              <figcaption className="flex items-center gap-3">
-                {item.avatar ? (
-                  <Image
-                    src={item.avatar}
-                    alt={item.author}
-                    width={40}
-                    height={40}
-                    className="ring-border size-10 rounded-full object-cover ring-1"
-                    unoptimized={item.avatar.startsWith("http")}
-                  />
-                ) : (
-                  <div className="border-border bg-muted text-muted-foreground ring-border flex size-10 shrink-0 items-center justify-center rounded-full border text-xs font-semibold ring-1">
-                    {item.author
-                      .split(" ")
-                      .slice(0, 2)
-                      .map((n) => n[0])
-                      .join("")}
-                  </div>
-                )}
-                <div>
-                  <p className="text-foreground text-sm font-semibold">
-                    {item.author}
-                  </p>
-                  {(item.role ?? item.company) && (
-                    <p className="text-muted-foreground text-xs">
-                      {[item.role, item.company].filter(Boolean).join(" · ")}
-                    </p>
-                  )}
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
       </div>
+
+      {layout === "marquee" ? (
+        <div className="relative flex flex-col gap-4 overflow-hidden">
+          <div className="from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r sm:w-32" />
+          <div className="from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l sm:w-32" />
+
+          <Marquee pauseOnHover className="[--duration:50s] [--gap:1rem]">
+            {row1.map((item, i) => (
+              <TestimonialCard key={i} item={item} fixed />
+            ))}
+          </Marquee>
+
+          {row2.length > 0 && (
+            <Marquee
+              reverse
+              pauseOnHover
+              className="[--duration:55s] [--gap:1rem]"
+            >
+              {row2.map((item, i) => (
+                <TestimonialCard key={i} item={item} fixed />
+              ))}
+            </Marquee>
+          )}
+        </div>
+      ) : (
+        <div className="mx-auto w-full max-w-5xl px-6">
+          <div className={cn("grid grid-cols-1 gap-6", colClass)}>
+            {testimonials.map((item, i) => (
+              <TestimonialCard key={i} item={item} />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

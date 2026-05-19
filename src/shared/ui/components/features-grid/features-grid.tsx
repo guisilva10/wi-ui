@@ -48,22 +48,22 @@ function FeaturesGrid({
           )}
         </div>
 
-        <div className={cn("grid grid-cols-1 gap-6", colClass)}>
+        <div className={cn("grid grid-cols-1 gap-5", colClass)}>
           {features.map((feature, i) => (
             <div
               key={i}
-              className="group border-border/60 bg-muted/40 hover:border-border hover:bg-muted/70 flex flex-col gap-4 rounded-xl border p-6 transition-all duration-300 hover:-translate-y-1"
+              className="group border-border/50 bg-card/50 hover:border-border hover:bg-card relative flex flex-col gap-4 rounded-xl border p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
             >
               {feature.icon && (
-                <div className="border-foreground/10 bg-foreground/5 text-foreground/70 group-hover:bg-foreground/10 flex size-10 items-center justify-center rounded-lg border transition-all duration-300 group-hover:scale-110">
+                <div className="bg-foreground/5 text-foreground/70 group-hover:bg-foreground/10 group-hover:text-foreground flex size-10 items-center justify-center rounded-lg transition-all duration-300">
                   {feature.icon}
                 </div>
               )}
               <div>
-                <h3 className="text-foreground text-lg font-semibold tracking-tight">
+                <h3 className="text-foreground text-base font-semibold tracking-tight">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground mt-1.5 text-sm leading-[1.7]">
+                <p className="text-muted-foreground mt-1.5 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>

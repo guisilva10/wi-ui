@@ -51,6 +51,12 @@ const PROPS = [
       "Estilo visual. default: sem container | bordered: com borda | filled: fundo escuro",
   },
   {
+    name: "background",
+    type: "React.ReactNode",
+    description:
+      "Componente de background (DotGrid, Grainient, LightRays). Renderizado atras do conteudo.",
+  },
+  {
     name: "className",
     type: "string",
     default: "--",

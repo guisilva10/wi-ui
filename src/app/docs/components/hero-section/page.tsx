@@ -3,6 +3,7 @@ import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
 import { InstallSection } from "@/shared/ui/docs/install-section";
 import { HeroSection } from "@/shared/ui/components/hero-section";
+import { DotGrid } from "@/shared/ui/components/dot-grid";
 
 const BREADCRUMBS = [
   { label: "Docs", href: "/docs" },
@@ -16,6 +17,7 @@ const TOC = [
   { id: "simples", label: "Simples", level: 2 },
   { id: "com-badge", label: "Com badge", level: 2 },
   { id: "com-highlight", label: "Com titulo highlight", level: 2 },
+  { id: "com-background", label: "Com background", level: 2 },
   { id: "alinhado-esquerda", label: "Alinhado a esquerda", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
@@ -60,6 +62,12 @@ const PROPS = [
     type: '"left" | "center"',
     default: '"center"',
     description: "Alinhamento do conteudo",
+  },
+  {
+    name: "background",
+    type: "React.ReactNode",
+    description:
+      "Componente de background (DotGrid, Grainient, LightRays). Substitui o gradiente padrao.",
   },
   {
     name: "className",
@@ -162,6 +170,30 @@ export default function HeroSectionPage() {
               { label: "Comecar gratis", href: "/docs" },
               { label: "Ver exemplos", href: "#", variant: "outline" },
             ]}
+          />
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="com-background" title="Com background">
+        <ComponentPreview
+          code={`import { DotGrid } from "@/components/dot-grid";
+
+<HeroSection
+  badge="Novo — com backgrounds"
+  title="Use backgrounds animados"
+  titleHighlight="no seu hero"
+  description="Combine DotGrid, Grainient ou LightRays como background."
+  background={<DotGrid />}
+  ctas={[{ label: "Explorar", href: "/docs" }]}
+/>`}
+        >
+          <HeroSection
+            badge="Novo — com backgrounds"
+            title="Use backgrounds animados"
+            titleHighlight="no seu hero"
+            description="Combine DotGrid, Grainient ou LightRays como background."
+            background={<DotGrid />}
+            ctas={[{ label: "Explorar", href: "/docs" }]}
           />
         </ComponentPreview>
       </DocSection>

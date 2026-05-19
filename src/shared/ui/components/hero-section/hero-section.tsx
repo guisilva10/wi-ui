@@ -15,6 +15,7 @@ interface HeroSectionProps extends React.HTMLAttributes<HTMLElement> {
   ctas?: HeroSectionCta[];
   eyebrow?: string;
   align?: "left" | "center";
+  background?: React.ReactNode;
 }
 
 function HeroSection({
@@ -25,6 +26,7 @@ function HeroSection({
   ctas = [],
   eyebrow,
   align = "center",
+  background,
   className,
   ...props
 }: HeroSectionProps) {
@@ -38,10 +40,16 @@ function HeroSection({
       )}
       {...props}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,oklch(0.9_0_0/0.5),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,oklch(0.3_0_0/0.4),transparent)]"
-      />
+      {background ? (
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          {background}
+        </div>
+      ) : (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,oklch(0.9_0_0/0.5),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,oklch(0.3_0_0/0.4),transparent)]"
+        />
+      )}
 
       <div
         className={cn(
@@ -50,21 +58,13 @@ function HeroSection({
         )}
       >
         {eyebrow && (
-          <p
-            className={cn(
-              "text-muted-foreground mb-4 text-sm font-medium tracking-widest uppercase",
-            )}
-          >
+          <p className="text-muted-foreground mb-4 text-sm font-medium tracking-widest uppercase">
             {eyebrow}
           </p>
         )}
 
         {badge && (
-          <div
-            className={cn(
-              "border-foreground/15 bg-foreground/5 text-muted-foreground mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-xs font-medium",
-            )}
-          >
+          <div className="border-foreground/15 bg-foreground/5 text-muted-foreground mb-6 inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-xs font-medium backdrop-blur-sm">
             <span
               aria-hidden
               className="bg-foreground/40 size-1.5 animate-pulse rounded-full"
