@@ -18,3 +18,5 @@ export * from "./text-reveal";
 export * from "./textarea";
 export * from "./urgency-banner";
 export * from "./visitor-counter";
+export * from "./canvas-reveal-effect";
+export * from "./card-spotlight";
