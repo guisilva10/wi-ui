@@ -1,6 +1,6 @@
 {
   "name": "@wi-ui/cli",
-  "version": "0.1.0",
+  "version": "0.1.3",
   "description": "CLI para adicionar componentes WI.UI ao seu projeto",
   "type": "module",
   "bin": {
