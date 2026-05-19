@@ -1,7 +1,9 @@
 "use client";
 
-import { Suspense, useTransition } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { SiGoogle } from "react-icons/si";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
@@ -10,14 +12,13 @@ function LoginForm() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") ?? "/playground";
 
-  const [isPending, startTransition] = useTransition();
+  const [loading, setLoading] = useState(false);
 
   function handleGoogle() {
-    startTransition(() => {
-      void authClient.signIn.social({
-        provider: "google",
-        callbackURL: callbackUrl,
-      });
+    setLoading(true);
+    void authClient.signIn.social({
+      provider: "google",
+      callbackURL: callbackUrl,
     });
   }
 
@@ -25,19 +26,24 @@ function LoginForm() {
     <div className="space-y-3">
       <button
         onClick={handleGoogle}
-        disabled={isPending}
+        disabled={loading}
         className={cn(
           "flex w-full items-center justify-center gap-3 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors",
           "border-border bg-background text-foreground hover:bg-accent",
           "disabled:cursor-not-allowed disabled:opacity-50",
         )}
       >
-        {isPending ? (
-          <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+        {loading ? (
+          <>
+            <span className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+            Carregando...
+          </>
         ) : (
-          <SiGoogle className="size-4" aria-hidden />
+          <>
+            <SiGoogle className="size-4" aria-hidden />
+            Entrar com Google
+          </>
         )}
-        Entrar com Google
       </button>
     </div>
   );
@@ -72,6 +78,17 @@ function LoginPage() {
         >
           <LoginForm />
         </Suspense>
+
+        {/* Back */}
+        <div className="text-center">
+          <Link
+            href="/"
+            className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm transition-colors"
+          >
+            <ArrowLeft className="size-3.5" />
+            Voltar ao início
+          </Link>
+        </div>
 
         {/* Footer */}
         <p className="text-muted-foreground text-center text-xs">
