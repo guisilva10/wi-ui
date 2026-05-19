@@ -29,7 +29,7 @@ export const addCommand = defineCommand({
     components: {
       type: "positional",
       description: "Nome(s) do(s) componente(s) — ex: button card badge",
-      required: true,
+      required: false,
     },
     cwd: {
       type: "string",
@@ -42,12 +42,36 @@ export const addCommand = defineCommand({
       description: "Sobrescrever arquivos existentes",
       default: false,
     },
+    "all-base": {
+      type: "boolean",
+      description: "Adiciona todos os componentes base",
+      default: false,
+    },
+    "all-fomo": {
+      type: "boolean",
+      description: "Adiciona todos os componentes FOMO",
+      default: false,
+    },
+    "all-animation": {
+      type: "boolean",
+      description: "Adiciona todos os componentes de animação",
+      default: false,
+    },
+    "all-block": {
+      type: "boolean",
+      description: "Adiciona todos os blocos de seção",
+      default: false,
+    },
+    all: {
+      type: "boolean",
+      description: "Adiciona TODOS os componentes",
+      default: false,
+    },
   },
   async run({ args }) {
     const cwd = args.cwd ?? process.cwd();
-    const componentNames = String(args.components)
-      .split(/[\s,]+/)
-      .filter(Boolean);
+
+    const componentNames = resolveComponentNames(args);
 
     const config = await loadConfig(cwd);
     if (!config) {
@@ -88,6 +112,53 @@ export const addCommand = defineCommand({
     }
   },
 });
+
+type CategoryFlag = "all-base" | "all-fomo" | "all-animation" | "all-block";
+
+const CATEGORY_FLAG_MAP: Record<CategoryFlag, RegistryEntry["category"]> = {
+  "all-base": "base",
+  "all-fomo": "fomo",
+  "all-animation": "animation",
+  "all-block": "block",
+};
+
+function resolveComponentNames(args: Record<string, unknown>): string[] {
+  // --all flag: every component
+  if (args.all) {
+    const names = registry.map((e) => e.name);
+    consola.info(`Adicionando TODOS os ${names.length} componentes...`);
+    return names;
+  }
+
+  // Category flags: --all-base, --all-fomo, etc.
+  const categoryNames: string[] = [];
+  for (const [flag, category] of Object.entries(CATEGORY_FLAG_MAP)) {
+    if (args[flag]) {
+      const entries = registry.filter((e) => e.category === category);
+      categoryNames.push(...entries.map((e) => e.name));
+    }
+  }
+
+  if (categoryNames.length > 0) {
+    const unique = [...new Set(categoryNames)];
+    consola.info(`Adicionando ${unique.length} componente(s) por categoria...`);
+    return unique;
+  }
+
+  // Positional: component names
+  const positional = String(args.components ?? "")
+    .split(/[\s,]+/)
+    .filter(Boolean);
+
+  if (positional.length === 0) {
+    consola.error(
+      "Especifique componente(s) ou use --all-base, --all-fomo, --all-animation, --all-block, --all",
+    );
+    process.exit(1);
+  }
+
+  return positional;
+}
 
 async function tryUseRemoteRegistry(
   registryUrl: string,
