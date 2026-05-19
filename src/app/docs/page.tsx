@@ -17,17 +17,17 @@ const TOC = [
 type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
 
 const INIT_COMMANDS: Record<PackageManager, string> = {
-  pnpm: "pnpm dlx wi-ui init",
-  npm: "npx wi-ui init",
-  yarn: "yarn dlx wi-ui init",
-  bun: "bunx wi-ui init",
+  pnpm: "pnpm dlx @wi-ui/cli init",
+  npm: "npx @wi-ui/cli init",
+  yarn: "yarn dlx @wi-ui/cli init",
+  bun: "bunx @wi-ui/cli init",
 };
 
 const ADD_COMMANDS: Record<PackageManager, string> = {
-  pnpm: "pnpm dlx wi-ui add button",
-  npm: "npx wi-ui add button",
-  yarn: "yarn dlx wi-ui add button",
-  bun: "bunx wi-ui add button",
+  pnpm: "pnpm dlx @wi-ui/cli add button",
+  npm: "npx @wi-ui/cli add button",
+  yarn: "yarn dlx @wi-ui/cli add button",
+  bun: "bunx @wi-ui/cli add button",
 };
 
 function CopyButton({ text }: { text: string }) {

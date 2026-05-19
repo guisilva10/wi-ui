@@ -2,8 +2,7 @@ import { Search, Mail } from "lucide-react";
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { Input } from "@/shared/ui/components/input";
 
 const BREADCRUMBS = [
@@ -15,13 +14,10 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "default", label: "Default", level: 2 },
   { id: "com-icone-esquerda", label: "Com icone a esquerda", level: 2 },
   { id: "com-icone-direita", label: "Com icone a direita", level: 2 },
   { id: "estado-erro", label: "Estado de erro", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -74,8 +70,7 @@ export default function InputPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="input" />
-        <ComponentSource componentName="input" />
+        <InstallSection componentName="input" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -84,14 +79,6 @@ export default function InputPage() {
 
 <Input placeholder="Nome completo" />`}
         >
-          <div className="w-full max-w-sm">
-            <Input placeholder="Nome completo" />
-          </div>
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="default" title="Default">
-        <ComponentPreview code={`<Input placeholder="Nome completo" />`}>
           <div className="w-full max-w-sm">
             <Input placeholder="Nome completo" />
           </div>
@@ -141,14 +128,6 @@ export default function InputPage() {
             <Input placeholder="Nao editavel" disabled />
           </div>
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="input" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="input" />
       </DocSection>
 
       <DocSection id="props" title="Props">

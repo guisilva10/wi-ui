@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { CountdownTimerDemo } from "./countdown-timer-demo";
 
 const BREADCRUMBS = [
@@ -14,11 +13,8 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "default", label: "Default", level: 2 },
   { id: "urgent", label: "Urgent", level: 2 },
   { id: "minimal", label: "Minimal", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -89,8 +85,7 @@ export default function CountdownTimerPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="countdown-timer" />
-        <ComponentSource componentName="countdown-timer" />
+        <InstallSection componentName="countdown-timer" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -100,16 +95,6 @@ export default function CountdownTimerPage() {
 const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
 
 <CountdownTimer targetDate={target} />`}
-        >
-          <CountdownTimerDemo variant="default" />
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="default" title="Default">
-        <ComponentPreview
-          code={`const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
-
-<CountdownTimer targetDate={target} variant="default" />`}
         >
           <CountdownTimerDemo variant="default" />
         </ComponentPreview>
@@ -141,14 +126,6 @@ const target = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000);
         >
           <CountdownTimerDemo variant="minimal" showDays={false} />
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="countdown-timer" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="countdown-timer" />
       </DocSection>
 
       <DocSection id="props" title="Props">

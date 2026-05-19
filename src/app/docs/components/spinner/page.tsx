@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { Spinner } from "@/shared/ui/components/spinner";
 
 const BREADCRUMBS = [
@@ -19,8 +18,6 @@ const TOC = [
   { id: "lg", label: "Grande", level: 2 },
   { id: "xl", label: "Extra Grande", level: 2 },
   { id: "cor-customizada", label: "Cor customizada", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -55,8 +52,7 @@ export default function SpinnerPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="spinner" />
-        <ComponentSource componentName="spinner" />
+        <InstallSection componentName="spinner" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -105,14 +101,6 @@ export default function SpinnerPage() {
             <Spinner className="text-red-500" />
           </div>
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="spinner" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="spinner" />
       </DocSection>
 
       <DocSection id="props" title="Props">

@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { CardSpotlightDemo } from "./card-spotlight-demo";
 
 const BREADCRUMBS = [
@@ -65,8 +64,7 @@ export default function CardSpotlightPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="card-spotlight" />
-        <ComponentSource componentName="card-spotlight" />
+        <InstallSection componentName="card-spotlight" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">

@@ -23,7 +23,7 @@ export function FadeInDemo({ direction = "up" }: FadeInDemoProps) {
       <div className="flex justify-center">
         <button
           onClick={() => setKey((k) => k + 1)}
-          className="bg-primary text-primary-foreground rounded-lg px-4 py-2 text-sm font-medium transition-opacity hover:opacity-90"
+          className="bg-foreground text-background rounded-lg px-4 py-2 text-sm font-medium transition-opacity hover:opacity-90"
         >
           Replay
         </button>

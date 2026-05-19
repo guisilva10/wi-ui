@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { CTASection } from "@/shared/ui/components/cta-section";
 
 const BREADCRUMBS = [
@@ -69,8 +68,7 @@ export default function CTASectionPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="cta-section" />
-        <ComponentSource componentName="cta-section" />
+        <InstallSection componentName="cta-section" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">

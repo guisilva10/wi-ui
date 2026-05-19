@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { PricingCard } from "@/shared/ui/components/pricing-card";
 
 const BREADCRUMBS = [
@@ -100,8 +99,7 @@ export default function PricingCardPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="pricing-card" />
-        <ComponentSource componentName="pricing-card" />
+        <InstallSection componentName="pricing-card" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">

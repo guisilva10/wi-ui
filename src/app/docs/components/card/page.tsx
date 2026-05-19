@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import {
   Card,
   CardHeader,
@@ -27,8 +26,6 @@ const TOC = [
   { id: "basico", label: "Basico", level: 2 },
   { id: "com-footer", label: "Com Footer", level: 2 },
   { id: "com-avatar-badge", label: "Com Avatar e Badge", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -37,7 +34,37 @@ const PROPS = [
     name: "className",
     type: "string",
     default: "--",
-    description: "Classes CSS adicionais para o Card",
+    description: "Classes CSS adicionais para o Card raiz",
+  },
+  {
+    name: "CardHeader · className",
+    type: "string",
+    default: "--",
+    description: "Classes CSS adicionais para o CardHeader",
+  },
+  {
+    name: "CardTitle · className",
+    type: "string",
+    default: "--",
+    description: "Classes CSS adicionais para o CardTitle",
+  },
+  {
+    name: "CardDescription · className",
+    type: "string",
+    default: "--",
+    description: "Classes CSS adicionais para o CardDescription",
+  },
+  {
+    name: "CardContent · className",
+    type: "string",
+    default: "--",
+    description: "Classes CSS adicionais para o CardContent",
+  },
+  {
+    name: "CardFooter · className",
+    type: "string",
+    default: "--",
+    description: "Classes CSS adicionais para o CardFooter",
   },
 ];
 
@@ -51,8 +78,7 @@ export default function CardPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="card" />
-        <ComponentSource componentName="card" />
+        <InstallSection componentName="card" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -165,14 +191,6 @@ export default function CardPage() {
             </CardContent>
           </Card>
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="card" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="card" />
       </DocSection>
 
       <DocSection id="props" title="Props">
