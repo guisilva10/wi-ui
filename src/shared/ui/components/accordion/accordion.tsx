@@ -57,7 +57,7 @@ function AccordionItem({ value, className, ...props }: AccordionItemProps) {
     <div
       data-slot="accordion-item"
       data-value={value}
-      className={cn("border-b", className)}
+      className={cn("border-border border-b", className)}
       {...props}
     />
   );
@@ -128,13 +128,15 @@ function AccordionContent({
       data-slot="accordion-content"
       data-state={isOpen ? "open" : "closed"}
       className={cn(
-        "overflow-hidden text-sm transition-all",
-        isOpen ? "animate-accordion-down" : "hidden",
+        "grid text-sm transition-[grid-template-rows,opacity] duration-300 ease-out",
+        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
         className,
       )}
       {...props}
     >
-      <div className="pt-0 pb-4">{children}</div>
+      <div className="overflow-hidden">
+        <div className="pt-0 pb-4">{children}</div>
+      </div>
     </div>
   );
 }
