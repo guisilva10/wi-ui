@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WI.UI
 
-## Getting Started
+Biblioteca open-source de componentes React/Next.js no estilo copy-paste. Componentes de UI base, FOMO/conversao, animacoes e blocos de secao prontos para usar.
 
-First, run the development server:
+## Instalacao
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx @wi-ui/cli init
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Isso cria um `wi-ui.json` no projeto, instala dependencias base e adiciona o componente Button automaticamente.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Uso
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Adicionar componentes
 
-## Learn More
+```bash
+npx @wi-ui/cli add card
+npx @wi-ui/cli add badge input textarea
+npx @wi-ui/cli add hero-section
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Listar componentes disponiveis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npx @wi-ui/cli list
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Configuracao
 
-## Deploy on Vercel
+O `wi-ui.json` controla onde os componentes sao instalados:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```json
+{
+  "componentsDir": "src/components/ui",
+  "libDir": "src/lib",
+  "framework": "nextjs",
+  "typescript": true,
+  "tailwind": true,
+  "registry": "https://wi-ui.vercel.app/api/registry"
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Edite `componentsDir` para mudar o destino dos componentes. Exemplo:
+
+```json
+{
+  "componentsDir": "src/app/_components"
+}
+```
+
+## Componentes
+
+### Base (8)
+
+| Componente | Comando |
+|------------|---------|
+| Button | `wi-ui add button` |
+| Badge | `wi-ui add badge` |
+| Card | `wi-ui add card` |
+| Input | `wi-ui add input` |
+| Textarea | `wi-ui add textarea` |
+| Separator | `wi-ui add separator` |
+| Spinner | `wi-ui add spinner` |
+| Avatar | `wi-ui add avatar` |
+
+### FOMO / Conversao (7)
+
+| Componente | Comando |
+|------------|---------|
+| Countdown Timer | `wi-ui add countdown-timer` |
+| Social Proof | `wi-ui add social-proof` |
+| Scarcity Badge | `wi-ui add scarcity-badge` |
+| Testimonial Carousel | `wi-ui add testimonial-carousel` |
+| Pricing Card | `wi-ui add pricing-card` |
+| Urgency Banner | `wi-ui add urgency-banner` |
+| Visitor Counter | `wi-ui add visitor-counter` |
+
+### Animacao (7)
+
+| Componente | Comando |
+|------------|---------|
+| Fade In | `wi-ui add fade-in` |
+| Slide In | `wi-ui add slide-in` |
+| Scale In | `wi-ui add scale-in` |
+| Stagger Children | `wi-ui add stagger-children` |
+| Text Reveal | `wi-ui add text-reveal` |
+| Card Spotlight | `wi-ui add card-spotlight` |
+| Canvas Reveal Effect | `wi-ui add canvas-reveal-effect` |
+
+### Blocos de Secao (6)
+
+| Componente | Comando |
+|------------|---------|
+| Hero Section | `wi-ui add hero-section` |
+| Features Grid | `wi-ui add features-grid` |
+| Pricing Section | `wi-ui add pricing-section` |
+| Testimonials Section | `wi-ui add testimonials-section` |
+| CTA Section | `wi-ui add cta-section` |
+| FAQ Section | `wi-ui add faq-section` |
+
+## Stack
+
+- **Next.js 16** + React 19 + TypeScript
+- **Tailwind CSS v4**
+- **CVA** (Class Variance Authority)
+- **motion** para animacoes
+- **lucide-react** para icones
+
+## Playground
+
+Customize temas em tempo real: [wi-ui.vercel.app/playground](https://wi-ui.vercel.app/playground)
+
+## Documentacao
+
+Veja exemplos e props de cada componente: [wi-ui.vercel.app/docs](https://wi-ui.vercel.app/docs)
+
+## Desenvolvimento
+
+```bash
+git clone https://github.com/guisilva10/wi-ui.git
+cd wi-ui
+pnpm install
+pnpm dev
+```
+
+## Licenca
+
+MIT
