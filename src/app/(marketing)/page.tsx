@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroCanvasBg } from "./hero-canvas-bg";
 import { Copy, Code, Moon, Accessibility, ArrowRight, Zap } from "lucide-react";
 import { buttonVariants } from "@/shared/ui/components/button/button.variants";
 import {
@@ -149,20 +150,21 @@ export default function LandingPage() {
     <div className="bg-background">
       {/* Hero */}
       <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden px-4 py-24 text-center">
-        <h1 className="text-foreground mb-6 text-6xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
+        <HeroCanvasBg />
+        <h1 className="text-foreground relative z-10 mb-6 text-6xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
           WI.<span style={{ color: PRIMARY }}>UI</span>
         </h1>
 
-        <p className="text-muted-foreground mx-auto mb-4 max-w-lg text-lg leading-relaxed sm:text-xl">
+        <p className="text-muted-foreground relative z-10 mx-auto mb-4 max-w-lg text-lg leading-relaxed sm:text-xl">
           Componentes React bonitos, acess&iacute;veis e prontos para
           produ&ccedil;&atilde;o.
         </p>
-        <p className="text-muted-foreground/70 mx-auto mb-10 max-w-md text-base">
+        <p className="text-muted-foreground/70 relative z-10 mx-auto mb-10 max-w-md text-base">
           Copie, cole e customize &mdash; sem depend&ecirc;ncias extras, sem
           opinionismo.
         </p>
 
-        <div className="flex flex-col items-center gap-3 sm:flex-row">
+        <div className="relative z-10 flex flex-col items-center gap-3 sm:flex-row">
           <Link
             href="/docs"
             className={cn(
@@ -188,7 +190,7 @@ export default function LandingPage() {
           </a>
         </div>
 
-        <div className="border-border mt-10 flex items-center gap-2 rounded-lg border border-dashed px-4 py-2.5 font-mono text-sm">
+        <div className="border-border relative z-10 mt-10 flex items-center gap-2 rounded-lg border border-dashed px-4 py-2.5 font-mono text-sm">
           <span className="text-muted-foreground">$</span>
           <span className="text-foreground">npx wi-ui add button</span>
           <Copy className="text-muted-foreground/50 hover:text-foreground ml-2 size-3.5 cursor-pointer" />
