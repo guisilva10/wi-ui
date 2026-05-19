@@ -110,5 +110,6 @@ jobs:
           vercel deploy \
             --prebuilt \
             --prod \
+            --archive=tgz \
             --token="$VERCEL_TOKEN" \
             --force
