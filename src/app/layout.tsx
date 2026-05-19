@@ -5,9 +5,43 @@ import { ThemeProvider } from "@/shared/ui/layout/theme-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WI.UI - Componentes React",
+  title: {
+    default: "WI.UI — Componentes React",
+    template: "%s | WI.UI",
+  },
   description:
-    "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo.",
+    "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo. 29+ componentes: base, FOMO, animação e blocos.",
+  keywords: [
+    "react",
+    "components",
+    "ui",
+    "typescript",
+    "tailwind",
+    "next.js",
+    "open source",
+    "copy paste",
+    "dark mode",
+  ],
+  authors: [{ name: "WI.UI", url: "https://wi-ui.vercel.app" }],
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "https://wi-ui.vercel.app",
+    title: "WI.UI — Componentes React",
+    description:
+      "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo.",
+    siteName: "WI.UI",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WI.UI — Componentes React",
+    description:
+      "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

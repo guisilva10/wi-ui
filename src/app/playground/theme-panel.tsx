@@ -105,9 +105,9 @@ function ThemePanel({
               aria-label={`Tema ${preset.label}`}
               aria-pressed={state.preset === preset.name}
               className={cn(
-                "flex flex-col items-center gap-1.5 rounded-lg border p-2 text-xs transition-all",
+                "border-border flex flex-col items-center gap-1.5 rounded-lg border p-2 text-xs transition-all",
                 state.preset === preset.name
-                  ? "border-foreground bg-accent font-semibold"
+                  ? "border-border bg-accent font-semibold"
                   : "border-border hover:bg-accent cursor-pointer",
               )}
             >
@@ -129,12 +129,12 @@ function ThemePanel({
         <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
           Modo
         </p>
-        <div className="flex overflow-hidden rounded-lg border">
+        <div className="border-border flex overflow-hidden rounded-lg border">
           <button
             onClick={() => state.mode === "dark" && onToggleMode()}
             aria-pressed={state.mode === "light"}
             className={cn(
-              "flex flex-1 items-center justify-center gap-1.5 py-1.5 text-xs transition-colors",
+              "border-border flex flex-1 items-center justify-center gap-1.5 border py-1.5 text-xs transition-colors",
               state.mode === "light"
                 ? "bg-foreground text-background font-medium"
                 : "hover:bg-accent text-muted-foreground",
@@ -182,8 +182,7 @@ function ThemePanel({
               aria-label={`Radius ${r}rem`}
               className={cn(
                 "border-border bg-muted h-7 flex-1 border text-xs transition-all",
-                state.radius === r &&
-                  "border-foreground ring-foreground ring-1",
+                state.radius === r && "border-border ring-border ring-1",
               )}
               style={{ borderRadius: `${r}rem` }}
             />
