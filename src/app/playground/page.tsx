@@ -86,9 +86,7 @@ export default function PlaygroundPage() {
                 <ThemePanel
                   state={state}
                   isDark={theme === "dark"}
-                  onPreset={(p) => {
-                    setPreset(p);
-                  }}
+                  onPreset={setPreset}
                   onToggleMode={toggleMode}
                   onSetRadius={setRadius}
                   onSetPrimaryL={setPrimaryL}

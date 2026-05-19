@@ -3,6 +3,7 @@
 import { Mail, Search } from "lucide-react";
 import { Button } from "@/shared/ui/components/button";
 import { Badge } from "@/shared/ui/components/badge";
+import { Textarea } from "@/shared/ui/components/textarea";
 import {
   Card,
   CardHeader,
@@ -145,10 +146,10 @@ function PreviewCustom() {
       {/* Textarea */}
       <div>
         <SectionLabel>Textarea</SectionLabel>
-        <textarea
+        <Textarea
           placeholder="Escreva uma mensagem..."
-          className="border-input bg-background text-foreground placeholder:text-muted-foreground w-full rounded-md border px-3 py-2 text-sm focus:ring-2 focus:ring-[var(--ring)] focus:outline-none"
           rows={4}
+          resize="none"
         />
       </div>
     </div>

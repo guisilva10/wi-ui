@@ -296,7 +296,7 @@ function PreviewDashboard() {
             </span>
             <div className="ml-auto flex items-center gap-2">
               <Badge variant="secondary" className="text-xs">
-                Jan 2025
+                Jan 2026
               </Badge>
             </div>
           </div>

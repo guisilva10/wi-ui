@@ -56,7 +56,7 @@ function LoginPage() {
         {/* Logo */}
         <div className="text-center">
           <p className="text-foreground text-3xl font-bold tracking-tight select-none">
-            <span className="text-primary">WI</span>
+            <span className="text-foreground">WI</span>
             <span className="text-muted-foreground">.</span>
             <span>UI</span>
           </p>
