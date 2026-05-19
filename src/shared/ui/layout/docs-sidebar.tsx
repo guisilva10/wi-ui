@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 type CategoryTag = "base" | "fomo" | "animation" | "block";
@@ -169,21 +169,6 @@ function CategoryBadge({ tag }: { tag: CategoryTag }) {
   );
 }
 
-function SidebarSearch() {
-  return (
-    <button
-      className="border-border bg-muted/50 text-muted-foreground hover:bg-muted flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors"
-      aria-label="Buscar componentes"
-    >
-      <Search className="size-4 shrink-0 opacity-50" />
-      <span className="flex-1 text-left">Buscar...</span>
-      <kbd className="bg-background border-border pointer-events-none hidden rounded border px-1.5 py-0.5 font-mono text-[10px] font-medium sm:inline-block">
-        Ctrl K
-      </kbd>
-    </button>
-  );
-}
-
 function SidebarSectionItem({
   section,
   onLinkClick,
@@ -284,9 +269,6 @@ function DesktopSidebarScroll() {
         ref={scrollRef}
         className="h-full scrollbar-none overflow-y-auto p-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
-        <div className="mb-5">
-          <SidebarSearch />
-        </div>
         <SidebarContent />
       </div>
 
@@ -348,10 +330,6 @@ function DocsSidebar() {
           >
             <X className="size-5" />
           </button>
-        </div>
-
-        <div className="mb-5">
-          <SidebarSearch />
         </div>
 
         <SidebarContent onLinkClick={() => setMobileOpen(false)} />
