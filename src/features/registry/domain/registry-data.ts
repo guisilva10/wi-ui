@@ -492,4 +492,130 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/sparkle-button/sparkle-button.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
+  {
+    name: "particles",
+    description:
+      "Partículas flutuantes canvas-based com linhas de conexão opcionais entre partículas próximas. Quantidade, velocidade, tamanho e cor configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/particles/particles.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "ripple",
+    description:
+      "Círculos expansivos animados (ripple effect). Quantidade, cor e duração configuráveis. CSS-only.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/ripple/ripple.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "bento-grid",
+    description:
+      "Layout grid estilo bento com BentoGrid (columns) + BentoGridItem (colSpan/rowSpan). Hover effects e gap configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/bento-grid/bento-grid.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "blur-fade",
+    description:
+      "Animação de entrada com blur + fade + translate Y. Usa motion/react e IntersectionObserver. Delay, duração e blur configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/blur-fade/blur-fade.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "typing-animation",
+    description:
+      "Efeito typewriter com suporte a loop (digita e apaga), cursor piscante, velocidade e delay configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/typing-animation/typing-animation.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "border-beam",
+    description:
+      "Borda animada com feixe rotativo conic-gradient. Duração, cor e delay configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/border-beam/border-beam.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "shine-border",
+    description:
+      "Borda com efeito shine rotativo. Suporta múltiplas cores, largura de borda e duração configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/shine-border/shine-border.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "retro-grid",
+    description:
+      "Grid perspectiva retro animado com scroll infinito. Ângulo, tamanho de célula, opacidade e cor configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/retro-grid/retro-grid.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "breadcrumb",
+    description:
+      "Navegação breadcrumb composável com Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator e BreadcrumbEllipsis.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/breadcrumb/breadcrumb.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "popover",
+    description:
+      "Popover flutuante com posicionamento automático, portal rendering e close on outside click/escape.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/popover/popover.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "toast",
+    description:
+      "Sistema de notificações toast com variantes (default, success, error, warning). API imperativa via toast() function + Toaster component.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/toast/toast.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "skeleton",
+    description:
+      "Placeholder loading com animação pulse. Simples e composável para criar layouts skeleton.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/skeleton/skeleton.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "scroll-area",
+    description:
+      "Área de scroll customizada com scrollbar estilizada que aparece no hover. Suporta orientação vertical, horizontal ou ambas.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/scroll-area/scroll-area.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "command",
+    description:
+      "Command palette composável com busca, grupos, items, shortcuts e dialog modal (Ctrl+K).",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/command/command.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
 ];
