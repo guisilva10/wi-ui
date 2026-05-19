@@ -38,7 +38,12 @@ function DocPage({
               <ol className="text-muted-foreground flex items-center gap-1.5 text-sm">
                 {breadcrumbs.map((crumb, i) => (
                   <li key={i} className="flex items-center gap-1.5">
-                    {i > 0 && <ChevronRight className="size-3 opacity-40" />}
+                    {i > 0 && (
+                      <ChevronRight
+                        className="size-3 opacity-40"
+                        aria-hidden="true"
+                      />
+                    )}
                     {crumb.href ? (
                       <Link
                         href={crumb.href}
@@ -114,7 +119,10 @@ function DocSection({
           className="hover:text-foreground flex items-center gap-2 no-underline transition-colors"
         >
           {title}
-          <Hash className="size-4 opacity-0 transition-opacity group-hover:opacity-40" />
+          <Hash
+            className="size-4 opacity-0 transition-opacity group-hover:opacity-40"
+            aria-hidden="true"
+          />
         </a>
       </h2>
       {children}

@@ -20,9 +20,9 @@ function CollapsibleSource({ files, className }: CollapsibleSourceProps) {
         className="text-muted-foreground hover:text-foreground flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         {open ? (
-          <ChevronUp className="size-4" />
+          <ChevronUp className="size-4" aria-hidden="true" />
         ) : (
-          <ChevronDown className="size-4" />
+          <ChevronDown className="size-4" aria-hidden="true" />
         )}
         {open ? "Ocultar codigo fonte" : "Ver codigo fonte"}
       </button>

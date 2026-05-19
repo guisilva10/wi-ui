@@ -27,7 +27,10 @@ function InstallCommand({ componentName, className }: InstallCommandProps) {
       )}
     >
       <div className="flex min-w-0 items-center gap-3">
-        <Terminal className="text-muted-foreground size-4 shrink-0" />
+        <Terminal
+          className="text-muted-foreground size-4 shrink-0"
+          aria-hidden="true"
+        />
         <code className="text-foreground truncate font-mono text-sm">
           {command}
         </code>
@@ -44,12 +47,12 @@ function InstallCommand({ componentName, className }: InstallCommandProps) {
       >
         {copied ? (
           <>
-            <Check className="size-3.5" />
+            <Check className="size-3.5" aria-hidden="true" />
             <span>Copiado!</span>
           </>
         ) : (
           <>
-            <Copy className="size-3.5" />
+            <Copy className="size-3.5" aria-hidden="true" />
             <span>Copiar</span>
           </>
         )}
