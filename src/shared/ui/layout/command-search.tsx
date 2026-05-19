@@ -408,7 +408,7 @@ function CommandSearch() {
       <button
         onClick={openDialog}
         aria-label="Buscar componentes"
-        className="text-muted-foreground hover:text-foreground flex size-8 items-center justify-center rounded-md transition-colors md:hidden"
+        className="text-muted-foreground hover:text-foreground flex size-10 items-center justify-center rounded-md transition-colors md:hidden"
       >
         <Search className="size-4" />
       </button>
@@ -471,7 +471,7 @@ function CommandSearch() {
               {/* Results */}
               <div
                 ref={listRef}
-                className="max-h-[360px] overflow-y-auto overscroll-contain py-1"
+                className="max-h-[50vh] overflow-y-auto overscroll-contain py-1 sm:max-h-[360px]"
               >
                 {hasQuery && filtered.length === 0 ? (
                   <div className="flex flex-col items-center gap-2 px-4 py-10">

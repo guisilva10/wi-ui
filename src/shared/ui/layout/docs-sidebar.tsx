@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 interface SidebarLink {
@@ -335,14 +335,20 @@ function DocsSidebar() {
   return (
     <>
       {/* Mobile toggle bar */}
-      <div className="border-border/50 bg-background/80 sticky top-14 z-30 flex items-center gap-2 border-b px-4 py-2 backdrop-blur-md lg:hidden">
+      <div className="border-border/50 bg-background/80 sticky top-14 z-30 flex items-center border-b px-4 py-2 backdrop-blur-md lg:hidden">
         <button
           onClick={() => setMobileOpen((o) => !o)}
           aria-label={mobileOpen ? "Fechar sidebar" : "Abrir sidebar"}
-          className="text-muted-foreground hover:text-foreground flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors"
+          className="bg-muted/50 hover:bg-muted text-foreground flex h-9 items-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors"
         >
           {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
-          <span>Menu</span>
+          <span>Componentes</span>
+          <ChevronDown
+            className={cn(
+              "text-muted-foreground size-3.5 transition-transform",
+              mobileOpen && "rotate-180",
+            )}
+          />
         </button>
       </div>
 
@@ -358,7 +364,7 @@ function DocsSidebar() {
       {/* Mobile drawer */}
       <aside
         className={cn(
-          "bg-background border-border/50 fixed top-0 left-0 z-50 h-full w-72 overflow-y-auto border-r p-5 shadow-xl transition-transform duration-300 ease-out lg:hidden",
+          "bg-background border-border/50 fixed top-0 left-0 z-50 h-full w-[85vw] max-w-72 overflow-y-auto border-r p-5 shadow-xl transition-transform duration-300 ease-out lg:hidden",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
