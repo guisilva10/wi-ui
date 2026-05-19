@@ -110,17 +110,11 @@ const SEARCH_ITEMS: SearchItem[] = [
     category: "Animação",
   },
   {
-    name: "LaserBeam",
-    href: "/docs/components/laser-beam",
-    category: "Animação",
-  },
-  {
     name: "Particles",
     href: "/docs/components/particles",
     category: "Animação",
   },
   { name: "Ripple", href: "/docs/components/ripple", category: "Animação" },
-  { name: "Globe", href: "/docs/components/globe", category: "Animação" },
   {
     name: "BentoGrid",
     href: "/docs/components/bento-grid",
@@ -144,11 +138,6 @@ const SEARCH_ITEMS: SearchItem[] = [
   {
     name: "ShineBorder",
     href: "/docs/components/shine-border",
-    category: "Animação",
-  },
-  {
-    name: "MeteorShower",
-    href: "/docs/components/meteor-shower",
     category: "Animação",
   },
   {

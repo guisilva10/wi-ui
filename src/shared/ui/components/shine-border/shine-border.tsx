@@ -24,7 +24,7 @@ function ShineBorder({
       {...props}
     >
       <div
-        className="pointer-events-none absolute inset-0 rounded-[inherit]"
+        className="pointer-events-none absolute inset-[-200%] rounded-[inherit]"
         style={{
           background: `conic-gradient(from 0deg, transparent 30%, ${colors}, transparent 70%)`,
           animation: `shine-border-rotate ${duration}s linear infinite`,

@@ -151,7 +151,7 @@ function PopoverContent({
       ref={contentRef}
       data-slot="popover-content"
       className={cn(
-        "bg-popover text-popover-foreground fixed z-50 w-72 rounded-lg border p-4 shadow-md outline-none",
+        "bg-background text-foreground border-border fixed z-50 w-72 rounded-lg border p-4 shadow-md outline-none",
         "animate-in fade-in-0 zoom-in-95",
         className,
       )}
