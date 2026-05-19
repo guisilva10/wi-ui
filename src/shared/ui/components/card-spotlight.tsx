@@ -2,36 +2,38 @@
 
 import { useMotionValue, motion, useMotionTemplate } from "motion/react";
 import React, { MouseEvent as ReactMouseEvent, useState } from "react";
-import { CanvasRevealEffect } from "@/shared/ui/components/canvas-reveal-effect";
 import { cn } from "@/lib/cn";
 
-export const CardSpotlight = ({
+interface CardSpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
+  radius?: number;
+  color?: string;
+  overlay?: React.ReactNode;
+  children: React.ReactNode;
+}
+
+function CardSpotlight({
   children,
   radius = 350,
   color,
+  overlay,
   className,
   ...props
-}: {
-  radius?: number;
-  color?: string;
-  children: React.ReactNode;
-} & React.HTMLAttributes<HTMLDivElement>) => {
+}: CardSpotlightProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+
   function handleMouseMove({
     currentTarget,
     clientX,
     clientY,
   }: ReactMouseEvent<HTMLDivElement>) {
     const { left, top } = currentTarget.getBoundingClientRect();
-
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
 
   const [isHovering, setIsHovering] = useState(false);
-  const handleMouseEnter = () => setIsHovering(true);
-  const handleMouseLeave = () => setIsHovering(false);
+
   return (
     <div
       className={cn(
@@ -39,8 +41,8 @@ export const CardSpotlight = ({
         className,
       )}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       {...props}
     >
       <motion.div
@@ -56,19 +58,11 @@ export const CardSpotlight = ({
           `,
         }}
       >
-        {isHovering && (
-          <CanvasRevealEffect
-            animationSpeed={5}
-            containerClassName="bg-transparent absolute inset-0 pointer-events-none"
-            colors={[
-              [0, 180, 216],
-              [0, 210, 230],
-            ]}
-            dotSize={3}
-          />
-        )}
+        {isHovering && overlay}
       </motion.div>
       {children}
     </div>
   );
-};
+}
+
+export { CardSpotlight, type CardSpotlightProps };

@@ -8,6 +8,7 @@ import { SiGithub } from "react-icons/si";
 import { useTheme } from "./theme-provider";
 import { cn } from "@/lib/cn";
 import { CardSpotlight } from "../components/card-spotlight";
+import { CanvasRevealEffect } from "../components/canvas-reveal-effect";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -25,7 +26,19 @@ function Header({ extraRight }: HeaderProps) {
 
   return (
     <header className="bg-background/80 border-border relative sticky top-0 z-50 w-full border-b backdrop-blur-md">
-      <CardSpotlight>
+      <CardSpotlight
+        overlay={
+          <CanvasRevealEffect
+            animationSpeed={5}
+            containerClassName="bg-transparent absolute inset-0 pointer-events-none"
+            colors={[
+              [0, 180, 216],
+              [0, 210, 230],
+            ]}
+            dotSize={3}
+          />
+        }
+      >
         <div className="relative flex h-14 items-center justify-between px-4 lg:px-6">
           {/* Logo */}
           <Link
