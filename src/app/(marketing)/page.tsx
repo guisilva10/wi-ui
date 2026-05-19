@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Copy, ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { buttonVariants } from "@/shared/ui/components/button";
 import {
   Badge,
   Button,

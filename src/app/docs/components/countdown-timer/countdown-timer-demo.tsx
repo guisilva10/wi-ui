@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { CountdownTimer } from "@/shared/ui/components/countdown-timer";
+import {
+  CountdownTimer,
+  countdownVariants,
+} from "@/shared/ui/components/countdown-timer";
 import { type VariantProps } from "class-variance-authority";
-import { countdownVariants } from "@/shared/ui/components/countdown-timer/countdown-timer.variants";
 
 type CountdownTimerDemoProps = VariantProps<typeof countdownVariants> & {
   showDays?: boolean;

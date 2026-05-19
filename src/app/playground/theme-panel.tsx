@@ -2,7 +2,7 @@
 
 import { Moon, Sun, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { buttonVariants } from "@/shared/ui/components/button";
 import { THEME_PRESETS } from "./theme-presets";
 import type { ThemeState } from "./use-theme-customizer";
 import type { ThemePreset } from "./theme-presets";
