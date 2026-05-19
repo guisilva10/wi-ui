@@ -5,7 +5,7 @@
   "packageManager": "pnpm@10.30.3",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm --filter @wi-ui/database db:generate && next build",
     "start": "next start",
     "lint": "eslint",
     "prepare": "husky",
