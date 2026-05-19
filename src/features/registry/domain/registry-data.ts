@@ -39,7 +39,7 @@ export const registry: RegistryEntry[] = [
   {
     name: "button",
     description:
-      "Botão com variants (default, secondary, outline, ghost, destructive, link), sizes e estado isLoading integrado.",
+      "Botão acessível com variants (default, secondary, outline, ghost, destructive, link) e múltiplos tamanhos.",
     version: "1.0.0",
     category: "base",
     files: ["src/shared/ui/components/button/button.tsx"],
@@ -79,6 +79,123 @@ export const registry: RegistryEntry[] = [
     version: "1.0.0",
     category: "base",
     files: ["src/shared/ui/components/card/card.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "label",
+    description:
+      "Label acessível para campos de formulário. Integra com peer-disabled.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/label/label.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "checkbox",
+    description:
+      "Checkbox nativo estilizado com CSS puro. Suporta checked, disabled e focus states.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/checkbox/checkbox.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "switch",
+    description:
+      "Toggle switch acessível com role switch e aria-checked. Controlled/uncontrolled.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/switch/switch.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "alert",
+    description:
+      "Alerta semântico com variantes default e destructive. Sub-componentes: AlertTitle, AlertDescription.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/alert/alert.tsx"],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "progress",
+    description:
+      "Barra de progresso acessível com role progressbar e aria-valuenow. Valor configurável.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/progress/progress.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "table",
+    description:
+      "Tabela estilizada com sub-componentes: Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/table/table.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "tabs",
+    description:
+      "Tabs com Context puro. Controlled/uncontrolled. Sub-componentes: Tabs, TabsList, TabsTrigger, TabsContent.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/tabs/tabs.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "dialog",
+    description:
+      "Modal dialog com overlay, ESC para fechar, e scroll lock. Sub-componentes: Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/dialog/dialog.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "accordion",
+    description:
+      "Accordion com suporte single/multiple e collapsible. Sub-componentes: Accordion, AccordionItem, AccordionTrigger, AccordionContent.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/accordion/accordion.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "dropdown-menu",
+    description:
+      "Dropdown menu com Context. Click outside e ESC para fechar. Sub-componentes: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/dropdown-menu/dropdown-menu.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "sheet",
+    description:
+      "Painel lateral (drawer) com variantes de posição: top, bottom, left, right. Overlay, ESC e scroll lock.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/sheet/sheet.tsx"],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "tooltip",
+    description:
+      "Tooltip leve com posicionamento (top, bottom, left, right) e delay configurável. CSS puro, sem portais.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/tooltip/tooltip.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "select",
+    description:
+      "Select customizado com Context. Dropdown com check no item selecionado. Controlled/uncontrolled.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/select/select.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
   {

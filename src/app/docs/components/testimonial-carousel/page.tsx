@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { TestimonialCarouselDemo } from "./testimonial-carousel-demo";
 
 const BREADCRUMBS = [
@@ -17,8 +16,6 @@ const TOC = [
   { id: "card", label: "Card", level: 2 },
   { id: "bubble", label: "Bubble", level: 2 },
   { id: "minimal", label: "Minimal", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
   { id: "tipo-testimonial", label: "Tipo Testimonial", level: 2 },
 ];
@@ -107,8 +104,7 @@ export default function TestimonialCarouselPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="testimonial-carousel" />
-        <ComponentSource componentName="testimonial-carousel" />
+        <InstallSection componentName="testimonial-carousel" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -166,14 +162,6 @@ export default function TestimonialCarouselPage() {
             <TestimonialCarouselDemo variant="minimal" />
           </div>
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="testimonial-carousel" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="testimonial-carousel" />
       </DocSection>
 
       <DocSection id="props" title="Props">

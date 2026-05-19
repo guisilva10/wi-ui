@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { Button } from "@/shared/ui/components/button";
 
 const BREADCRUMBS = [
@@ -12,17 +11,16 @@ const BREADCRUMBS = [
 ];
 
 const TOC = [
-  { id: "instalacao", label: "Instalacao", level: 2 },
+  { id: "instalacao", label: "Instalação", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "default", label: "Default", level: 2 },
   { id: "secondary", label: "Secondary", level: 2 },
   { id: "outline", label: "Outline", level: 2 },
   { id: "ghost", label: "Ghost", level: 2 },
   { id: "destructive", label: "Destructive", level: 2 },
   { id: "link", label: "Link", level: 2 },
   { id: "tamanhos", label: "Tamanhos", level: 2 },
-  { id: "loading", label: "Carregando", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
+  { id: "com-icone", label: "Com ícone", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -31,31 +29,19 @@ const PROPS = [
     name: "variant",
     type: '"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
     default: '"default"',
-    description: "Estilo visual do botao",
+    description: "Estilo visual do botão",
   },
   {
     name: "size",
     type: '"sm" | "md" | "lg" | "icon"',
     default: '"md"',
-    description: "Tamanho do botao",
-  },
-  {
-    name: "isLoading",
-    type: "boolean",
-    default: "false",
-    description: "Exibe spinner e desabilita o botao",
-  },
-  {
-    name: "loadingText",
-    type: "string",
-    default: "--",
-    description: "Texto exibido durante loading",
+    description: "Tamanho do botão",
   },
   {
     name: "disabled",
     type: "boolean",
     default: "false",
-    description: "Desabilita o botao",
+    description: "Desabilita o botão",
   },
   {
     name: "className",
@@ -69,29 +55,22 @@ export default function ButtonPage() {
   return (
     <DocPage
       title="Button"
-      description="Botao acessivel com multiplas variantes, tamanhos e suporte a estado de loading."
+      description="Botão acessível com múltiplas variantes e tamanhos."
       breadcrumbs={BREADCRUMBS}
       badge="Base"
       toc={TOC}
     >
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="button" />
-        <ComponentSource componentName="button" />
+      <DocSection id="instalacao" title="Instalação">
+        <InstallSection componentName="button" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
         <ComponentPreview
-          code={`import { Button } from "@/components/button";
+          code={`import { Button } from "@/components/ui/button";
 
 <Button>Clique aqui</Button>`}
         >
           <Button>Clique aqui</Button>
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="default" title="Default">
-        <ComponentPreview code={`<Button variant="default">Default</Button>`}>
-          <Button variant="default">Default</Button>
         </ComponentPreview>
       </DocSection>
 
@@ -143,22 +122,6 @@ export default function ButtonPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="loading" title="Carregando">
-        <ComponentPreview
-          code={`<Button isLoading loadingText="Salvando...">Salvar</Button>
-<Button isLoading variant="outline">Carregando</Button>`}
-        >
-          <div className="flex gap-3">
-            <Button isLoading loadingText="Salvando...">
-              Salvar
-            </Button>
-            <Button isLoading variant="outline">
-              Carregando
-            </Button>
-          </div>
-        </ComponentPreview>
-      </DocSection>
-
       <DocSection id="desabilitado" title="Desabilitado">
         <ComponentPreview
           code={`<Button disabled>Desabilitado</Button>
@@ -170,6 +133,35 @@ export default function ButtonPage() {
               Outline
             </Button>
           </div>
+        </ComponentPreview>
+      </DocSection>
+
+      <DocSection id="com-icone" title="Com ícone">
+        <ComponentPreview
+          code={`import { ArrowRight } from "lucide-react";
+
+<Button>
+  Próximo
+  <ArrowRight />
+</Button>`}
+        >
+          <Button>
+            Próximo
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Button>
         </ComponentPreview>
       </DocSection>
 

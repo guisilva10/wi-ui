@@ -28,7 +28,7 @@ function DocPage({
   children,
 }: DocPageProps) {
   return (
-    <div className="flex">
+    <div className="flex min-h-[calc(100vh-3.5rem)]">
       {/* Main content */}
       <main className="min-w-0 flex-1 px-6 py-10 md:px-10 lg:px-12">
         <div className="mx-auto max-w-5xl">
@@ -89,10 +89,8 @@ function DocPage({
 
       {/* Right sidebar - Table of Contents (xl screens only) */}
       {toc && toc.length > 0 && (
-        <aside className="hidden w-52 shrink-0 xl:block">
-          <div className="sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto p-5 pt-10">
-            <TableOfContents items={toc} />
-          </div>
+        <aside className="sticky top-14 hidden h-fit max-h-[calc(100vh-3.5rem)] w-52 shrink-0 overflow-y-auto p-5 pt-10 xl:block">
+          <TableOfContents items={toc} />
         </aside>
       )}
     </div>

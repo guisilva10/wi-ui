@@ -27,19 +27,6 @@ export const countdownVariants = cva(
   },
 );
 
-export const digitBlockVariants = cva("flex flex-col items-center gap-0.5", {
-  variants: {
-    variant: {
-      default: "",
-      urgent: "",
-      minimal: "",
-    },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
-
 interface TimeLeft {
   days: number;
   hours: number;

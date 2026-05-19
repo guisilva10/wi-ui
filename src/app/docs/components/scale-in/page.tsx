@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { ScaleInDemo } from "./scale-in-demo";
 
 const BREADCRUMBS = [
@@ -17,8 +16,6 @@ const TOC = [
   { id: "padrao", label: "Padrao", level: 2 },
   { id: "sutil", label: "Sutil", level: 2 },
   { id: "dramatico", label: "Dramatico", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -71,8 +68,7 @@ export default function ScaleInPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="scale-in" />
-        <ComponentSource componentName="scale-in" />
+        <InstallSection componentName="scale-in" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -131,14 +127,6 @@ export default function ScaleInPage() {
         >
           <ScaleInDemo initialScale={0.7} duration={0.5} />
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="scale-in" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="scale-in" />
       </DocSection>
 
       <DocSection id="props" title="Props">

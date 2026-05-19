@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { CanvasRevealEffectDemo } from "./canvas-reveal-effect-demo";
 
 const BREADCRUMBS = [
@@ -68,8 +67,7 @@ export default function CanvasRevealEffectPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="canvas-reveal-effect" />
-        <ComponentSource componentName="canvas-reveal-effect" />
+        <InstallSection componentName="canvas-reveal-effect" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">

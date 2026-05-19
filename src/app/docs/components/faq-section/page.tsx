@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { FAQSection } from "@/shared/ui/components/faq-section";
 
 const BREADCRUMBS = [
@@ -94,8 +93,7 @@ export default function FAQSectionPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="faq-section" />
-        <ComponentSource componentName="faq-section" />
+        <InstallSection componentName="faq-section" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">

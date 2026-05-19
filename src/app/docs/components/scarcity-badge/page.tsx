@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { ScarcityBadge } from "@/shared/ui/components/scarcity-badge";
 
 const BREADCRUMBS = [
@@ -14,12 +13,9 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "default", label: "Default", level: 2 },
   { id: "critical", label: "Critical", level: 2 },
   { id: "soldout", label: "Esgotado", level: 2 },
   { id: "sem-barra", label: "Sem barra", level: 2 },
-  { id: "instalacao", label: "Instalacao", level: 2 },
-  { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -73,8 +69,7 @@ export default function ScarcityBadgePage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="scarcity-badge" />
-        <ComponentSource componentName="scarcity-badge" />
+        <InstallSection componentName="scarcity-badge" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -83,12 +78,6 @@ export default function ScarcityBadgePage() {
 
 <ScarcityBadge total={100} remaining={60} />`}
         >
-          <ScarcityBadge total={100} remaining={60} />
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="default" title="Default">
-        <ComponentPreview code={`<ScarcityBadge total={100} remaining={60} />`}>
           <ScarcityBadge total={100} remaining={60} />
         </ComponentPreview>
       </DocSection>
@@ -114,14 +103,6 @@ export default function ScarcityBadgePage() {
         >
           <ScarcityBadge total={50} remaining={3} showBar={false} />
         </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="scarcity-badge" />
-      </DocSection>
-
-      <DocSection id="codigo-fonte" title="Codigo fonte">
-        <ComponentSource componentName="scarcity-badge" />
       </DocSection>
 
       <DocSection id="props" title="Props">

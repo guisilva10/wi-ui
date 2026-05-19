@@ -40,7 +40,7 @@ function PropsTable({ props }: PropsTableProps) {
                 )}
               </div>
               <div className="space-y-1">
-                <code className="text-primary/80 font-mono text-xs">
+                <code className="text-muted-foreground font-mono text-xs">
                   {prop.type}
                 </code>
                 <p className="text-muted-foreground text-[13px] leading-relaxed">
@@ -77,7 +77,7 @@ function PropsTable({ props }: PropsTableProps) {
                   </code>
                 )}
               </div>
-              <code className="text-primary/80 block font-mono text-xs">
+              <code className="text-muted-foreground block font-mono text-xs">
                 {prop.type}
               </code>
               <p className="text-muted-foreground text-[13px] leading-relaxed">

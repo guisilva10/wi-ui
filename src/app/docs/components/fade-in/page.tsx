@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { FadeInDemo } from "./fade-in-demo";
 
 const BREADCRUMBS = [
@@ -70,8 +69,7 @@ export default function FadeInPage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="fade-in" />
-        <ComponentSource componentName="fade-in" />
+        <InstallSection componentName="fade-in" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">

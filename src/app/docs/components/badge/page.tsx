@@ -1,8 +1,7 @@
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { ComponentPreview } from "@/shared/ui/docs/component-preview";
 import { PropsTable } from "@/shared/ui/docs/props-table";
-import { InstallCommand } from "@/shared/ui/docs/install-command";
-import { ComponentSource } from "@/shared/ui/docs/component-source";
+import { InstallSection } from "@/shared/ui/docs/install-section";
 import { Badge } from "@/shared/ui/components/badge";
 
 const BREADCRUMBS = [
@@ -14,7 +13,6 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "default", label: "Default", level: 2 },
   { id: "secondary", label: "Secondary", level: 2 },
   { id: "outline", label: "Outline", level: 2 },
   { id: "destructive", label: "Destructive", level: 2 },
@@ -48,8 +46,7 @@ export default function BadgePage() {
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
-        <InstallCommand componentName="badge" />
-        <ComponentSource componentName="badge" />
+        <InstallSection componentName="badge" />
       </DocSection>
 
       <DocSection id="uso" title="Uso">
@@ -59,12 +56,6 @@ export default function BadgePage() {
 <Badge>Badge</Badge>`}
         >
           <Badge>Badge</Badge>
-        </ComponentPreview>
-      </DocSection>
-
-      <DocSection id="default" title="Default">
-        <ComponentPreview code={`<Badge variant="default">Default</Badge>`}>
-          <Badge variant="default">Default</Badge>
         </ComponentPreview>
       </DocSection>
 

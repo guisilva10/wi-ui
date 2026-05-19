@@ -11,7 +11,7 @@ interface InstallCommandProps {
 
 function InstallCommand({ componentName, className }: InstallCommandProps) {
   const [copied, setCopied] = useState(false);
-  const command = `npx wi-ui add ${componentName}`;
+  const command = `npx @wi-ui/cli add ${componentName}`;
 
   async function handleCopy() {
     await navigator.clipboard.writeText(command);
