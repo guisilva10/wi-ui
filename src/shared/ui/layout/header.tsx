@@ -111,7 +111,7 @@ function Header({ extraRight }: HeaderProps) {
         </nav>
 
         {/* Mobile controls */}
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-0.5 md:hidden">
           <CommandSearch />
 
           {extraRight}
@@ -121,12 +121,12 @@ function Header({ extraRight }: HeaderProps) {
           <button
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? "Fechar menu" : "Abrir menu"}
-            className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+            className="text-muted-foreground hover:text-foreground flex size-10 items-center justify-center rounded-md transition-colors"
           >
             {mobileOpen ? (
-              <X className="size-4" />
+              <X className="size-5" />
             ) : (
-              <Menu className="size-4" />
+              <Menu className="size-5" />
             )}
           </button>
         </div>

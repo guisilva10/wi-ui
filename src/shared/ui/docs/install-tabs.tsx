@@ -83,9 +83,13 @@ function InstallTabs({ command, sourceFiles, className }: InstallTabsProps) {
       </div>
 
       {tab === "cli" && (
-        <div className="flex items-center gap-3 px-4 py-3">
-          <span className="text-muted-foreground font-mono text-sm">$</span>
-          <code className="text-foreground font-mono text-sm">{command}</code>
+        <div className="flex items-center gap-3 overflow-x-auto px-4 py-3">
+          <span className="text-muted-foreground shrink-0 font-mono text-sm">
+            $
+          </span>
+          <code className="text-foreground font-mono text-xs whitespace-nowrap sm:text-sm">
+            {command}
+          </code>
         </div>
       )}
 

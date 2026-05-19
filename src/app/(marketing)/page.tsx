@@ -80,11 +80,14 @@ function CopyCommand() {
   return (
     <button
       onClick={handleCopy}
-      className="border-border bg-muted/30 hover:bg-muted/50 group inline-flex items-center gap-3 rounded-lg border px-4 py-2.5 font-mono text-sm transition-colors"
+      className="border-border bg-muted/30 hover:bg-muted/50 group inline-flex max-w-full items-center gap-2 overflow-hidden rounded-lg border px-3 py-2.5 font-mono text-xs transition-colors sm:gap-3 sm:px-4 sm:text-sm"
     >
-      <Terminal className="text-muted-foreground size-4" aria-hidden="true" />
-      <span className="text-muted-foreground">$</span>
-      <span className="text-foreground">{command}</span>
+      <Terminal
+        className="text-muted-foreground hidden size-4 sm:block"
+        aria-hidden="true"
+      />
+      <span className="text-muted-foreground hidden sm:inline">$</span>
+      <span className="text-foreground truncate">{command}</span>
       {copied ? (
         <Check className="size-3.5 text-emerald-500" aria-hidden="true" />
       ) : (
@@ -298,7 +301,7 @@ export default function LandingPage() {
     <div className="bg-background">
       <div className="mx-auto max-w-5xl px-4 pt-16 pb-24 sm:pt-24">
         <div className="mb-14 max-w-2xl">
-          <h1 className="text-foreground mb-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-foreground mb-4 text-2xl font-bold tracking-tight sm:text-4xl lg:text-6xl">
             Componentes que você <TypingEffect /> e faz seu.
           </h1>
           <p className="text-muted-foreground mb-8 max-w-lg text-lg leading-relaxed">

@@ -84,9 +84,9 @@ function CommandBlock({
         ))}
       </div>
 
-      <div className="flex items-center gap-3 px-4 py-3">
+      <div className="flex items-center gap-3 overflow-x-auto px-4 py-3">
         <Icon className="text-muted-foreground size-4 shrink-0" />
-        <code className="text-foreground flex-1 font-mono text-sm">
+        <code className="text-foreground flex-1 font-mono text-xs whitespace-nowrap sm:text-sm">
           {command}
         </code>
         <CopyButton text={command} />
