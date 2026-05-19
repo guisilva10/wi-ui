@@ -27,6 +27,16 @@ const SEARCH_ITEMS: SearchItem[] = [
   { name: "Avatar", href: "/docs/components/avatar", category: "Base" },
   { name: "Separator", href: "/docs/components/separator", category: "Base" },
   { name: "Spinner", href: "/docs/components/spinner", category: "Base" },
+  { name: "Breadcrumb", href: "/docs/components/breadcrumb", category: "Base" },
+  { name: "Popover", href: "/docs/components/popover", category: "Base" },
+  { name: "Toast", href: "/docs/components/toast", category: "Base" },
+  { name: "Skeleton", href: "/docs/components/skeleton", category: "Base" },
+  {
+    name: "ScrollArea",
+    href: "/docs/components/scroll-area",
+    category: "Base",
+  },
+  { name: "Command", href: "/docs/components/command", category: "Base" },
   // FOMO
   {
     name: "CountdownTimer",
@@ -97,6 +107,53 @@ const SEARCH_ITEMS: SearchItem[] = [
   {
     name: "SparkleButton",
     href: "/docs/components/sparkle-button",
+    category: "Animação",
+  },
+  {
+    name: "LaserBeam",
+    href: "/docs/components/laser-beam",
+    category: "Animação",
+  },
+  {
+    name: "Particles",
+    href: "/docs/components/particles",
+    category: "Animação",
+  },
+  { name: "Ripple", href: "/docs/components/ripple", category: "Animação" },
+  { name: "Globe", href: "/docs/components/globe", category: "Animação" },
+  {
+    name: "BentoGrid",
+    href: "/docs/components/bento-grid",
+    category: "Animação",
+  },
+  {
+    name: "BlurFade",
+    href: "/docs/components/blur-fade",
+    category: "Animação",
+  },
+  {
+    name: "TypingAnimation",
+    href: "/docs/components/typing-animation",
+    category: "Animação",
+  },
+  {
+    name: "BorderBeam",
+    href: "/docs/components/border-beam",
+    category: "Animação",
+  },
+  {
+    name: "ShineBorder",
+    href: "/docs/components/shine-border",
+    category: "Animação",
+  },
+  {
+    name: "MeteorShower",
+    href: "/docs/components/meteor-shower",
+    category: "Animação",
+  },
+  {
+    name: "RetroGrid",
+    href: "/docs/components/retro-grid",
     category: "Animação",
   },
   // Backgrounds
