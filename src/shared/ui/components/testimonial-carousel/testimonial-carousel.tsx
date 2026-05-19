@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { Avatar } from "@/shared/ui/components/avatar";
 
 interface Testimonial {
   name: string;
@@ -24,6 +23,58 @@ interface TestimonialCarouselProps extends React.HTMLAttributes<HTMLDivElement> 
   variant?: TestimonialVariant;
   showControls?: boolean;
   showDots?: boolean;
+}
+
+function InlineAvatar({
+  src,
+  name,
+  size,
+}: {
+  src?: string;
+  name: string;
+  size: "sm" | "md";
+}) {
+  const sizeClass = size === "md" ? "size-10" : "size-8";
+  const textClass = size === "md" ? "text-sm" : "text-xs";
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  return (
+    <div
+      className={cn(
+        sizeClass,
+        "bg-muted shrink-0 overflow-hidden rounded-full",
+      )}
+    >
+      {src ? (
+        <img
+          src={src}
+          alt={name}
+          className="size-full object-cover"
+          onError={(e) => {
+            e.currentTarget.style.display = "none";
+            const parent = e.currentTarget.parentElement;
+            if (parent) {
+              parent.innerHTML = `<span class="flex size-full items-center justify-center ${textClass} font-medium text-muted-foreground">${initials}</span>`;
+            }
+          }}
+        />
+      ) : (
+        <span
+          className={cn(
+            "text-muted-foreground flex size-full items-center justify-center font-medium",
+            textClass,
+          )}
+        >
+          {initials}
+        </span>
+      )}
+    </div>
+  );
 }
 
 function StarRating({ rating }: { rating: number }) {
@@ -124,7 +175,7 @@ function TestimonialCarousel({
     if (variant === "bubble") {
       return (
         <div className="flex gap-3">
-          <Avatar src={t.avatar} fallback={t.name} size="md" />
+          <InlineAvatar src={t.avatar} name={t.name} size="md" />
           <div className="flex-1 space-y-1">
             <div className="bg-muted relative rounded-2xl rounded-tl-none px-4 py-3">
               {t.rating && (
@@ -158,7 +209,7 @@ function TestimonialCarousel({
         {t.rating && <StarRating rating={t.rating} />}
         <p className="text-foreground leading-relaxed">{t.content}</p>
         <div className="flex items-center gap-3 pt-2">
-          <Avatar src={t.avatar} fallback={t.name} size="sm" />
+          <InlineAvatar src={t.avatar} name={t.name} size="sm" />
           <div>
             <p className="text-foreground font-semibold">{t.name}</p>
             {(t.role ?? t.company) && (

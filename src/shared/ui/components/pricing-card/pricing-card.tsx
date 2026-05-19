@@ -1,7 +1,5 @@
 import { Check, X } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { Badge } from "@/shared/ui/components/badge";
-import { Button } from "@/shared/ui/components/button";
 
 interface PricingFeature {
   text: string;
@@ -52,15 +50,21 @@ function PricingCard({
     typeof f === "string" ? { text: f, included: true } : f,
   );
 
-  const ctaElement = (
-    <Button
-      variant={highlighted ? "default" : "outline"}
-      size="lg"
-      className="w-full"
-      onClick={cta.onClick}
-    >
+  const ctaClass = cn(
+    "inline-flex w-full items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200",
+    highlighted
+      ? "bg-foreground text-background hover:bg-foreground/90"
+      : "border border-border bg-transparent text-foreground hover:bg-muted",
+  );
+
+  const ctaElement = cta.href ? (
+    <a href={cta.href} className={ctaClass}>
       {cta.label}
-    </Button>
+    </a>
+  ) : (
+    <button onClick={cta.onClick} className={ctaClass}>
+      {cta.label}
+    </button>
   );
 
   return (
@@ -76,7 +80,16 @@ function PricingCard({
       {/* Badge topo */}
       {badge && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <Badge variant={highlighted ? "default" : "secondary"}>{badge}</Badge>
+          <span
+            className={cn(
+              "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
+              highlighted
+                ? "bg-foreground text-background"
+                : "bg-muted text-muted-foreground",
+            )}
+          >
+            {badge}
+          </span>
         </div>
       )}
 
@@ -91,12 +104,7 @@ function PricingCard({
       {/* Pricing */}
       <div className="mb-6">
         <div className="flex items-end gap-2">
-          <span
-            className={cn(
-              "text-4xl font-extrabold tracking-tight",
-              highlighted ? "text-foreground" : "text-foreground",
-            )}
-          >
+          <span className="text-foreground text-4xl font-extrabold tracking-tight">
             {price}
           </span>
           {period && (
@@ -109,22 +117,16 @@ function PricingCard({
               {originalPrice}
             </span>
             {discountPercent !== null && discountPercent > 0 && (
-              <Badge variant="success" className="text-xs">
+              <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
                 -{discountPercent}%
-              </Badge>
+              </span>
             )}
           </div>
         )}
       </div>
 
       {/* CTA */}
-      {cta.href ? (
-        <a href={cta.href} className="mb-6 block">
-          {ctaElement}
-        </a>
-      ) : (
-        <div className="mb-6">{ctaElement}</div>
-      )}
+      <div className="mb-6">{ctaElement}</div>
 
       {/* Features */}
       <ul className="flex-1 space-y-2.5">

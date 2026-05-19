@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/cn";
-import { Avatar } from "@/shared/ui/components/avatar";
 
 type SocialProofType = "purchase" | "signup" | "viewing";
 
@@ -159,7 +158,36 @@ function SocialProof({
             role="status"
             aria-live="polite"
           >
-            <Avatar src={current.avatar} fallback={current.name} size="sm" />
+            <div className="bg-muted size-8 shrink-0 overflow-hidden rounded-full">
+              {current.avatar ? (
+                <img
+                  src={current.avatar}
+                  alt={current.name}
+                  className="size-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      parent.innerHTML = `<span class="flex size-full items-center justify-center text-xs font-medium text-muted-foreground">${current.name
+                        .split(" ")
+                        .map((w: string) => w[0])
+                        .join("")
+                        .slice(0, 2)
+                        .toUpperCase()}</span>`;
+                    }
+                  }}
+                />
+              ) : (
+                <span className="text-muted-foreground flex size-full items-center justify-center text-xs font-medium">
+                  {current.name
+                    .split(" ")
+                    .map((w: string) => w[0])
+                    .join("")
+                    .slice(0, 2)
+                    .toUpperCase()}
+                </span>
+              )}
+            </div>
             <div className="min-w-0 flex-1">
               <p className="text-foreground text-sm">
                 <span className="font-semibold">{current.name}</span>{" "}
