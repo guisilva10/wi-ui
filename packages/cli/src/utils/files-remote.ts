@@ -7,7 +7,9 @@ const { outputFile } = fsExtra;
 function rewriteImports(content: string, cnImport: string): string {
   return content
     .replace(/@\/lib\/cn/g, cnImport)
-    .replace(/@\/shared\/ui\/components\/(\w[\w-]*)/g, "./$1");
+    .replace(/["']\.\.\/cn["']/g, `"${cnImport}"`)
+    .replace(/@\/shared\/ui\/components\/([\w-]+)/g, "./$1")
+    .replace(/from\s+["']\.\/button\.variants["']/g, `from "./button"`);
 }
 
 export async function writeRemoteComponentFiles(
