@@ -98,6 +98,67 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
         href: "/docs/components/canvas-reveal-effect",
         isNew: true,
       },
+      {
+        label: "Marquee",
+        href: "/docs/components/marquee",
+        isNew: true,
+      },
+      {
+        label: "NumberTicker",
+        href: "/docs/components/number-ticker",
+        isNew: true,
+      },
+      {
+        label: "Confetti",
+        href: "/docs/components/confetti",
+        isNew: true,
+      },
+      {
+        label: "ArcTimeline",
+        href: "/docs/components/arc-timeline",
+        isNew: true,
+      },
+      {
+        label: "SparkleButton",
+        href: "/docs/components/sparkle-button",
+        isNew: true,
+      },
+    ],
+  },
+  {
+    section: "Backgrounds",
+    defaultOpen: true,
+    links: [
+      {
+        label: "DotGrid",
+        href: "/docs/components/dot-grid",
+        isNew: true,
+      },
+      {
+        label: "AnimatedWave",
+        href: "/docs/components/animated-wave",
+        isNew: true,
+      },
+      {
+        label: "AnimatedSphere",
+        href: "/docs/components/animated-sphere",
+        isNew: true,
+      },
+      {
+        label: "Grainient",
+        href: "/docs/components/grainient",
+        isNew: true,
+      },
+      {
+        label: "LightRays",
+        href: "/docs/components/light-rays",
+        isNew: true,
+      },
+      {
+        label: "DarkVeil",
+        href: "/docs/components/dark-veil",
+        isNew: true,
+      },
     ],
   },
   {

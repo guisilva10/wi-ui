@@ -393,4 +393,103 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/faq-section/faq-section.tsx"],
     dependencies: ["clsx", "tailwind-merge", "lucide-react"],
   },
+  {
+    name: "marquee",
+    description:
+      "Scroll infinito horizontal ou vertical com pause on hover. CSS puro, sem deps de animacao.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/marquee/marquee.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "number-ticker",
+    description:
+      "Contador animado com spring physics. Incrementa/decrementa suavemente ao entrar no viewport.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/number-ticker/number-ticker.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "confetti",
+    description:
+      "Explosao de confetes coloridos com particulas animadas. Ativacao controlada via prop isActive.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/confetti/confetti.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "dot-grid",
+    description:
+      "Grid de pontos animados com onda sinusoidal. Canvas 2D, zero deps externas. Ideal como background decorativo.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/dot-grid/dot-grid.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "animated-wave",
+    description:
+      "Onda ASCII animada com caracteres Unicode. Canvas 2D, respeita tema dark/light. Background decorativo.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/animated-wave/animated-wave.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "animated-sphere",
+    description:
+      "Esfera 3D wireframe renderizada com caracteres ASCII. Canvas 2D, rotacao continua. Background decorativo.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/animated-sphere/animated-sphere.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "grainient",
+    description:
+      "Gradiente animado com warp, grain e noise via WebGL 2 shader. Cores, velocidade e efeitos configuraveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/grainient/grainient.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "ogl"],
+  },
+  {
+    name: "arc-timeline",
+    description:
+      "Timeline circular interativa com steps clicaveis. Rotacao suave, icones e conteudo por step.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/arc-timeline/arc-timeline.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "light-rays",
+    description:
+      "Raios de luz animados via WebGL shader. Origem configuravel, mouse follow, pulsacao e distorcao.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/light-rays/light-rays.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "ogl"],
+  },
+  {
+    name: "dark-veil",
+    description:
+      "Background procedural via CPPN neural network shader. Hue shift, scanlines, noise e warp configuraveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/dark-veil/dark-veil.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "ogl"],
+  },
+  {
+    name: "sparkle-button",
+    description:
+      "Botao com borda rotativa animada, glow e particulas sparkle no hover. Usa var(--primary) do tema.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/sparkle-button/sparkle-button.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
 ];
