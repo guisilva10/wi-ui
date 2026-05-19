@@ -1,2 +1,6 @@
-export { CountdownTimer, type CountdownTimerProps } from "./countdown-timer";
-export { countdownVariants } from "./countdown-timer.variants";
+export {
+  CountdownTimer,
+  countdownVariants,
+  digitBlockVariants,
+  type CountdownTimerProps,
+} from "./countdown-timer";

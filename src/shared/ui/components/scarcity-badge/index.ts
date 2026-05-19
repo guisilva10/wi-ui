@@ -1,5 +1,6 @@
-export { ScarcityBadge, type ScarcityBadgeProps } from "./scarcity-badge";
 export {
+  ScarcityBadge,
   scarcityBadgeVariants,
   scarcityBarVariants,
-} from "./scarcity-badge.variants";
+  type ScarcityBadgeProps,
+} from "./scarcity-badge";
