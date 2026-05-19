@@ -61,7 +61,7 @@ export default function CardSpotlightPage() {
       title="CardSpotlight"
       description="Card com efeito spotlight que segue o cursor do mouse. Ao passar o mouse, revela um gradiente radial suave. Compose com CanvasRevealEffect via prop overlay para adicionar particulas."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

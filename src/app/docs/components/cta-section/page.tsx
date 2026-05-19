@@ -65,7 +65,7 @@ export default function CTASectionPage() {
       title="CTASection"
       description="Secao call-to-action para o final de landing pages. Tres variantes: default, bordered e filled."
       breadcrumbs={BREADCRUMBS}
-      badge="Block"
+      badge="Bloco"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

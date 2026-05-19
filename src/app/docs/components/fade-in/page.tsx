@@ -66,7 +66,7 @@ export default function FadeInPage() {
       title="FadeIn"
       description="Wrapper que anima a entrada de qualquer elemento com fade. Trigger via IntersectionObserver ao entrar no viewport. Respeita prefers-reduced-motion."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

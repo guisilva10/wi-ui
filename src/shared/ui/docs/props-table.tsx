@@ -17,7 +17,7 @@ function PropsTable({ props }: PropsTableProps) {
       <div className="text-muted-foreground hidden grid-cols-[180px_1fr_100px] gap-4 px-4 pb-2 text-xs font-medium tracking-wide uppercase md:grid">
         <span>Prop</span>
         <span>Tipo / Descricao</span>
-        <span className="text-right">Default</span>
+        <span className="text-right">Padrão</span>
       </div>
 
       {/* Prop rows */}

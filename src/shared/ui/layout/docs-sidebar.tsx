@@ -44,7 +44,7 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   {
     section: "Inicio",
     defaultOpen: true,
-    links: [{ label: "Getting Started", href: "/docs" }],
+    links: [{ label: "Primeiros Passos", href: "/docs" }],
   },
   {
     section: "Componentes Base",
@@ -152,8 +152,8 @@ function CategoryBadge({ tag }: { tag: CategoryTag }) {
   const labels: Record<CategoryTag, string> = {
     base: "Base",
     fomo: "FOMO",
-    animation: "Motion",
-    block: "Block",
+    animation: "Animação",
+    block: "Bloco",
   };
 
   return (
@@ -218,7 +218,7 @@ function SidebarSectionItem({
                 {label}
                 {isNew && (
                   <span className="ml-1.5 inline-flex rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[10px] leading-none font-medium text-emerald-600 dark:text-emerald-400">
-                    New
+                    Novo
                   </span>
                 )}
               </Link>

@@ -76,7 +76,7 @@ export default function HeroSectionPage() {
       title="HeroSection"
       description="Secao hero completa para landing pages com badge, titulo, subtitulo e CTAs. Minimalista e altamente customizavel."
       breadcrumbs={BREADCRUMBS}
-      badge="Block"
+      badge="Bloco"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

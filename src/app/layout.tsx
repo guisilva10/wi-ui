@@ -6,7 +6,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "WI.UI — Componentes React",
+    default: "WI.UI · Componentes React",
     template: "%s | WI.UI",
   },
   description:
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: "https://wi-ui.vercel.app",
-    title: "WI.UI — Componentes React",
+    title: "WI.UI · Componentes React",
     description:
       "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo.",
     siteName: "WI.UI",
   },
   twitter: {
     card: "summary_large_image",
-    title: "WI.UI — Componentes React",
+    title: "WI.UI · Componentes React",
     description:
       "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo.",
   },
