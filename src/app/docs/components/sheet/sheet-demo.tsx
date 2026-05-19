@@ -15,7 +15,7 @@ export function SheetDemo() {
     <div>
       <button
         onClick={() => setOpen(true)}
-        className="hover:bg-accent inline-flex h-9 items-center rounded-md border px-4 text-sm"
+        className="border-border hover:bg-accent inline-flex h-9 items-center rounded-md border px-4 text-sm"
       >
         Abrir Sheet
       </button>

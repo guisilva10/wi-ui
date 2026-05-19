@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-type CategoryTag = "base" | "fomo" | "animation" | "block";
-
 interface SidebarLink {
   label: string;
   href: string;
@@ -16,29 +14,9 @@ interface SidebarLink {
 
 interface SidebarSection {
   section: string;
-  tag?: CategoryTag;
   links: SidebarLink[];
   defaultOpen?: boolean;
 }
-
-const CATEGORY_STYLES: Record<CategoryTag, { bg: string; text: string }> = {
-  base: {
-    bg: "bg-primary/10",
-    text: "text-primary",
-  },
-  fomo: {
-    bg: "bg-orange-500/10",
-    text: "text-orange-600 dark:text-orange-400",
-  },
-  animation: {
-    bg: "bg-violet-500/10",
-    text: "text-violet-600 dark:text-violet-400",
-  },
-  block: {
-    bg: "bg-emerald-500/10",
-    text: "text-emerald-600 dark:text-emerald-400",
-  },
-};
 
 const SIDEBAR_ITEMS: SidebarSection[] = [
   {
@@ -48,22 +26,37 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Componentes Base",
-    tag: "base",
     defaultOpen: true,
     links: [
-      { label: "Button", href: "/docs/components/button" },
-      { label: "Input", href: "/docs/components/input" },
-      { label: "Card", href: "/docs/components/card" },
-      { label: "Badge", href: "/docs/components/badge" },
+      { label: "Accordion", href: "/docs/components/accordion", isNew: true },
+      { label: "Alert", href: "/docs/components/alert", isNew: true },
       { label: "Avatar", href: "/docs/components/avatar" },
+      { label: "Badge", href: "/docs/components/badge" },
+      { label: "Button", href: "/docs/components/button" },
+      { label: "Card", href: "/docs/components/card" },
+      { label: "Checkbox", href: "/docs/components/checkbox", isNew: true },
+      { label: "Dialog", href: "/docs/components/dialog", isNew: true },
+      {
+        label: "DropdownMenu",
+        href: "/docs/components/dropdown-menu",
+        isNew: true,
+      },
+      { label: "Input", href: "/docs/components/input" },
+      { label: "Label", href: "/docs/components/label", isNew: true },
+      { label: "Progress", href: "/docs/components/progress", isNew: true },
+      { label: "Select", href: "/docs/components/select", isNew: true },
       { label: "Separator", href: "/docs/components/separator" },
+      { label: "Sheet", href: "/docs/components/sheet", isNew: true },
       { label: "Spinner", href: "/docs/components/spinner" },
+      { label: "Switch", href: "/docs/components/switch", isNew: true },
+      { label: "Table", href: "/docs/components/table", isNew: true },
+      { label: "Tabs", href: "/docs/components/tabs", isNew: true },
       { label: "Textarea", href: "/docs/components/textarea" },
+      { label: "Tooltip", href: "/docs/components/tooltip", isNew: true },
     ],
   },
   {
     section: "FOMO & Conversao",
-    tag: "fomo",
     defaultOpen: true,
     links: [
       { label: "CountdownTimer", href: "/docs/components/countdown-timer" },
@@ -80,7 +73,6 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Animacao",
-    tag: "animation",
     defaultOpen: true,
     links: [
       { label: "FadeIn", href: "/docs/components/fade-in", isNew: true },
@@ -110,7 +102,6 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Blocos",
-    tag: "block",
     defaultOpen: true,
     links: [
       {
@@ -147,28 +138,6 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
 ];
 
-function CategoryBadge({ tag }: { tag: CategoryTag }) {
-  const style = CATEGORY_STYLES[tag];
-  const labels: Record<CategoryTag, string> = {
-    base: "Base",
-    fomo: "FOMO",
-    animation: "Animação",
-    block: "Bloco",
-  };
-
-  return (
-    <span
-      className={cn(
-        "ml-auto rounded-full px-1.5 py-0.5 text-[10px] leading-none font-medium",
-        style.bg,
-        style.text,
-      )}
-    >
-      {labels[tag]}
-    </span>
-  );
-}
-
 function SidebarSectionItem({
   section,
   onLinkClick,
@@ -180,9 +149,8 @@ function SidebarSectionItem({
 
   return (
     <div>
-      <div className="text-foreground/80 flex items-center gap-1 py-1.5 text-xs font-semibold tracking-wide uppercase">
-        <span>{section.section}</span>
-        {section.tag && <CategoryBadge tag={section.tag} />}
+      <div className="text-foreground/80 py-1.5 text-xs font-semibold tracking-wide uppercase">
+        {section.section}
       </div>
 
       <ul className="border-border/50 mt-1 ml-1 space-y-px border-l pl-3">
@@ -232,13 +200,11 @@ function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
 function DesktopSidebarScroll() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [showTop, setShowTop] = useState(false);
-  const [showBottom, setShowBottom] = useState(false);
 
   const checkScroll = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setShowTop(el.scrollTop > 8);
-    setShowBottom(el.scrollTop + el.clientHeight < el.scrollHeight - 8);
   }, []);
 
   useEffect(() => {
@@ -256,29 +222,21 @@ function DesktopSidebarScroll() {
 
   return (
     <div className="border-border fixed top-14 left-0 h-[calc(100vh-3.5rem)] w-60 border-r">
-      {/* Top fade */}
       <div
         className={cn(
-          "from-background pointer-events-none absolute top-0 right-0 left-0 z-10 h-8 bg-linear-to-b to-transparent transition-opacity duration-200",
+          "from-background pointer-events-none absolute top-0 right-0 left-0 z-10 h-12 bg-linear-to-b to-transparent transition-opacity duration-200",
           showTop ? "opacity-100" : "opacity-0",
         )}
       />
 
-      {/* Scrollable content */}
       <div
         ref={scrollRef}
-        className="h-full scrollbar-none overflow-y-auto p-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="h-full [scrollbar-width:none] overflow-y-auto p-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         <SidebarContent />
       </div>
 
-      {/* Bottom fade */}
-      <div
-        className={cn(
-          "from-background pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-20 bg-linear-to-t to-transparent transition-opacity duration-200",
-          showBottom ? "opacity-100" : "opacity-0",
-        )}
-      />
+      <div className="from-background pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-24 bg-linear-to-t to-transparent" />
     </div>
   );
 }

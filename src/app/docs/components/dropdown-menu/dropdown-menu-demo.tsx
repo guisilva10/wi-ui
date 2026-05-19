@@ -12,7 +12,7 @@ import {
 export function DropdownMenuDemo() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="hover:bg-accent inline-flex h-9 items-center rounded-md border px-4 text-sm">
+      <DropdownMenuTrigger className="border-border hover:bg-accent inline-flex h-9 items-center rounded-md border px-4 text-sm">
         Opcoes
       </DropdownMenuTrigger>
       <DropdownMenuContent>
