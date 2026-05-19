@@ -108,6 +108,43 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
       },
     ],
   },
+  {
+    section: "Blocos",
+    tag: "block",
+    defaultOpen: true,
+    links: [
+      {
+        label: "HeroSection",
+        href: "/docs/components/hero-section",
+        isNew: true,
+      },
+      {
+        label: "FeaturesGrid",
+        href: "/docs/components/features-grid",
+        isNew: true,
+      },
+      {
+        label: "PricingSection",
+        href: "/docs/components/pricing-section",
+        isNew: true,
+      },
+      {
+        label: "TestimonialsSection",
+        href: "/docs/components/testimonials-section",
+        isNew: true,
+      },
+      {
+        label: "CTASection",
+        href: "/docs/components/cta-section",
+        isNew: true,
+      },
+      {
+        label: "FAQSection",
+        href: "/docs/components/faq-section",
+        isNew: true,
+      },
+    ],
+  },
 ];
 
 function CategoryBadge({ tag }: { tag: CategoryTag }) {

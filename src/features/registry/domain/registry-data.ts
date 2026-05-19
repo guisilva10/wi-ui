@@ -235,4 +235,60 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/canvas-reveal-effect.tsx"],
     dependencies: [],
   },
+  {
+    name: "hero-section",
+    description:
+      "Seção hero completa com badge, título com highlight, subtítulo e CTA buttons. Variantes de alinhamento centro ou esquerda.",
+    version: "1.0.0",
+    category: "block",
+    files: ["src/shared/ui/components/hero-section/hero-section.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "features-grid",
+    description:
+      "Grid de features com ícone, título e descrição. Suporte a 2, 3 ou 4 colunas. Ideal para apresentar funcionalidades de um produto.",
+    version: "1.0.0",
+    category: "block",
+    files: ["src/shared/ui/components/features-grid/features-grid.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "pricing-section",
+    description:
+      "Seção de pricing completa com múltiplos planos, ancoragem de preço, badge de destaque e lista de features com check/x.",
+    version: "1.0.0",
+    category: "block",
+    files: ["src/shared/ui/components/pricing-section/pricing-section.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
+  },
+  {
+    name: "testimonials-section",
+    description:
+      "Seção de depoimentos em grid com rating por estrelas, avatar com fallback de iniciais e informações do autor.",
+    version: "1.0.0",
+    category: "block",
+    files: [
+      "src/shared/ui/components/testimonials-section/testimonials-section.tsx",
+    ],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "cta-section",
+    description:
+      "Seção call-to-action final com título, descrição e botões. Variantes: default, bordered e filled (fundo escuro).",
+    version: "1.0.0",
+    category: "block",
+    files: ["src/shared/ui/components/cta-section/cta-section.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "faq-section",
+    description:
+      "Seção FAQ com accordion de perguntas e respostas. Suporte a múltiplos itens abertos simultaneamente. Animação de abertura/fechamento.",
+    version: "1.0.0",
+    category: "block",
+    files: ["src/shared/ui/components/faq-section/faq-section.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
+  },
 ];
