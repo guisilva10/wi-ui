@@ -4,9 +4,26 @@
   "description": "CLI para adicionar componentes WI.UI ao seu projeto",
   "type": "module",
   "bin": {
-    "wi-ui": "./dist/index.js"
+    "wi-ui": "dist/index.js"
   },
   "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "ui",
+    "components",
+    "react",
+    "nextjs",
+    "tailwind",
+    "cli"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guisilva10/wi-ui.git",
+    "directory": "packages/cli"
+  },
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -14,7 +31,6 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@wi-ui/registry": "workspace:*",
     "citty": "^0.1.6",
     "consola": "^3.4.2",
     "fs-extra": "^11.3.0",
@@ -22,6 +38,7 @@
     "pkg-types": "^2.1.0"
   },
   "devDependencies": {
+    "@wi-ui/registry": "workspace:*",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "tsup": "^8.5.0",

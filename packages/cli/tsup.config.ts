@@ -6,6 +6,7 @@ export default defineConfig({
   target: "node18",
   clean: true,
   dts: false,
+  noExternal: ["@wi-ui/registry"],
   banner: {
     js: "#!/usr/bin/env node",
   },
