@@ -37,8 +37,9 @@ function getSnapshot() {
   return toasts;
 }
 
+const SERVER_SNAPSHOT: Toast[] = [];
 function getServerSnapshot() {
-  return [] as Toast[];
+  return SERVER_SNAPSHOT;
 }
 
 let toastId = 0;
