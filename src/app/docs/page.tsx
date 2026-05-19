@@ -4,6 +4,7 @@ import { useState } from "react";
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
 import { cn } from "@/lib/cn";
 import { Copy, Check, Terminal, Package } from "lucide-react";
+import Link from "next/link";
 import { SiNextdotjs, SiVite, SiRemix, SiAstro } from "react-icons/si";
 
 const TOC = [
@@ -132,25 +133,38 @@ export default function DocsPage() {
               name: "Next.js",
               desc: "App Router & Pages",
               icon: SiNextdotjs,
+              href: "/docs/frameworks/nextjs",
             },
-            { name: "Vite", desc: "React + Vite", icon: SiVite },
+            {
+              name: "Vite",
+              desc: "React + Vite",
+              icon: SiVite,
+              href: "/docs/frameworks/vite",
+            },
             {
               name: "Remix",
               desc: "Remix / React Router",
               icon: SiRemix,
+              href: "/docs/frameworks/remix",
             },
-            { name: "Astro", desc: "Com React islands", icon: SiAstro },
+            {
+              name: "Astro",
+              desc: "Com React islands",
+              icon: SiAstro,
+              href: "/docs/frameworks/astro",
+            },
           ].map((fw) => (
-            <div
+            <Link
               key={fw.name}
-              className="border-border hover:bg-muted/30 flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-colors"
+              href={fw.href}
+              className="border-border hover:bg-muted/30 hover:border-foreground/20 flex flex-col items-center gap-2 rounded-lg border p-4 text-center transition-all duration-200"
             >
               <fw.icon className="text-foreground size-8" />
               <div>
                 <p className="text-foreground text-sm font-medium">{fw.name}</p>
                 <p className="text-muted-foreground text-xs">{fw.desc}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </DocSection>
