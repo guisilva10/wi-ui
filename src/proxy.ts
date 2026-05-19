@@ -6,17 +6,19 @@ export function proxy(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const { pathname } = request.nextUrl;
 
-  if (sessionCookie && ["/login", "/signup"].includes(pathname)) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
+  if (sessionCookie && pathname === "/login") {
+    return NextResponse.redirect(new URL("/playground", request.url));
   }
 
-  if (!sessionCookie && pathname.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (!sessionCookie && pathname.startsWith("/playground")) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(loginUrl);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/signup"],
+  matcher: ["/playground/:path*", "/login"],
 };
