@@ -292,6 +292,194 @@ export const registry: RegistryEntry[] = [
     dependencies: ["clsx", "tailwind-merge", "lucide-react"],
   },
   {
+    name: "accordion",
+    description:
+      "Accordion com suporte a single/multiple aberto, collapsible, e animação grid-rows CSS. Sub-componentes: Accordion, AccordionItem, AccordionTrigger, AccordionContent.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/accordion/accordion.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "alert",
+    description:
+      "Alerta com variantes info, success, warning, destructive. Sub-componentes: Alert, AlertTitle, AlertDescription.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/alert/alert.tsx"],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "checkbox",
+    description:
+      "Checkbox estilizado com label opcional. Suporte a checked, disabled e indeterminate.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/checkbox/checkbox.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "dialog",
+    description:
+      "Modal dialog com overlay, animação fade+zoom, escape to close e click outside. Sub-componentes: Dialog, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/dialog/dialog.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "dropdown-menu",
+    description:
+      "Menu dropdown portal-based com animação. Sub-componentes: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/dropdown-menu/dropdown-menu.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "label",
+    description: "Label acessível para form fields com suporte a htmlFor.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/label/label.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "progress",
+    description:
+      "Barra de progresso com animação de transição suave. Valor de 0-100.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/progress/progress.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "select",
+    description:
+      "Select portal-based com animação, busca e suporte a grupos. Sub-componentes: Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/select/select.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "sheet",
+    description:
+      "Painel lateral (drawer) com 4 posições: top, bottom, left, right. Overlay, escape to close, animação slide-in. Sub-componentes: Sheet, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/sheet/sheet.tsx"],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "switch",
+    description:
+      "Toggle switch com animação de transição. Suporte a checked, disabled e label.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/switch/switch.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "table",
+    description:
+      "Tabela responsiva com container rounded e border. Sub-componentes: Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/table/table.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "tabs",
+    description:
+      "Tabs com animação de troca. Sub-componentes: Tabs, TabsList, TabsTrigger, TabsContent.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/tabs/tabs.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "tooltip",
+    description:
+      "Tooltip com 4 posições (top, bottom, left, right), delay configurável e animação fade+zoom.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/tooltip/tooltip.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "marquee",
+    description:
+      "Scroll infinito horizontal ou vertical com pause on hover, reverse e repeat configurável. Ideal para logos, testimonials e banners.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/marquee/marquee.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "number-ticker",
+    description:
+      "Animação de contagem numérica com spring physics. Suporte a casas decimais, direção up/down e delay. Usa IntersectionObserver.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/number-ticker/number-ticker.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "confetti",
+    description:
+      "Efeito confetti com partículas animadas. Trigger via click ou programático. Cores, quantidade e duração configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/confetti/confetti.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "arc-timeline",
+    description:
+      "Timeline circular/arco animada com items posicionados ao longo do arco. Ideal para roadmaps e históricos.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/arc-timeline/arc-timeline.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
+  },
+  {
+    name: "dot-grid",
+    description:
+      "Background canvas com grid de dots animados por wave. Responde a prefers-reduced-motion. Gap, radius, velocidade e centro da onda configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/dot-grid/dot-grid.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "animated-wave",
+    description:
+      "Background canvas com ondas animadas. Cores, velocidade, amplitude e frequência configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/animated-wave/animated-wave.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "animated-sphere",
+    description:
+      "Esfera 3D animada via WebGL (OGL). Cores, velocidade de rotação e wireframe configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/animated-sphere/animated-sphere.tsx"],
+    dependencies: ["ogl", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "grainient",
+    description:
+      "Background gradiente animado com grain via WebGL (OGL). Cores, velocidade, warp, contraste, saturação e zoom configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/grainient/grainient.tsx"],
+    dependencies: ["ogl", "clsx", "tailwind-merge"],
+  },
+  {
     name: "light-rays",
     description:
       "Raios de luz animados via WebGL (OGL). Origem configurável (8 posições), cor, velocidade, espalhamento, comprimento, fade, distorção e tracking de mouse com smoothing.",
