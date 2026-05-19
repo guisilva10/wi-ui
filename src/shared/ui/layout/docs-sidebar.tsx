@@ -25,6 +25,16 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
     links: [{ label: "Primeiros Passos", href: "/docs" }],
   },
   {
+    section: "Frameworks",
+    defaultOpen: true,
+    links: [
+      { label: "Next.js", href: "/docs/frameworks/nextjs", isNew: true },
+      { label: "Vite", href: "/docs/frameworks/vite", isNew: true },
+      { label: "Remix", href: "/docs/frameworks/remix", isNew: true },
+      { label: "Astro", href: "/docs/frameworks/astro", isNew: true },
+    ],
+  },
+  {
     section: "Componentes Base",
     defaultOpen: true,
     links: [
