@@ -9,6 +9,7 @@ interface CanvasRevealEffectProps {
   colors?: [number, number, number][];
   dotSize?: number;
   opacities?: number[];
+  loop?: boolean;
 }
 
 function CanvasRevealEffect({
@@ -17,6 +18,7 @@ function CanvasRevealEffect({
   colors = [[0, 255, 255]],
   dotSize = 3,
   opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
+  loop = false,
 }: CanvasRevealEffectProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
@@ -39,12 +41,21 @@ function CanvasRevealEffect({
     resizeCanvas();
 
     const startTime = Date.now();
+    const cycleDuration = 1 / (animationSpeed * 0.3);
 
     function draw() {
       if (!ctx || !canvas) return;
 
       const elapsed = (Date.now() - startTime) / 1000;
-      const progress = Math.min(elapsed * animationSpeed * 0.3, 1);
+
+      let progress: number;
+      if (loop) {
+        const cycleTime = elapsed % (cycleDuration * 2);
+        const normalized = cycleTime / cycleDuration;
+        progress = normalized <= 1 ? normalized : 2 - normalized;
+      } else {
+        progress = Math.min(elapsed * animationSpeed * 0.3, 1);
+      }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -75,7 +86,7 @@ function CanvasRevealEffect({
         }
       }
 
-      if (progress < 1) {
+      if (loop || progress < 1) {
         animationRef.current = requestAnimationFrame(draw);
       }
     }
@@ -89,7 +100,7 @@ function CanvasRevealEffect({
       cancelAnimationFrame(animationRef.current);
       ro.disconnect();
     };
-  }, [animationSpeed, colors, dotSize, opacities]);
+  }, [animationSpeed, colors, dotSize, loop, opacities]);
 
   return (
     <div className={cn("h-full w-full", containerClassName)}>
@@ -98,4 +109,4 @@ function CanvasRevealEffect({
   );
 }
 
-export { CanvasRevealEffect };
+export { CanvasRevealEffect, type CanvasRevealEffectProps };
