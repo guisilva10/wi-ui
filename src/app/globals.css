@@ -127,6 +127,21 @@ body {
   background-color: oklch(0.5 0 0 / 0.5);
 }
 
+/* Marquee keyframes */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - var(--gap))); }
+}
+
+@theme inline {
+  --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+}
+
 /* Smooth scroll for anchor links */
 html {
   scroll-behavior: smooth;

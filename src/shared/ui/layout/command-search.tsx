@@ -87,6 +87,34 @@ const SEARCH_ITEMS: SearchItem[] = [
     href: "/docs/components/canvas-reveal-effect",
     category: "Animação",
   },
+  { name: "Marquee", href: "/docs/components/marquee", category: "Animação" },
+  {
+    name: "NumberTicker",
+    href: "/docs/components/number-ticker",
+    category: "Animação",
+  },
+  { name: "Confetti", href: "/docs/components/confetti", category: "Animação" },
+  {
+    name: "SparkleButton",
+    href: "/docs/components/sparkle-button",
+    category: "Animação",
+  },
+  // Backgrounds
+  {
+    name: "DotGrid",
+    href: "/docs/components/dot-grid",
+    category: "Backgrounds",
+  },
+  {
+    name: "LightRays",
+    href: "/docs/components/light-rays",
+    category: "Backgrounds",
+  },
+  {
+    name: "DarkVeil",
+    href: "/docs/components/dark-veil",
+    category: "Backgrounds",
+  },
   // Blocos
   {
     name: "HeroSection",
