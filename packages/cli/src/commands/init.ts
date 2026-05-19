@@ -3,7 +3,7 @@ import consola from "consola";
 import { join } from "pathe";
 import fsExtra from "fs-extra";
 
-const { pathExists, outputFile } = fsExtra;
+const { pathExists } = fsExtra;
 import {
   loadConfig,
   saveConfig,
@@ -18,6 +18,10 @@ import {
 } from "../utils/detect.js";
 import { installPackages } from "../utils/installer.js";
 import { createCnUtil } from "../utils/files.js";
+import { fetchComponent } from "../utils/remote-registry.js";
+import { writeRemoteComponentFiles } from "../utils/files-remote.js";
+import { DEFAULT_REGISTRY_URL } from "../utils/config.js";
+import { computeCnImportPath } from "../utils/import-path.js";
 
 export const initCommand = defineCommand({
   meta: {
@@ -87,17 +91,15 @@ export const initCommand = defineCommand({
     await saveConfig(cwd, config);
     consola.success(`wi-ui.json criado em ${join(cwd, "wi-ui.json")}`);
 
-    // Cria a pasta destino dos componentes
     const fullComponentsDir = join(cwd, componentsDir);
-    await outputFile(join(fullComponentsDir, ".gitkeep"), "");
-    consola.success(`Pasta criada: ${componentsDir}`);
+    const fullLibDir = join(cwd, config.libDir);
 
-    // Cria cn.ts utilitário
-    const cnPath = await createCnUtil(fullComponentsDir);
+    // Cria cn.ts no caminho configurado (editável no wi-ui.json)
+    const cnPath = await createCnUtil(fullLibDir);
     consola.success(`Utilitário criado: ${cnPath.replace(cwd + "/", "")}`);
 
     // Instala dependências base
-    const baseDeps = ["clsx", "tailwind-merge"];
+    const baseDeps = ["clsx", "tailwind-merge", "class-variance-authority"];
     const missingDeps = await filterMissingDeps(cwd, baseDeps);
 
     if (missingDeps.length > 0) {
@@ -106,16 +108,29 @@ export const initCommand = defineCommand({
       consola.info("Dependências base já instaladas.");
     }
 
+    // Adiciona button como componente base
+    consola.start("Adicionando componente base: button...");
+    const cnImport = computeCnImportPath(config.componentsDir, config.libDir);
+    await addBaseComponent(
+      "button",
+      fullComponentsDir,
+      config.registry ?? DEFAULT_REGISTRY_URL,
+      cnImport,
+    );
+
     consola.box(
       [
         "WI.UI inicializado com sucesso!",
         "",
-        `Componentes serão adicionados em: ${config.componentsDir}`,
+        `Componentes em: ${config.componentsDir}`,
+        `Utilitários em: ${config.libDir}`,
+        "",
+        "Edite wi-ui.json para alterar os caminhos",
         "",
         "Próximos passos:",
         "  wi-ui list          — listar componentes disponíveis",
-        "  wi-ui add button    — adicionar o Button",
         "  wi-ui add card      — adicionar o Card",
+        "  wi-ui add badge     — adicionar o Badge",
       ].join("\n"),
     );
   },
@@ -136,6 +151,51 @@ function resolveDefaultComponentsDir(
       return "src/components/ui";
     default:
       return "components/ui";
+  }
+}
+
+async function addBaseComponent(
+  name: string,
+  targetDir: string,
+  registryUrl: string,
+  cnImport: string,
+): Promise<void> {
+  try {
+    const entry = await fetchComponent(registryUrl, name);
+    if (!entry) {
+      consola.warn(`Componente "${name}" não encontrado no registry remoto.`);
+      return;
+    }
+
+    // Adiciona spinner primeiro se button
+    if (name === "button") {
+      const spinner = await fetchComponent(registryUrl, "spinner");
+      if (spinner) {
+        await writeRemoteComponentFiles(
+          spinner.files as Array<{
+            name: string;
+            path: string;
+            content: string;
+          }>,
+          targetDir,
+          "spinner",
+          cnImport,
+        );
+        consola.success("spinner adicionado");
+      }
+    }
+
+    await writeRemoteComponentFiles(
+      entry.files as Array<{ name: string; path: string; content: string }>,
+      targetDir,
+      name,
+      cnImport,
+    );
+    consola.success(`${name} adicionado`);
+  } catch {
+    consola.warn(
+      `Falha ao adicionar "${name}". Use \`wi-ui add ${name}\` depois.`,
+    );
   }
 }
 

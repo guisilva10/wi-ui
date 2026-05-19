@@ -5,6 +5,7 @@ const { readFile, writeFile, pathExists } = fsExtra;
 
 export type WiUiConfig = {
   componentsDir: string;
+  libDir: string;
   framework: "nextjs" | "vite" | "remix" | "other";
   typescript: boolean;
   tailwind: boolean;
@@ -17,6 +18,7 @@ export const DEFAULT_REGISTRY_URL = "https://wi-ui.vercel.app/api/registry";
 
 const DEFAULT_CONFIG: WiUiConfig = {
   componentsDir: "src/components/ui",
+  libDir: "src/lib",
   framework: "nextjs",
   typescript: true,
   tailwind: true,
