@@ -291,4 +291,31 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/faq-section/faq-section.tsx"],
     dependencies: ["clsx", "tailwind-merge", "lucide-react"],
   },
+  {
+    name: "light-rays",
+    description:
+      "Raios de luz animados via WebGL (OGL). Origem configurável (8 posições), cor, velocidade, espalhamento, comprimento, fade, distorção e tracking de mouse com smoothing.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/light-rays/light-rays.tsx"],
+    dependencies: ["ogl", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "dark-veil",
+    description:
+      "Background procedural via CPPN (Compositional Pattern Producing Network) em WebGL. Hue shift, scanlines, noise, domain warp e escala de resolução configuráveis.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/dark-veil/dark-veil.tsx"],
+    dependencies: ["ogl", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "sparkle-button",
+    description:
+      "Botão com borda giratória animada e partículas cintilantes ao hover. Usa var(--primary) e var(--primary-foreground) do tema. Sem dependências externas.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/sparkle-button/sparkle-button.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
 ];
