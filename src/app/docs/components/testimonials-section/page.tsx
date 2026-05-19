@@ -13,8 +13,8 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "tres-colunas", label: "Tres colunas", level: 2 },
-  { id: "duas-colunas", label: "Duas colunas", level: 2 },
+  { id: "marquee", label: "Marquee (padrao)", level: 2 },
+  { id: "grid", label: "Grid", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -43,10 +43,17 @@ const PROPS = [
     description: "Descricao abaixo do titulo da secao",
   },
   {
+    name: "layout",
+    type: '"grid" | "marquee"',
+    default: '"marquee"',
+    description:
+      "Layout dos depoimentos. Marquee mostra em scroll infinito, grid mostra em colunas estaticas.",
+  },
+  {
     name: "columns",
     type: "2 | 3",
     default: "3",
-    description: "Numero de colunas no grid",
+    description: "Numero de colunas (apenas layout grid)",
   },
   {
     name: "className",
@@ -81,13 +88,37 @@ const TESTIMONIALS_BASE = [
     company: "Studio Z",
     rating: 5,
   },
+  {
+    quote:
+      "Melhor DX que ja tive com uma lib de componentes. CLI simples e direto ao ponto.",
+    author: "Rafael Costa",
+    role: "Tech Lead",
+    company: "DevHouse",
+    rating: 5,
+  },
+  {
+    quote:
+      "Os componentes FOMO deram um boost real na conversao das nossas landing pages.",
+    author: "Marina Oliveira",
+    role: "Growth Manager",
+    company: "SaaS Corp",
+    rating: 4,
+  },
+  {
+    quote:
+      "Personalizacao facil com Tailwind. Nao precisa lutar contra a lib pra mudar estilos.",
+    author: "Pedro Alves",
+    role: "Frontend Dev",
+    company: "Agency Pro",
+    rating: 5,
+  },
 ];
 
 export default function TestimonialsSectionPage() {
   return (
     <DocPage
       title="TestimonialsSection"
-      description="Secao de depoimentos em grid com rating por estrelas, avatar com fallback de iniciais e informacoes do autor."
+      description="Secao de depoimentos com layout em marquee (scroll infinito) ou grid. Cards com rating, avatar e informacoes do autor."
       breadcrumbs={BREADCRUMBS}
       badge="Bloco"
       toc={TOC}
@@ -103,11 +134,7 @@ export default function TestimonialsSectionPage() {
 <TestimonialsSection
   title="O que dizem nossos clientes"
   testimonials={[
-    {
-      quote: "Produto incrivel!",
-      author: "Ana Lima",
-      rating: 5,
-    },
+    { quote: "Produto incrivel!", author: "Ana Lima", rating: 5 },
   ]}
 />`}
         >
@@ -119,18 +146,23 @@ export default function TestimonialsSectionPage() {
                 author: "Ana Lima",
                 rating: 5,
               },
+              {
+                quote: "Simplesmente funciona. Sem configuracao extra.",
+                author: "Carlos Mendes",
+                rating: 5,
+              },
             ]}
           />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="tres-colunas" title="Tres colunas">
+      <DocSection id="marquee" title="Marquee (padrao)">
         <ComponentPreview
           code={`<TestimonialsSection
   eyebrow="Depoimentos"
   title="Amado por desenvolvedores"
   description="Mais de 1.000 times ja usam WI.UI."
-  columns={3}
+  layout="marquee"
   testimonials={[...]}
 />`}
         >
@@ -138,24 +170,26 @@ export default function TestimonialsSectionPage() {
             eyebrow="Depoimentos"
             title="Amado por desenvolvedores"
             description="Mais de 1.000 times ja usam WI.UI."
-            columns={3}
+            layout="marquee"
             testimonials={TESTIMONIALS_BASE}
           />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="duas-colunas" title="Duas colunas">
+      <DocSection id="grid" title="Grid">
         <ComponentPreview
           code={`<TestimonialsSection
   title="O que dizem nossos clientes"
-  columns={2}
+  layout="grid"
+  columns={3}
   testimonials={[...]}
 />`}
         >
           <TestimonialsSection
             title="O que dizem nossos clientes"
-            columns={2}
-            testimonials={TESTIMONIALS_BASE.slice(0, 2)}
+            layout="grid"
+            columns={3}
+            testimonials={TESTIMONIALS_BASE.slice(0, 3)}
           />
         </ComponentPreview>
       </DocSection>
