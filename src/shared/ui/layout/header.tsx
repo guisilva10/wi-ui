@@ -14,7 +14,11 @@ const NAV_LINKS = [
   { label: "Playground", href: "/playground" },
 ] as const;
 
-function Header() {
+interface HeaderProps {
+  extraRight?: React.ReactNode;
+}
+
+function Header({ extraRight }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -71,10 +75,19 @@ function Header() {
               <Moon className="size-4" />
             )}
           </button>
+
+          {extraRight && (
+            <>
+              <div className="bg-border mx-1 h-4 w-px" />
+              {extraRight}
+            </>
+          )}
         </nav>
 
         {/* Mobile controls */}
         <div className="flex items-center gap-1 md:hidden">
+          {extraRight}
+
           <button
             onClick={toggleTheme}
             aria-label={

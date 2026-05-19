@@ -223,11 +223,11 @@ function DesktopSidebarScroll() {
   }, [checkScroll]);
 
   return (
-    <div className="fixed top-14 left-0 h-[calc(100vh-3.5rem)] w-60">
+    <div className="border-border fixed top-14 left-0 h-[calc(100vh-3.5rem)] w-60 border-r">
       {/* Top fade */}
       <div
         className={cn(
-          "from-background pointer-events-none absolute top-0 right-0 left-0 z-10 h-8 bg-gradient-to-b to-transparent transition-opacity duration-200",
+          "from-background pointer-events-none absolute top-0 right-0 left-0 z-10 h-8 bg-linear-to-b to-transparent transition-opacity duration-200",
           showTop ? "opacity-100" : "opacity-0",
         )}
       />
@@ -235,7 +235,7 @@ function DesktopSidebarScroll() {
       {/* Scrollable content */}
       <div
         ref={scrollRef}
-        className="h-full [scrollbar-width:none] overflow-y-auto p-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        className="h-full scrollbar-none overflow-y-auto p-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
       >
         <div className="mb-5">
           <SidebarSearch />
@@ -246,7 +246,7 @@ function DesktopSidebarScroll() {
       {/* Bottom fade */}
       <div
         className={cn(
-          "from-background pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-20 bg-gradient-to-t to-transparent transition-opacity duration-200",
+          "from-background pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-20 bg-linear-to-t to-transparent transition-opacity duration-200",
           showBottom ? "opacity-100" : "opacity-0",
         )}
       />
