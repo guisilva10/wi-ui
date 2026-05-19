@@ -31,7 +31,7 @@ function DocPage({
     <div className="flex">
       {/* Main content */}
       <main className="min-w-0 flex-1 px-6 py-10 md:px-10 lg:px-12">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-5xl">
           {/* Breadcrumb */}
           {breadcrumbs && breadcrumbs.length > 0 && (
             <nav aria-label="Breadcrumb" className="mb-6">
