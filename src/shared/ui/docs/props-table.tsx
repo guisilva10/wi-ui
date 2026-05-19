@@ -77,7 +77,7 @@ function PropsTable({ props }: PropsTableProps) {
                   </code>
                 )}
               </div>
-              <code className="text-muted-foreground block font-mono text-xs">
+              <code className="text-muted-foreground block font-mono text-xs break-all">
                 {prop.type}
               </code>
               <p className="text-muted-foreground text-[13px] leading-relaxed">

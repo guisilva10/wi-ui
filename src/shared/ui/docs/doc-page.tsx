@@ -30,7 +30,7 @@ function DocPage({
   return (
     <div className="flex min-h-[calc(100vh-3.5rem)]">
       {/* Main content */}
-      <main className="min-w-0 flex-1 px-6 py-10 md:px-10 lg:px-12">
+      <main className="min-w-0 flex-1 px-4 py-8 sm:px-6 md:px-10 lg:px-12">
         <div className="mx-auto max-w-5xl">
           {/* Breadcrumb */}
           {breadcrumbs && breadcrumbs.length > 0 && (
@@ -65,7 +65,7 @@ function DocPage({
           {/* Page header */}
           <div className="mb-10 space-y-3">
             <div className="flex items-center gap-3">
-              <h1 className="text-foreground text-3xl font-bold tracking-tight">
+              <h1 className="text-foreground text-2xl font-bold tracking-tight sm:text-3xl">
                 {title}
               </h1>
               {badge && (

@@ -33,7 +33,7 @@ function ComponentPreview({
     >
       <div
         className={cn(
-          "bg-background flex min-h-[200px] items-center justify-center p-10",
+          "bg-background flex min-h-[200px] items-center justify-center p-4 sm:p-10",
           "[background-image:radial-gradient(oklch(0.5_0_0/0.07)_1px,transparent_1px)]",
           "[background-size:16px_16px]",
         )}
