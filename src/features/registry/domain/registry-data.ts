@@ -33,10 +33,7 @@ export const registry: RegistryEntry[] = [
       "Label inline para status, tags e contadores. Variants: default, secondary, destructive, outline, success, warning.",
     version: "1.0.0",
     category: "base",
-    files: [
-      "src/shared/ui/components/badge/badge.tsx",
-      "src/shared/ui/components/badge/badge.variants.ts",
-    ],
+    files: ["src/shared/ui/components/badge/badge.tsx"],
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
   },
   {
@@ -45,10 +42,7 @@ export const registry: RegistryEntry[] = [
       "Botão com variants (default, secondary, outline, ghost, destructive, link), sizes e estado isLoading integrado.",
     version: "1.0.0",
     category: "base",
-    files: [
-      "src/shared/ui/components/button/button.tsx",
-      "src/shared/ui/components/button/button.variants.ts",
-    ],
+    files: ["src/shared/ui/components/button/button.tsx"],
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
   },
   {
@@ -93,10 +87,7 @@ export const registry: RegistryEntry[] = [
       "Timer regressivo com urgência visual. Muda automaticamente para vermelho/pulsante quando < 1h. Animação flip nos dígitos.",
     version: "1.0.0",
     category: "fomo",
-    files: [
-      "src/shared/ui/components/countdown-timer/countdown-timer.tsx",
-      "src/shared/ui/components/countdown-timer/countdown-timer.variants.ts",
-    ],
+    files: ["src/shared/ui/components/countdown-timer/countdown-timer.tsx"],
     dependencies: [
       "class-variance-authority",
       "clsx",
@@ -119,10 +110,7 @@ export const registry: RegistryEntry[] = [
       'Badge de escassez com barra de progresso. Muda automaticamente para "critical" quando < 20% disponível.',
     version: "1.0.0",
     category: "fomo",
-    files: [
-      "src/shared/ui/components/scarcity-badge/scarcity-badge.tsx",
-      "src/shared/ui/components/scarcity-badge/scarcity-badge.variants.ts",
-    ],
+    files: ["src/shared/ui/components/scarcity-badge/scarcity-badge.tsx"],
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
   },
   {
@@ -151,10 +139,7 @@ export const registry: RegistryEntry[] = [
       "Banner full-width com countdown inline e animação slide-down. Variantes: info, warning, critical. Dispensável.",
     version: "1.0.0",
     category: "fomo",
-    files: [
-      "src/shared/ui/components/urgency-banner/urgency-banner.tsx",
-      "src/shared/ui/components/urgency-banner/urgency-banner.variants.ts",
-    ],
+    files: ["src/shared/ui/components/urgency-banner/urgency-banner.tsx"],
     dependencies: [
       "class-variance-authority",
       "clsx",
