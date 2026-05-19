@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { PanelLeft, X } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { buttonVariants } from "@/shared/ui/components/button";
 import { useTheme } from "@/shared/ui/layout/theme-provider";
 import { ThemePanel } from "./theme-panel";
 import { ThemePreview } from "./theme-preview";

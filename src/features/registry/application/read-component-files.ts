@@ -10,13 +10,13 @@ function getProjectRoot(): string {
 }
 
 function normalizeImports(content: string, componentName: string): string {
+  // Mantém @/lib/cn — CLI reescreve pro caminho correto baseado no wi-ui.json
   return content
-    .replace(/@\/lib\/cn/g, "../cn")
     .replace(
       new RegExp(`@/shared/ui/components/(${componentName})`, "g"),
       `./$1`,
     )
-    .replace(/@\/shared\/ui\/components\/(\w+)/g, "../$1");
+    .replace(/@\/shared\/ui\/components\/([\w-]+)/g, "./$1");
 }
 
 export async function readComponentFiles(

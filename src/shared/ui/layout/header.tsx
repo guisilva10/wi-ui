@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Moon, Sun, Menu, X } from "lucide-react";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { buttonVariants } from "@/shared/ui/components/button";
 import { SiGithub } from "react-icons/si";
 import { useTheme } from "./theme-provider";
 import { cn } from "@/lib/cn";

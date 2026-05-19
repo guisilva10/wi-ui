@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { UrgencyBanner } from "@/shared/ui/components/urgency-banner";
+import {
+  UrgencyBanner,
+  urgencyBannerVariants,
+} from "@/shared/ui/components/urgency-banner";
 import { type VariantProps } from "class-variance-authority";
-import { urgencyBannerVariants } from "@/shared/ui/components/urgency-banner/urgency-banner.variants";
 
 type UrgencyBannerDemoProps = VariantProps<typeof urgencyBannerVariants>;
 

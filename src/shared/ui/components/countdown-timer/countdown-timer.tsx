@@ -2,9 +2,43 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { type VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
-import { countdownVariants } from "./countdown-timer.variants";
+
+export const countdownVariants = cva(
+  "inline-flex items-center gap-1 font-mono font-bold tabular-nums",
+  {
+    variants: {
+      variant: {
+        default: "text-foreground",
+        urgent: "text-destructive animate-pulse",
+        minimal: "text-muted-foreground text-sm",
+      },
+      size: {
+        sm: "text-lg",
+        md: "text-2xl",
+        lg: "text-4xl",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "md",
+    },
+  },
+);
+
+export const digitBlockVariants = cva("flex flex-col items-center gap-0.5", {
+  variants: {
+    variant: {
+      default: "",
+      urgent: "",
+      minimal: "",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 interface TimeLeft {
   days: number;

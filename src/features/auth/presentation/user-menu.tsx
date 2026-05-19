@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { LogOut } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { buttonVariants } from "@/shared/ui/components/button";
 
 function UserMenu() {
   const { data: session, isPending } = authClient.useSession();

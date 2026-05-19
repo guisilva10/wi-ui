@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Check, Copy, X } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { buttonVariants } from "@/shared/ui/components/button";
 
 interface ThemeExportProps {
   css: string;
