@@ -4,7 +4,7 @@ import { Particles } from "@/shared/ui/components/particles/particles";
 
 export function ParticlesDemo() {
   return (
-    <div className="bg-background relative h-[300px] w-full overflow-hidden rounded-lg border">
+    <div className="bg-background border-border relative h-[300px] w-full overflow-hidden rounded-lg border">
       <Particles
         quantity={60}
         speed={0.5}
@@ -20,7 +20,7 @@ export function ParticlesDemo() {
 
 export function ParticlesWithLinesDemo() {
   return (
-    <div className="bg-background relative h-[300px] w-full overflow-hidden rounded-lg border">
+    <div className="bg-background border-border relative h-[300px] w-full overflow-hidden rounded-lg border">
       <Particles
         quantity={40}
         speed={0.3}
