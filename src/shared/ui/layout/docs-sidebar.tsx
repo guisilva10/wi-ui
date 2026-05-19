@@ -96,6 +96,16 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
         href: "/docs/components/text-reveal",
         isNew: true,
       },
+      {
+        label: "CardSpotlight",
+        href: "/docs/components/card-spotlight",
+        isNew: true,
+      },
+      {
+        label: "CanvasRevealEffect",
+        href: "/docs/components/canvas-reveal-effect",
+        isNew: true,
+      },
     ],
   },
 ];

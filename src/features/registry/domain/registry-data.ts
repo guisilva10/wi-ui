@@ -217,4 +217,22 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/text-reveal/text-reveal.tsx"],
     dependencies: ["clsx", "tailwind-merge", "motion"],
   },
+  {
+    name: "card-spotlight",
+    description:
+      "Card com efeito spotlight que segue o cursor do mouse. Revela partículas animadas via CanvasRevealEffect ao hover. Requer canvas-reveal-effect.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/card-spotlight.tsx"],
+    dependencies: ["motion"],
+  },
+  {
+    name: "canvas-reveal-effect",
+    description:
+      "Efeito canvas com dots animados que se revelam a partir do centro. Ideal como background de cards e seções interativas. Controle de velocidade, cores, tamanho e opacidades.",
+    version: "1.0.0",
+    category: "animation",
+    files: ["src/shared/ui/components/canvas-reveal-effect.tsx"],
+    dependencies: [],
+  },
 ];
