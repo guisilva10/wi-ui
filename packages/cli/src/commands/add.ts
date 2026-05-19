@@ -16,6 +16,7 @@ import {
   type RemoteRegistryEntry,
 } from "../utils/remote-registry.js";
 import { writeRemoteComponentFiles } from "../utils/files-remote.js";
+import { computeCnImportPath } from "../utils/import-path.js";
 
 type InstallableEntry = RegistryEntry | RemoteRegistryEntry;
 
@@ -57,6 +58,8 @@ export const addCommand = defineCommand({
     const registryUrl = config.registry ?? DEFAULT_REGISTRY_URL;
     const pm = await detectPackageManager(cwd);
     const targetDir = join(cwd, config.componentsDir);
+    const libDir = join(cwd, config.libDir);
+    const cnImport = computeCnImportPath(config.componentsDir, config.libDir);
 
     // Tenta buscar do registry remoto primeiro, fallback para local
     const useRemote = await tryUseRemoteRegistry(registryUrl, componentNames);
@@ -66,12 +69,22 @@ export const addCommand = defineCommand({
         componentNames,
         registryUrl,
         targetDir,
+        libDir,
+        cnImport,
         cwd,
         pm,
         args.overwrite,
       );
     } else {
-      await addLocal(componentNames, targetDir, cwd, pm, args.overwrite);
+      await addLocal(
+        componentNames,
+        targetDir,
+        libDir,
+        cnImport,
+        cwd,
+        pm,
+        args.overwrite,
+      );
     }
   },
 });
@@ -98,6 +111,8 @@ async function addRemote(
   componentNames: string[],
   registryUrl: string,
   targetDir: string,
+  libDir: string,
+  cnImport: string,
   cwd: string,
   pm: "pnpm" | "npm" | "yarn" | "bun",
   overwrite: boolean,
@@ -113,7 +128,7 @@ async function addRemote(
       const spinner = await fetchComponent(registryUrl, "spinner");
       if (spinner) {
         const exists =
-          !overwrite && (await pathExists(join(targetDir, "spinner")));
+          !overwrite && (await pathExists(join(targetDir, "spinner.tsx")));
         if (!exists) toAdd.push(spinner);
       }
     }
@@ -122,7 +137,8 @@ async function addRemote(
     if (!entry) {
       notFound.push(name);
     } else {
-      const exists = !overwrite && (await pathExists(join(targetDir, name)));
+      const exists =
+        !overwrite && (await pathExists(join(targetDir, `${name}.tsx`)));
       if (!exists) toAdd.push(entry);
       else
         consola.warn(`"${name}" já existe. Use --overwrite para substituir.`);
@@ -142,7 +158,7 @@ async function addRemote(
     return;
   }
 
-  await ensureCnUtil(targetDir, cwd);
+  await ensureCnUtil(libDir, cwd);
 
   const allCreatedFiles: string[] = [];
   const allDeps = new Set<string>();
@@ -164,6 +180,7 @@ async function addRemote(
       }>,
       targetDir,
       entry.name,
+      cnImport,
     );
 
     allCreatedFiles.push(...createdFiles);
@@ -179,6 +196,8 @@ async function addRemote(
 async function addLocal(
   componentNames: string[],
   targetDir: string,
+  libDir: string,
+  cnImport: string,
   cwd: string,
   pm: "pnpm" | "npm" | "yarn" | "bun",
   overwrite: boolean,
@@ -210,7 +229,7 @@ async function addLocal(
     return;
   }
 
-  await ensureCnUtil(targetDir, cwd);
+  await ensureCnUtil(libDir, cwd);
 
   const allCreatedFiles: string[] = [];
   const allDeps = new Set<string>();
@@ -222,6 +241,7 @@ async function addLocal(
       entry.files,
       targetDir,
       entry.name,
+      cnImport,
     );
 
     allCreatedFiles.push(...createdFiles);
@@ -234,8 +254,8 @@ async function addLocal(
   printSummary(toAdd.length, allCreatedFiles, cwd, Array.from(allDeps));
 }
 
-async function ensureCnUtil(targetDir: string, cwd: string): Promise<void> {
-  const cnPath = await createCnUtil(targetDir);
+async function ensureCnUtil(libDir: string, cwd: string): Promise<void> {
+  const cnPath = await createCnUtil(libDir);
   const cnRelative = cnPath.replace(cwd + "/", "");
   if (cnRelative !== cnPath) {
     consola.info(`cn.ts garantido em: ${cnRelative}`);
@@ -327,8 +347,8 @@ async function partitionExisting(
   const skipped: InstallableEntry[] = [];
 
   for (const entry of entries) {
-    const componentDir = join(targetDir, entry.name);
-    const exists = await pathExists(componentDir);
+    const componentFile = join(targetDir, `${entry.name}.tsx`);
+    const exists = await pathExists(componentFile);
 
     if (exists && !overwrite) {
       skipped.push(entry);

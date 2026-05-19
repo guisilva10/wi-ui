@@ -4,16 +4,27 @@ import { type RemoteComponentFile } from "./remote-registry.js";
 
 const { outputFile } = fsExtra;
 
+function rewriteImports(content: string, cnImport: string): string {
+  return content
+    .replace(/@\/lib\/cn/g, cnImport)
+    .replace(/@\/shared\/ui\/components\/(\w[\w-]*)/g, "./$1");
+}
+
 export async function writeRemoteComponentFiles(
   files: RemoteComponentFile[],
   targetDir: string,
   componentName: string,
+  cnImport: string = "../../lib/cn",
 ): Promise<string[]> {
   const createdFiles: string[] = [];
 
   for (const file of files) {
-    const destPath = join(targetDir, componentName, file.name);
-    await outputFile(destPath, file.content, "utf-8");
+    // Skip cn.ts — já existe no libDir
+    if (file.name === "cn.ts") continue;
+
+    const destPath = join(targetDir, file.name);
+    const content = rewriteImports(file.content, cnImport);
+    await outputFile(destPath, content, "utf-8");
     createdFiles.push(destPath);
   }
 

@@ -17,6 +17,7 @@ export async function copyComponentFiles(
   sourceFiles: string[],
   targetDir: string,
   componentName: string,
+  cnImport: string = "../../lib/cn",
 ): Promise<string[]> {
   const sourceRoot = getSourceRoot();
   const createdFiles: string[] = [];
@@ -24,16 +25,18 @@ export async function copyComponentFiles(
   for (const relPath of sourceFiles) {
     const sourcePath = join(sourceRoot, relPath.replace(/^src\//, ""));
     const fileName = basename(relPath);
-    const destPath = join(targetDir, componentName, fileName);
+
+    // Skip cn.ts — já existe no libDir
+    if (fileName === "cn.ts") continue;
+
+    const destPath = join(targetDir, fileName);
 
     if (!(await pathExists(sourcePath))) {
       continue;
     }
 
     let content = await readFile(sourcePath, "utf-8");
-
-    // Ajusta imports absolutos @/ para caminhos relativos
-    content = rewriteImports(content, componentName);
+    content = rewriteImports(content, componentName, cnImport);
 
     await outputFile(destPath, content, "utf-8");
     createdFiles.push(destPath);
@@ -42,16 +45,18 @@ export async function copyComponentFiles(
   return createdFiles;
 }
 
-function rewriteImports(content: string, componentName: string): string {
-  // @/lib/cn → ../cn  (sobe um nível: components/<name>/ → components/)
-  // @/shared/ui/components/spinner → ../spinner
+function rewriteImports(
+  content: string,
+  componentName: string,
+  cnImport: string,
+): string {
   return content
-    .replace(/@\/lib\/cn/g, "../cn")
+    .replace(/@\/lib\/cn/g, cnImport)
     .replace(
       new RegExp(`@/shared/ui/components/(${componentName})`, "g"),
       `./$1`,
     )
-    .replace(/@\/shared\/ui\/components\/(\w+)/g, "../$1");
+    .replace(/@\/shared\/ui\/components\/(\w[\w-]*)/g, "./$1");
 }
 
 export async function createCnUtil(targetDir: string): Promise<string> {
