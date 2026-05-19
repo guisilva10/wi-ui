@@ -45,7 +45,7 @@ function ComponentPreview({
                 : "text-muted-foreground hover:text-foreground",
             )}
           >
-            <Eye className="size-3.5" />
+            <Eye className="size-3.5" aria-hidden="true" />
             Preview
           </button>
           <button
@@ -57,7 +57,7 @@ function ComponentPreview({
                 : "text-muted-foreground hover:text-foreground",
             )}
           >
-            <Code2 className="size-3.5" />
+            <Code2 className="size-3.5" aria-hidden="true" />
             Code
           </button>
         </div>
@@ -75,12 +75,12 @@ function ComponentPreview({
         >
           {copied ? (
             <>
-              <Check className="size-3.5" />
+              <Check className="size-3.5" aria-hidden="true" />
               <span>Copiado!</span>
             </>
           ) : (
             <>
-              <Copy className="size-3.5" />
+              <Copy className="size-3.5" aria-hidden="true" />
               <span className="hidden sm:inline">Copiar</span>
             </>
           )}

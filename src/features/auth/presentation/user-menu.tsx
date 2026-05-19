@@ -3,7 +3,7 @@
 import { useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { LogOut, User } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/cn";
 import { buttonVariants } from "@/shared/ui/components/button/button.variants";

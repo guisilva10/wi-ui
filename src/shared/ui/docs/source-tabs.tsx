@@ -68,12 +68,12 @@ function SourceTabs({ files, className }: SourceTabsProps) {
         >
           {copied ? (
             <>
-              <Check className="size-3.5" />
+              <Check className="size-3.5" aria-hidden="true" />
               <span>Copiado!</span>
             </>
           ) : (
             <>
-              <Copy className="size-3.5" />
+              <Copy className="size-3.5" aria-hidden="true" />
               <span className="hidden sm:inline">Copiar</span>
             </>
           )}
@@ -82,7 +82,7 @@ function SourceTabs({ files, className }: SourceTabsProps) {
 
       {/* Code area */}
       <div className="bg-[oklch(0.16_0_0)] dark:bg-[oklch(0.12_0_0)]">
-        <pre className="overflow-x-auto p-5 text-[13px] leading-relaxed [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <pre className="[scrollbar-width:none] overflow-x-auto p-5 text-[13px] leading-relaxed [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           <code className="font-mono text-[oklch(0.85_0_0)]">
             {currentFile?.content ?? ""}
           </code>

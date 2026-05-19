@@ -45,7 +45,7 @@ function ThemePreview({ cssVariables, isDark, className }: ThemePreviewProps) {
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-xl border",
+        "border-border overflow-hidden rounded-xl border",
         isDark ? "dark" : "",
         className,
       )}
