@@ -9,6 +9,7 @@ import type { ThemePreset } from "./theme-presets";
 
 interface ThemePanelProps {
   state: ThemeState;
+  isDark: boolean;
   onPreset: (preset: ThemePreset) => void;
   onToggleMode: () => void;
   onSetRadius: (value: number) => void;
@@ -27,6 +28,7 @@ function SliderField({
   step,
   onChange,
   displayValue,
+  isDark,
 }: {
   label: string;
   value: number;
@@ -35,6 +37,7 @@ function SliderField({
   step: number;
   onChange: (v: number) => void;
   displayValue?: string;
+  isDark?: boolean;
 }) {
   return (
     <div className="space-y-1.5">
@@ -51,7 +54,8 @@ function SliderField({
         step={step}
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="accent-primary w-full cursor-pointer"
+        className="w-full cursor-pointer"
+        style={{ accentColor: isDark ? "#fff" : "#000" }}
         aria-label={label}
       />
     </div>
@@ -60,6 +64,7 @@ function SliderField({
 
 function ThemePanel({
   state,
+  isDark,
   onPreset,
   onToggleMode,
   onSetRadius,
@@ -76,7 +81,7 @@ function ThemePanel({
       {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-foreground text-sm font-semibold">
-          Theme Customizer
+          Customizar Tema
         </h2>
         <button
           onClick={onReset}
@@ -87,7 +92,7 @@ function ThemePanel({
           )}
         >
           <RotateCcw className="size-3" aria-hidden />
-          Reset
+          Resetar
         </button>
       </div>
 
@@ -141,7 +146,7 @@ function ThemePanel({
             )}
           >
             <Sun className="size-3" aria-hidden />
-            Light
+            Claro
           </button>
           <button
             onClick={() => state.mode === "light" && onToggleMode()}
@@ -154,7 +159,7 @@ function ThemePanel({
             )}
           >
             <Moon className="size-3" aria-hidden />
-            Dark
+            Escuro
           </button>
         </div>
       </div>
@@ -162,7 +167,7 @@ function ThemePanel({
       {/* Radius */}
       <div className="space-y-2">
         <p className="text-muted-foreground text-xs font-medium tracking-wider uppercase">
-          Border Radius
+          Borda
         </p>
         <SliderField
           label="Radius"
@@ -172,6 +177,7 @@ function ThemePanel({
           step={0.05}
           onChange={onSetRadius}
           displayValue={`${state.radius}rem`}
+          isDark={isDark}
         />
         {/* Visual preview dos radius */}
         <div className="flex items-end gap-2 pt-1">
@@ -211,6 +217,7 @@ function ThemePanel({
           step={0.01}
           onChange={onSetPrimaryL}
           displayValue={state.primaryL.toFixed(2)}
+          isDark={isDark}
         />
         <SliderField
           label="Saturação (C)"
@@ -220,6 +227,7 @@ function ThemePanel({
           step={0.005}
           onChange={onSetPrimaryC}
           displayValue={state.primaryC.toFixed(3)}
+          isDark={isDark}
         />
         <SliderField
           label="Matiz (H)"
@@ -229,6 +237,7 @@ function ThemePanel({
           step={1}
           onChange={onSetPrimaryH}
           displayValue={`${Math.round(state.primaryH)}°`}
+          isDark={isDark}
         />
 
         {/* Hue strip */}

@@ -66,7 +66,7 @@ export default function TextRevealPage() {
       title="TextReveal"
       description="Revela texto palavra por palavra ou caractere por caractere com stagger elegante. Ideal para headings de hero sections e chamadas de impacto."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

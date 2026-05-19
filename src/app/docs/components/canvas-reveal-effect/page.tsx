@@ -17,7 +17,7 @@ const TOC = [
   { id: "padrao", label: "Padrao (cyan)", level: 2 },
   { id: "cores-customizadas", label: "Cores customizadas", level: 2 },
   { id: "velocidade", label: "Velocidade", level: 2 },
-  { id: "dot-size", label: "Tamanho dos dots", level: 2 },
+  { id: "dot-size", label: "Tamanho dos pontos", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
 
@@ -41,7 +41,7 @@ const PROPS = [
     type: "number",
     default: "3",
     description:
-      "Tamanho dos dots em pixels. Controla tambem o espacamento entre eles (dotSize * 3)",
+      "Tamanho dos pontos em pixels. Controla tambem o espacamento entre eles (dotSize * 3)",
   },
   {
     name: "opacities",
@@ -64,7 +64,7 @@ export default function CanvasRevealEffectPage() {
       title="CanvasRevealEffect"
       description="Efeito canvas com dots animados que se revelam radialmente a partir do centro. Ideal como background interativo de cards, heroes e secoes de destaque. Sem dependencias externas — puro Canvas API."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
@@ -166,7 +166,7 @@ export default function CanvasRevealEffectPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="dot-size" title="Tamanho dos dots">
+      <DocSection id="dot-size" title="Tamanho dos pontos">
         <p className="text-muted-foreground text-sm">
           O{" "}
           <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">

@@ -67,7 +67,7 @@ export default function ScaleInPage() {
       title="ScaleIn"
       description="Scale entrance animation com spring physics. Escala de initialScale ate 1 com fade in simultaneo. Ideal para cards, modals e popovers."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

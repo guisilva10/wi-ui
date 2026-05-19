@@ -90,7 +90,7 @@ export default function TestimonialsSectionPage() {
       title="TestimonialsSection"
       description="Secao de depoimentos em grid com rating por estrelas, avatar com fallback de iniciais e informacoes do autor."
       breadcrumbs={BREADCRUMBS}
-      badge="Block"
+      badge="Bloco"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

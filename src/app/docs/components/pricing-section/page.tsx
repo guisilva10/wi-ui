@@ -102,7 +102,7 @@ export default function PricingSectionPage() {
       title="PricingSection"
       description="Secao de pricing completa com multiplos planos, ancoragem de preco, badge de destaque e lista de features."
       breadcrumbs={BREADCRUMBS}
-      badge="Block"
+      badge="Bloco"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

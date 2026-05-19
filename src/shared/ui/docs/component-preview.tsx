@@ -46,7 +46,7 @@ function ComponentPreview({
             )}
           >
             <Eye className="size-3.5" aria-hidden="true" />
-            Preview
+            Visualização
           </button>
           <button
             onClick={() => setActiveTab("code")}
@@ -58,7 +58,7 @@ function ComponentPreview({
             )}
           >
             <Code2 className="size-3.5" aria-hidden="true" />
-            Code
+            Código
           </button>
         </div>
 

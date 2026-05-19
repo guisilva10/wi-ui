@@ -21,7 +21,7 @@ const TOC = [
   { id: "destructive", label: "Destructive", level: 2 },
   { id: "link", label: "Link", level: 2 },
   { id: "tamanhos", label: "Tamanhos", level: 2 },
-  { id: "loading", label: "Loading", level: 2 },
+  { id: "loading", label: "Carregando", level: 2 },
   { id: "desabilitado", label: "Desabilitado", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
@@ -131,19 +131,19 @@ export default function ButtonPage() {
 
       <DocSection id="tamanhos" title="Tamanhos">
         <ComponentPreview
-          code={`<Button size="sm">Small</Button>
-<Button size="md">Medium</Button>
-<Button size="lg">Large</Button>`}
+          code={`<Button size="sm">Pequeno</Button>
+<Button size="md">Médio</Button>
+<Button size="lg">Grande</Button>`}
         >
           <div className="flex flex-wrap items-center gap-3">
-            <Button size="sm">Small</Button>
-            <Button size="md">Medium</Button>
-            <Button size="lg">Large</Button>
+            <Button size="sm">Pequeno</Button>
+            <Button size="md">Médio</Button>
+            <Button size="lg">Grande</Button>
           </div>
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="loading" title="Loading">
+      <DocSection id="loading" title="Carregando">
         <ComponentPreview
           code={`<Button isLoading loadingText="Salvando...">Salvar</Button>
 <Button isLoading variant="outline">Carregando</Button>`}

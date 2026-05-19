@@ -60,7 +60,7 @@ export default function StaggerChildrenPage() {
       title="StaggerChildren"
       description="Container que anima seus filhos em sequencia com delay incremental. Ideal para listas, grids de cards e menus. Respeita prefers-reduced-motion."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

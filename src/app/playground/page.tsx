@@ -4,12 +4,15 @@ import { useState } from "react";
 import { PanelLeft, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { buttonVariants } from "@/shared/ui/components/button/button.variants";
+import { useTheme } from "@/shared/ui/layout/theme-provider";
 import { ThemePanel } from "./theme-panel";
 import { ThemePreview } from "./theme-preview";
 import { ThemeExport } from "./theme-export";
 import { useThemeCustomizer } from "./use-theme-customizer";
 
 export default function PlaygroundPage() {
+  const { theme, toggleTheme } = useTheme();
+
   const {
     state,
     cssVariables,
@@ -21,7 +24,10 @@ export default function PlaygroundPage() {
     setPrimaryC,
     setPrimaryH,
     reset,
-  } = useThemeCustomizer();
+  } = useThemeCustomizer({
+    externalMode: theme,
+    onModeChange: () => toggleTheme(),
+  });
 
   const [showExport, setShowExport] = useState(false);
   const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
@@ -35,6 +41,7 @@ export default function PlaygroundPage() {
           <div className="p-4">
             <ThemePanel
               state={state}
+              isDark={theme === "dark"}
               onPreset={setPreset}
               onToggleMode={toggleMode}
               onSetRadius={setRadius}
@@ -78,6 +85,7 @@ export default function PlaygroundPage() {
               <div className="p-4">
                 <ThemePanel
                   state={state}
+                  isDark={theme === "dark"}
                   onPreset={(p) => {
                     setPreset(p);
                   }}
@@ -134,7 +142,7 @@ export default function PlaygroundPage() {
 
             <div className="ml-auto flex items-center gap-2">
               <span className="text-muted-foreground hidden text-xs sm:block">
-                Preview isolado do site
+                Pré-visualização isolada
               </span>
             </div>
           </div>

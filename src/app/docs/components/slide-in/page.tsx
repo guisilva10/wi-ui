@@ -72,7 +72,7 @@ export default function SlideInPage() {
       title="SlideIn"
       description="Slide entrance animation com direcao customizavel. Combina translate + opacity para uma entrada fluida. Respeita prefers-reduced-motion."
       breadcrumbs={BREADCRUMBS}
-      badge="Animation"
+      badge="Animação"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

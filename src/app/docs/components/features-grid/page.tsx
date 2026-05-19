@@ -136,7 +136,7 @@ export default function FeaturesGridPage() {
       title="FeaturesGrid"
       description="Grid de features para landing pages. Apresente funcionalidades com icone, titulo e descricao em 2, 3 ou 4 colunas."
       breadcrumbs={BREADCRUMBS}
-      badge="Block"
+      badge="Bloco"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">

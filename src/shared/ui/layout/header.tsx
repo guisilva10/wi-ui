@@ -44,7 +44,7 @@ function ThemeSwitcher() {
 }
 
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
+  { label: "Início", href: "/" },
   { label: "Docs", href: "/docs" },
   { label: "Playground", href: "/playground" },
 ] as const;

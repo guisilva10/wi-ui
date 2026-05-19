@@ -14,7 +14,7 @@ function Footer() {
             className="size-5"
           />
           <p className="text-muted-foreground text-sm">
-            &copy; 2026 WI.UI &mdash; 2V Educação
+            &copy; 2026 WI.UI · 2V Educação
           </p>
         </div>
 
@@ -31,7 +31,7 @@ function Footer() {
             href="/docs"
             className="text-muted-foreground hover:text-foreground text-sm transition-colors"
           >
-            Docs
+            Documentação
           </Link>
         </nav>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useReducer } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import { DEFAULT_PRESET, type ThemePreset } from "./theme-presets";
 
 export interface ThemeState {
@@ -21,14 +21,17 @@ type ThemeAction =
   | { type: "SET_PRIMARY_H"; value: number }
   | { type: "RESET" };
 
-const initialState: ThemeState = {
-  preset: "default",
-  mode: "light",
-  radius: 0.5,
-  primaryL: DEFAULT_PRESET.light.primaryL,
-  primaryC: DEFAULT_PRESET.light.primaryC,
-  primaryH: DEFAULT_PRESET.light.primaryH,
-};
+function createInitialState(mode: "light" | "dark"): ThemeState {
+  const colors = mode === "dark" ? DEFAULT_PRESET.dark : DEFAULT_PRESET.light;
+  return {
+    preset: "default",
+    mode,
+    radius: 0.5,
+    primaryL: colors.primaryL,
+    primaryC: colors.primaryC,
+    primaryH: colors.primaryH,
+  };
+}
 
 function themeReducer(state: ThemeState, action: ThemeAction): ThemeState {
   switch (action.type) {
@@ -60,7 +63,7 @@ function themeReducer(state: ThemeState, action: ThemeAction): ThemeState {
     case "SET_PRIMARY_H":
       return { ...state, preset: "custom", primaryH: action.value };
     case "RESET":
-      return { ...initialState };
+      return createInitialState(state.mode);
     default:
       return state;
   }
@@ -130,8 +133,26 @@ function buildExportCss(state: ThemeState): string {
   return `:root {\n${formatVars(lightVars)}\n}\n\n.dark {\n${formatVars(darkVars)}\n}`;
 }
 
-function useThemeCustomizer() {
-  const [state, dispatch] = useReducer(themeReducer, initialState);
+interface UseThemeCustomizerOptions {
+  externalMode: "light" | "dark";
+  onModeChange?: (mode: "light" | "dark") => void;
+}
+
+function useThemeCustomizer({
+  externalMode,
+  onModeChange,
+}: UseThemeCustomizerOptions) {
+  const [state, dispatch] = useReducer(
+    themeReducer,
+    externalMode,
+    createInitialState,
+  );
+
+  useEffect(() => {
+    if (externalMode !== state.mode) {
+      dispatch({ type: "TOGGLE_MODE" });
+    }
+  }, [externalMode, state.mode]);
 
   const cssVariables = buildCssVariables(state);
   const exportCss = buildExportCss(state);
@@ -140,7 +161,10 @@ function useThemeCustomizer() {
     (preset: ThemePreset) => dispatch({ type: "SET_PRESET", preset }),
     [],
   );
-  const toggleMode = useCallback(() => dispatch({ type: "TOGGLE_MODE" }), []);
+  const toggleMode = useCallback(() => {
+    dispatch({ type: "TOGGLE_MODE" });
+    onModeChange?.(state.mode === "light" ? "dark" : "light");
+  }, [onModeChange, state.mode]);
   const setRadius = useCallback(
     (value: number) => dispatch({ type: "SET_RADIUS", value }),
     [],

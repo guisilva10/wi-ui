@@ -14,10 +14,10 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "sm", label: "Small", level: 2 },
-  { id: "md", label: "Medium", level: 2 },
-  { id: "lg", label: "Large", level: 2 },
-  { id: "xl", label: "Extra Large", level: 2 },
+  { id: "sm", label: "Pequeno", level: 2 },
+  { id: "md", label: "Médio", level: 2 },
+  { id: "lg", label: "Grande", level: 2 },
+  { id: "xl", label: "Extra Grande", level: 2 },
   { id: "cor-customizada", label: "Cor customizada", level: 2 },
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "codigo-fonte", label: "Codigo fonte", level: 2 },
@@ -69,25 +69,25 @@ export default function SpinnerPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="sm" title="Small">
+      <DocSection id="sm" title="Pequeno">
         <ComponentPreview code={`<Spinner size="sm" />`}>
           <Spinner size="sm" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="md" title="Medium">
+      <DocSection id="md" title="Médio">
         <ComponentPreview code={`<Spinner size="md" />`}>
           <Spinner size="md" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="lg" title="Large">
+      <DocSection id="lg" title="Grande">
         <ComponentPreview code={`<Spinner size="lg" />`}>
           <Spinner size="lg" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="xl" title="Extra Large">
+      <DocSection id="xl" title="Extra Grande">
         <ComponentPreview code={`<Spinner size="xl" />`}>
           <Spinner size="xl" />
         </ComponentPreview>

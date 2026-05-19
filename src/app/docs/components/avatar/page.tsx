@@ -14,10 +14,10 @@ const BREADCRUMBS = [
 const TOC = [
   { id: "instalacao", label: "Instalacao", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
-  { id: "sm", label: "Small", level: 2 },
-  { id: "md", label: "Medium", level: 2 },
-  { id: "lg", label: "Large", level: 2 },
-  { id: "xl", label: "Extra Large", level: 2 },
+  { id: "sm", label: "Pequeno", level: 2 },
+  { id: "md", label: "Médio", level: 2 },
+  { id: "lg", label: "Grande", level: 2 },
+  { id: "xl", label: "Extra Grande", level: 2 },
   { id: "com-imagem", label: "Com imagem", level: 2 },
   { id: "props", label: "Props", level: 2 },
 ];
@@ -79,13 +79,13 @@ export default function AvatarPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="sm" title="Small">
+      <DocSection id="sm" title="Pequeno">
         <ComponentPreview code={`<Avatar size="sm" fallback="Joao Silva" />`}>
           <Avatar size="sm" fallback="Joao Silva" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="md" title="Medium">
+      <DocSection id="md" title="Médio">
         <ComponentPreview
           code={`<Avatar size="md" fallback="Maria Oliveira" />`}
         >
@@ -93,13 +93,13 @@ export default function AvatarPage() {
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="lg" title="Large">
+      <DocSection id="lg" title="Grande">
         <ComponentPreview code={`<Avatar size="lg" fallback="Pedro Costa" />`}>
           <Avatar size="lg" fallback="Pedro Costa" />
         </ComponentPreview>
       </DocSection>
 
-      <DocSection id="xl" title="Extra Large">
+      <DocSection id="xl" title="Extra Grande">
         <ComponentPreview code={`<Avatar size="xl" fallback="Ana Lima" />`}>
           <Avatar size="xl" fallback="Ana Lima" />
         </ComponentPreview>

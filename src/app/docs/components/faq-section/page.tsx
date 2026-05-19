@@ -90,7 +90,7 @@ export default function FAQSectionPage() {
       title="FAQSection"
       description="Secao FAQ com accordion de perguntas e respostas. Animacao suave de abertura e fechamento. Suporte a modo de multiplos itens abertos."
       breadcrumbs={BREADCRUMBS}
-      badge="Block"
+      badge="Bloco"
       toc={TOC}
     >
       <DocSection id="instalacao" title="Instalacao">
