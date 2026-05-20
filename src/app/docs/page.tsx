@@ -104,9 +104,9 @@ export default function DocsPage() {
     >
       <DocSection id="o-que-e" title="O que é WI.UI?">
         <p className="text-muted-foreground text-sm leading-relaxed">
-          WI.UI é inspirado no modelo copy-paste do shadcn/ui. Cada componente é
-          independente — você copia o código direto para o seu projeto e tem
-          controle total. Sem black-box, sem dependências ocultas.
+          WI.UI é uma coleção de componentes React independentes. Você copia o
+          código direto para o seu projeto e tem controle total. Sem black-box,
+          sem dependências ocultas.
         </p>
         <ul className="text-muted-foreground list-inside list-disc space-y-1.5 text-sm">
           <li>TypeScript com tipagem completa</li>
@@ -118,6 +118,7 @@ export default function DocsPage() {
           </li>
           <li>Mobile-first e acessível</li>
           <li>Tailwind v4 + design tokens customizáveis</li>
+          <li>Tema padrão configurado automaticamente no init</li>
           <li>Componentes Base, FOMO/Conversão e Animação</li>
         </ul>
       </DocSection>
@@ -191,6 +192,13 @@ export default function DocsPage() {
               src/lib/cn.ts
             </code>{" "}
             — utilitário de classes
+          </li>
+          <li>
+            <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">
+              globals.css
+            </code>{" "}
+            — tema padrão com variáveis de cor, tipografia e sombras (light +
+            dark)
           </li>
           <li>
             <code className="bg-muted rounded-md px-1.5 py-0.5 font-mono text-xs">

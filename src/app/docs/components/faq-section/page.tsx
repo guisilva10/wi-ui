@@ -69,7 +69,7 @@ const FAQ_ITEMS = [
   {
     question: "Como funciona o modelo copy-paste?",
     answer:
-      "Assim como o shadcn/ui, voce copia o codigo do componente direto pra sua base de codigo. Sem pacote npm, sem atualizacoes forcadas. Voce tem total controle.",
+      "Voce copia o codigo do componente direto pra sua base de codigo via CLI. Sem pacote npm, sem atualizacoes forcadas. Voce tem total controle.",
   },
   {
     question: "Funciona com qualquer framework React?",
