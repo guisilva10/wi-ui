@@ -40,11 +40,5 @@ export function injectTheme(cssPath: string, themeCSS: string): void {
     mkdirSync(dir, { recursive: true });
   }
 
-  let existingContent = "";
-  if (existsSync(fullPath)) {
-    existingContent = readFileSync(fullPath, "utf-8");
-  }
-
-  const newContent = themeCSS + "\n" + existingContent;
-  writeFileSync(fullPath, newContent, "utf-8");
+  writeFileSync(fullPath, themeCSS, "utf-8");
 }
