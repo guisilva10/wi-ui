@@ -22,6 +22,8 @@ import { fetchComponent } from "../utils/remote-registry.js";
 import { writeRemoteComponentFiles } from "../utils/files-remote.js";
 import { DEFAULT_REGISTRY_URL } from "../utils/config.js";
 import { computeCnImportPath } from "../utils/import-path.js";
+import { detectCssFile, injectTheme } from "../utils/css.js";
+import { neutralTheme } from "../themes/neutral.js";
 
 export const initCommand = defineCommand({
   meta: {
@@ -97,6 +99,11 @@ export const initCommand = defineCommand({
     // Cria cn.ts no caminho configurado (editável no wi-ui.json)
     const cnPath = await createCnUtil(fullLibDir);
     consola.success(`Utilitário criado: ${cnPath.replace(cwd + "/", "")}`);
+
+    // Injeta tema CSS padrão (neutral) no globals.css
+    const cssFile = detectCssFile(framework);
+    injectTheme(cssFile, neutralTheme);
+    consola.success(`Tema padrão adicionado em ${cssFile}`);
 
     // Instala dependências base
     const baseDeps = ["clsx", "tailwind-merge", "class-variance-authority"];
