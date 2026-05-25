@@ -101,8 +101,8 @@ export const initCommand = defineCommand({
     consola.success(`Utilitário criado: ${cnPath.replace(cwd + "/", "")}`);
 
     // Injeta tema CSS padrão (neutral) no globals.css
-    const cssFile = detectCssFile(framework);
-    injectTheme(cssFile, neutralTheme);
+    const cssFile = detectCssFile(framework, cwd);
+    injectTheme(cssFile, neutralTheme, cwd);
     consola.success(`Tema padrão adicionado em ${cssFile}`);
 
     // Instala dependências base

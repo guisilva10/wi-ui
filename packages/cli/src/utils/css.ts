@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
+import consola from "consola";
 
 const CSS_SEARCH_PATHS: Record<string, string[]> = {
   nextjs: [
@@ -20,11 +21,11 @@ const CSS_DEFAULT_PATH: Record<string, string> = {
   other: "src/index.css",
 };
 
-export function detectCssFile(framework: string): string {
+export function detectCssFile(framework: string, cwd: string): string {
   const searchPaths = CSS_SEARCH_PATHS[framework] ?? CSS_SEARCH_PATHS.other;
 
   for (const cssPath of searchPaths) {
-    if (existsSync(join(process.cwd(), cssPath))) {
+    if (existsSync(join(cwd, cssPath))) {
       return cssPath;
     }
   }
@@ -32,12 +33,25 @@ export function detectCssFile(framework: string): string {
   return CSS_DEFAULT_PATH[framework] ?? CSS_DEFAULT_PATH.other;
 }
 
-export function injectTheme(cssPath: string, themeCSS: string): void {
-  const fullPath = join(process.cwd(), cssPath);
+export function injectTheme(
+  cssPath: string,
+  themeCSS: string,
+  cwd: string,
+): void {
+  const fullPath = join(cwd, cssPath);
   const dir = dirname(fullPath);
 
   if (!existsSync(dir)) {
     mkdirSync(dir, { recursive: true });
+  }
+
+  if (existsSync(fullPath)) {
+    const existing = readFileSync(fullPath, "utf-8");
+    if (existing.trim().length > 0) {
+      const backupPath = `${fullPath}.bak`;
+      writeFileSync(backupPath, existing, "utf-8");
+      consola.warn(`Backup do CSS original salvo em: ${cssPath}.bak`);
+    }
   }
 
   writeFileSync(fullPath, themeCSS, "utf-8");
