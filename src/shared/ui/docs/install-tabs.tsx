@@ -8,7 +8,11 @@ type InstallTab = "cli" | "manual";
 
 interface InstallTabsProps {
   command: string;
-  sourceFiles: { filename: string; content: string }[];
+  sourceFiles: {
+    filename: string;
+    content: string;
+    highlightedHtml?: string;
+  }[];
   className?: string;
 }
 
@@ -113,12 +117,21 @@ function InstallTabs({ command, sourceFiles, className }: InstallTabsProps) {
               ))}
             </div>
           )}
-          <div className="bg-[oklch(0.16_0_0)] dark:bg-[oklch(0.12_0_0)]">
-            <pre className="max-h-[400px] [scrollbar-width:none] overflow-auto p-4 text-[13px] leading-relaxed [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-              <code className="font-mono text-[oklch(0.85_0_0)]">
-                {currentSource?.content ?? ""}
-              </code>
-            </pre>
+          <div className="bg-secondary/50 dark:bg-secondary">
+            {currentSource?.highlightedHtml ? (
+              <div
+                className="max-h-[400px] [scrollbar-width:none] overflow-auto p-4 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                dangerouslySetInnerHTML={{
+                  __html: currentSource.highlightedHtml,
+                }}
+              />
+            ) : (
+              <pre className="max-h-[400px] [scrollbar-width:none] overflow-auto p-4 text-[13px] leading-relaxed [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                <code className="text-foreground/85 font-mono">
+                  {currentSource?.content ?? ""}
+                </code>
+              </pre>
+            )}
           </div>
         </>
       )}

@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { registry } from "@wi-ui/registry";
+import { highlightCode } from "@/lib/shiki";
 import { CollapsibleSource } from "./collapsible-source";
 
 interface ComponentSourceProps {
@@ -8,7 +9,10 @@ interface ComponentSourceProps {
   className?: string;
 }
 
-function ComponentSource({ componentName, className }: ComponentSourceProps) {
+async function ComponentSource({
+  componentName,
+  className,
+}: ComponentSourceProps) {
   const entry = registry.find((r) => r.name === componentName);
 
   if (!entry) {
@@ -21,18 +25,28 @@ function ComponentSource({ componentName, className }: ComponentSourceProps) {
 
   const root = process.cwd();
 
-  const files = entry.files.map((filePath) => {
-    const absolutePath = join(root, filePath);
-    let content = "";
-    try {
-      content = readFileSync(absolutePath, "utf-8");
-    } catch {
-      content = `// Arquivo nao encontrado: ${filePath}`;
-    }
+  const files = await Promise.all(
+    entry.files.map(async (filePath) => {
+      const absolutePath = join(root, filePath);
+      let content = "";
+      try {
+        content = readFileSync(absolutePath, "utf-8");
+      } catch {
+        content = `// Arquivo nao encontrado: ${filePath}`;
+      }
 
-    const filename = filePath.split("/").pop() ?? filePath;
-    return { filename, content, path: filePath };
-  });
+      const filename = filePath.split("/").pop() ?? filePath;
+      const lang = filename.endsWith(".css") ? "css" : "tsx";
+      let highlightedHtml: string | undefined;
+      try {
+        highlightedHtml = await highlightCode(content, lang);
+      } catch {
+        highlightedHtml = undefined;
+      }
+
+      return { filename, content, path: filePath, highlightedHtml };
+    }),
+  );
 
   return <CollapsibleSource files={files} className={className} />;
 }

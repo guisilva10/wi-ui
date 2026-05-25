@@ -58,9 +58,9 @@ function TypingEffect() {
   }, [charIndex, isDeleting, currentWord]);
 
   return (
-    <span className="text-muted-foreground">
+    <span className="text-foreground">
       {displayed}
-      <span className="border-muted-foreground ml-px inline-block w-[2px] animate-pulse border-r-2">
+      <span className="border-foreground ml-px inline-block w-[2px] animate-pulse border-r-2">
         &nbsp;
       </span>
     </span>
@@ -301,7 +301,7 @@ export default function LandingPage() {
     <div className="bg-background">
       <div className="mx-auto max-w-5xl px-4 pt-16 pb-24 sm:pt-24">
         <div className="mb-14 max-w-2xl">
-          <h1 className="text-foreground mb-4 text-2xl font-bold tracking-tight sm:text-4xl lg:text-6xl">
+          <h1 className="text-foreground/60 mb-4 text-2xl font-bold tracking-tight sm:text-4xl lg:text-6xl">
             Componentes que você <TypingEffect /> e faz seu.
           </h1>
           <p className="text-muted-foreground mb-8 max-w-lg text-lg leading-relaxed">
@@ -321,6 +321,14 @@ export default function LandingPage() {
             </Link>
             <CopyCommand />
           </div>
+        </div>
+
+        <div className="mb-6 flex items-center gap-3">
+          <div className="bg-border/50 h-px flex-1" />
+          <span className="text-muted-foreground/50 font-mono text-xs tracking-widest uppercase">
+            preview
+          </span>
+          <div className="bg-border/50 h-px flex-1" />
         </div>
 
         <HeroShowcase />

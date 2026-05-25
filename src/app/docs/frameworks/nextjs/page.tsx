@@ -1,9 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
-import { cn } from "@/lib/cn";
-import { Copy, Check, Terminal, Package } from "lucide-react";
+import { CommandBlock } from "@/shared/ui/docs/command-block";
+import { CodeBlock } from "@/shared/ui/docs/code-block";
 
 const BREADCRUMBS = [
   { label: "Docs", href: "/docs" },
@@ -20,91 +17,6 @@ const TOC = [
   { id: "uso", label: "Uso", level: 2 },
   { id: "estrutura", label: "Estrutura", level: 2 },
 ];
-
-type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
-
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-
-  async function handleCopy() {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
-
-  return (
-    <button
-      onClick={handleCopy}
-      aria-label={copied ? "Copiado!" : "Copiar comando"}
-      className="text-muted-foreground hover:text-foreground shrink-0 transition-colors"
-    >
-      {copied ? (
-        <Check className="size-3.5 text-emerald-500" />
-      ) : (
-        <Copy className="size-3.5" />
-      )}
-    </button>
-  );
-}
-
-function CommandBlock({
-  commands,
-  icon: Icon = Terminal,
-}: {
-  commands: Record<PackageManager, string>;
-  icon?: typeof Terminal;
-}) {
-  const [pm, setPm] = useState<PackageManager>("pnpm");
-  const command = commands[pm];
-
-  return (
-    <div className="border-border overflow-hidden rounded-xl border">
-      <div className="bg-muted/30 border-border flex items-center gap-px border-b px-1 py-1">
-        {(["pnpm", "npm", "yarn", "bun"] as const).map((manager) => (
-          <button
-            key={manager}
-            onClick={() => setPm(manager)}
-            className={cn(
-              "rounded-md px-3 py-1 text-xs font-medium transition-colors",
-              pm === manager
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {manager}
-          </button>
-        ))}
-      </div>
-
-      <div className="flex items-center gap-3 px-4 py-3">
-        <Icon className="text-muted-foreground size-4 shrink-0" />
-        <code className="text-foreground flex-1 font-mono text-sm">
-          {command}
-        </code>
-        <CopyButton text={command} />
-      </div>
-    </div>
-  );
-}
-
-function CodeBlock({ code, filename }: { code: string; filename?: string }) {
-  return (
-    <div className="border-border overflow-hidden rounded-xl border">
-      {filename && (
-        <div className="bg-muted/30 border-border border-b px-4 py-2">
-          <span className="text-muted-foreground font-mono text-xs">
-            {filename}
-          </span>
-        </div>
-      )}
-      <div className="bg-muted/10 px-4 py-3">
-        <pre className="text-foreground overflow-x-auto font-mono text-sm leading-relaxed">
-          <code>{code}</code>
-        </pre>
-      </div>
-    </div>
-  );
-}
 
 export default function NextjsPage() {
   return (
@@ -179,7 +91,7 @@ export default function NextjsPage() {
             yarn: "yarn dlx @wi-ui/cli add button",
             bun: "bunx @wi-ui/cli add button",
           }}
-          icon={Package}
+          icon="package"
         />
       </DocSection>
 
@@ -198,7 +110,7 @@ export default function NextjsPage() {
             yarn: "yarn add clsx tailwind-merge",
             bun: "bun add clsx tailwind-merge",
           }}
-          icon={Package}
+          icon="package"
         />
 
         <h3 className="text-foreground mt-6 mb-2 text-sm font-semibold">
@@ -243,7 +155,7 @@ export function cn(...inputs: ClassValue[]) {
         <h3 className="text-foreground mt-6 mb-2 text-sm font-semibold">
           4. Criar pasta de componentes
         </h3>
-        <CodeBlock code={`mkdir -p src/components/ui`} />
+        <CodeBlock lang="bash" code={`mkdir -p src/components/ui`} />
       </DocSection>
 
       <DocSection id="configuracao" title="Configuracao">
@@ -307,7 +219,7 @@ export function cn(...inputs: ClassValue[]) {
             yarn: "yarn dlx @wi-ui/cli add button card badge",
             bun: "bunx @wi-ui/cli add button card badge",
           }}
-          icon={Package}
+          icon="package"
         />
 
         <p className="text-muted-foreground mt-3 text-sm">
