@@ -1,5 +1,6 @@
 import fsExtra from "fs-extra";
 import { join } from "pathe";
+import { consola } from "consola";
 
 const { readFile, writeFile, pathExists } = fsExtra;
 
@@ -31,7 +32,12 @@ export async function loadConfig(cwd: string): Promise<WiUiConfig | null> {
   if (!exists) return null;
 
   const raw = await readFile(configPath, "utf-8");
-  return JSON.parse(raw) as WiUiConfig;
+  try {
+    return JSON.parse(raw) as WiUiConfig;
+  } catch {
+    consola.error("wi-ui.json inválido. Verifique a sintaxe JSON.");
+    return null;
+  }
 }
 
 export async function saveConfig(

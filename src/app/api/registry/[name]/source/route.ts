@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { registry } from "@/features/registry/domain/registry-data";
+import { registry } from "@wi-ui/registry";
 import { readComponentFiles } from "@/features/registry/application/read-component-files";
 
 const CORS_HEADERS = {

@@ -28,7 +28,9 @@
     "build": "tsup",
     "dev": "tsup --watch",
     "lint": "eslint src",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "citty": "^0.1.6",
@@ -42,7 +44,8 @@
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20",
     "tsup": "^8.5.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.0"
   },
   "engines": {
     "node": ">=18"

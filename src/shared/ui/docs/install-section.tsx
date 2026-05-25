@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { join } from "path";
-import { registry } from "@/features/registry/domain/registry-data";
+import { registry } from "@wi-ui/registry";
 import { InstallTabs } from "./install-tabs";
 
 interface InstallSectionProps {

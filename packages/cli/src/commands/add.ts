@@ -221,7 +221,7 @@ async function addRemote(
       `Componente(s) não encontrado(s) no registry remoto: ${notFound.join(", ")}`,
     );
     consola.info("Tentando fallback local...");
-    await addLocal(notFound, targetDir, cwd, pm, overwrite);
+    await addLocal(notFound, targetDir, libDir, cnImport, cwd, pm, overwrite);
   }
 
   if (toAdd.length === 0) {
@@ -237,14 +237,8 @@ async function addRemote(
   for (const entry of toAdd) {
     consola.start(`Adicionando ${entry.name} (remoto)...`);
 
-    const remoteData = await fetchComponent(registryUrl, entry.name);
-    if (!remoteData) {
-      consola.warn(`Falha ao baixar "${entry.name}". Pulando.`);
-      continue;
-    }
-
     const createdFiles = await writeRemoteComponentFiles(
-      remoteData.files as Array<{
+      entry.files as Array<{
         name: string;
         path: string;
         content: string;

@@ -33,22 +33,16 @@ export const registry: RegistryEntry[] = [
       "Label inline para status, tags e contadores. Variants: default, secondary, destructive, outline, success, warning.",
     version: "1.0.0",
     category: "base",
-    files: [
-      "src/shared/ui/components/badge/badge.tsx",
-      "src/shared/ui/components/badge/badge.variants.ts",
-    ],
+    files: ["src/shared/ui/components/badge/badge.tsx"],
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
   },
   {
     name: "button",
     description:
-      "Botão com variants (default, secondary, outline, ghost, destructive, link), sizes e estado isLoading integrado.",
+      "Botão acessível com variants (default, secondary, outline, ghost, destructive, link) e múltiplos tamanhos.",
     version: "1.0.0",
     category: "base",
-    files: [
-      "src/shared/ui/components/button/button.tsx",
-      "src/shared/ui/components/button/button.variants.ts",
-    ],
+    files: ["src/shared/ui/components/button/button.tsx"],
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
   },
   {
@@ -88,15 +82,184 @@ export const registry: RegistryEntry[] = [
     dependencies: ["clsx", "tailwind-merge"],
   },
   {
+    name: "label",
+    description:
+      "Label acessível para campos de formulário. Integra com peer-disabled.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/label/label.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "checkbox",
+    description:
+      "Checkbox nativo estilizado com CSS puro. Suporta checked, disabled e focus states.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/checkbox/checkbox.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "switch",
+    description:
+      "Toggle switch acessível com role switch e aria-checked. Controlled/uncontrolled.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/switch/switch.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "alert",
+    description:
+      "Alerta semântico com variantes default e destructive. Sub-componentes: AlertTitle, AlertDescription.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/alert/alert.tsx"],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "progress",
+    description:
+      "Barra de progresso acessível com role progressbar e aria-valuenow. Valor configurável.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/progress/progress.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "table",
+    description:
+      "Tabela estilizada com sub-componentes: Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/table/table.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "tabs",
+    description:
+      "Tabs com Context puro. Controlled/uncontrolled. Sub-componentes: Tabs, TabsList, TabsTrigger, TabsContent.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/tabs/tabs.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "dialog",
+    description:
+      "Modal dialog com overlay, ESC para fechar, e scroll lock. Sub-componentes: Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/dialog/dialog.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "accordion",
+    description:
+      "Accordion com suporte single/multiple e collapsible. Sub-componentes: Accordion, AccordionItem, AccordionTrigger, AccordionContent.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/accordion/accordion.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "dropdown-menu",
+    description:
+      "Dropdown menu com Context. Click outside e ESC para fechar. Sub-componentes: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/dropdown-menu/dropdown-menu.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "sheet",
+    description:
+      "Painel lateral (drawer) com variantes de posição: top, bottom, left, right. Overlay, ESC e scroll lock.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/sheet/sheet.tsx"],
+    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
+  },
+  {
+    name: "tooltip",
+    description:
+      "Tooltip leve com posicionamento (top, bottom, left, right) e delay configurável. CSS puro, sem portais.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/tooltip/tooltip.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "select",
+    description:
+      "Select customizado com Context. Dropdown com check no item selecionado. Controlled/uncontrolled.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/select/select.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "breadcrumb",
+    description:
+      "Navegação breadcrumb composável com Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator e BreadcrumbEllipsis.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/breadcrumb/breadcrumb.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "popover",
+    description:
+      "Popover flutuante com posicionamento automático, portal rendering e close on outside click/escape.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/popover/popover.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "toast",
+    description:
+      "Sistema de notificações toast com variantes (default, success, error, warning). API imperativa via toast() function + Toaster component.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/toast/toast.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "skeleton",
+    description:
+      "Placeholder loading com animação pulse. Simples e composável para criar layouts skeleton.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/skeleton/skeleton.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "scroll-area",
+    description:
+      "Área de scroll customizada com scrollbar estilizada que aparece no hover. Suporta orientação vertical, horizontal ou ambas.",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/scroll-area/scroll-area.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  {
+    name: "command",
+    description:
+      "Command palette composável com busca, grupos, items, shortcuts e dialog modal (Ctrl+K).",
+    version: "1.0.0",
+    category: "base",
+    files: ["src/shared/ui/components/command/command.tsx"],
+    dependencies: ["clsx", "tailwind-merge"],
+  },
+  // FOMO
+  {
     name: "countdown-timer",
     description:
       "Timer regressivo com urgência visual. Muda automaticamente para vermelho/pulsante quando < 1h. Animação flip nos dígitos.",
     version: "1.0.0",
     category: "fomo",
-    files: [
-      "src/shared/ui/components/countdown-timer/countdown-timer.tsx",
-      "src/shared/ui/components/countdown-timer/countdown-timer.variants.ts",
-    ],
+    files: ["src/shared/ui/components/countdown-timer/countdown-timer.tsx"],
     dependencies: [
       "class-variance-authority",
       "clsx",
@@ -119,10 +282,7 @@ export const registry: RegistryEntry[] = [
       'Badge de escassez com barra de progresso. Muda automaticamente para "critical" quando < 20% disponível.',
     version: "1.0.0",
     category: "fomo",
-    files: [
-      "src/shared/ui/components/scarcity-badge/scarcity-badge.tsx",
-      "src/shared/ui/components/scarcity-badge/scarcity-badge.variants.ts",
-    ],
+    files: ["src/shared/ui/components/scarcity-badge/scarcity-badge.tsx"],
     dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
   },
   {
@@ -151,10 +311,7 @@ export const registry: RegistryEntry[] = [
       "Banner full-width com countdown inline e animação slide-down. Variantes: info, warning, critical. Dispensável.",
     version: "1.0.0",
     category: "fomo",
-    files: [
-      "src/shared/ui/components/urgency-banner/urgency-banner.tsx",
-      "src/shared/ui/components/urgency-banner/urgency-banner.variants.ts",
-    ],
+    files: ["src/shared/ui/components/urgency-banner/urgency-banner.tsx"],
     dependencies: [
       "class-variance-authority",
       "clsx",
@@ -172,6 +329,7 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/visitor-counter/visitor-counter.tsx"],
     dependencies: ["clsx", "tailwind-merge", "motion"],
   },
+  // Animation
   {
     name: "fade-in",
     description:
@@ -236,181 +394,9 @@ export const registry: RegistryEntry[] = [
     dependencies: ["clsx", "tailwind-merge"],
   },
   {
-    name: "hero-section",
-    description:
-      "Seção hero completa com badge, título com highlight, subtítulo e CTA buttons. Variantes de alinhamento centro ou esquerda.",
-    version: "1.0.0",
-    category: "block",
-    files: ["src/shared/ui/components/hero-section/hero-section.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "features-grid",
-    description:
-      "Grid de features com ícone, título e descrição. Suporte a 2, 3 ou 4 colunas. Ideal para apresentar funcionalidades de um produto.",
-    version: "1.0.0",
-    category: "block",
-    files: ["src/shared/ui/components/features-grid/features-grid.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "pricing-section",
-    description:
-      "Seção de pricing completa com múltiplos planos, ancoragem de preço, badge de destaque e lista de features com check/x.",
-    version: "1.0.0",
-    category: "block",
-    files: ["src/shared/ui/components/pricing-section/pricing-section.tsx"],
-    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
-  },
-  {
-    name: "testimonials-section",
-    description:
-      "Seção de depoimentos em grid com rating por estrelas, avatar com fallback de iniciais e informações do autor.",
-    version: "1.0.0",
-    category: "block",
-    files: [
-      "src/shared/ui/components/testimonials-section/testimonials-section.tsx",
-    ],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "cta-section",
-    description:
-      "Seção call-to-action final com título, descrição e botões. Variantes: default, bordered e filled (fundo escuro).",
-    version: "1.0.0",
-    category: "block",
-    files: ["src/shared/ui/components/cta-section/cta-section.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "faq-section",
-    description:
-      "Seção FAQ com accordion de perguntas e respostas. Suporte a múltiplos itens abertos simultaneamente. Animação de abertura/fechamento.",
-    version: "1.0.0",
-    category: "block",
-    files: ["src/shared/ui/components/faq-section/faq-section.tsx"],
-    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
-  },
-  {
-    name: "accordion",
-    description:
-      "Accordion com suporte a single/multiple aberto, collapsible, e animação grid-rows CSS. Sub-componentes: Accordion, AccordionItem, AccordionTrigger, AccordionContent.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/accordion/accordion.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "alert",
-    description:
-      "Alerta com variantes info, success, warning, destructive. Sub-componentes: Alert, AlertTitle, AlertDescription.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/alert/alert.tsx"],
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-  },
-  {
-    name: "checkbox",
-    description:
-      "Checkbox estilizado com label opcional. Suporte a checked, disabled e indeterminate.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/checkbox/checkbox.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "dialog",
-    description:
-      "Modal dialog com overlay, animação fade+zoom, escape to close e click outside. Sub-componentes: Dialog, DialogContent, DialogHeader, DialogFooter, DialogTitle, DialogDescription.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/dialog/dialog.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "dropdown-menu",
-    description:
-      "Menu dropdown portal-based com animação. Sub-componentes: DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuLabel.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/dropdown-menu/dropdown-menu.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "label",
-    description: "Label acessível para form fields com suporte a htmlFor.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/label/label.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "progress",
-    description:
-      "Barra de progresso com animação de transição suave. Valor de 0-100.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/progress/progress.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "select",
-    description:
-      "Select portal-based com animação, busca e suporte a grupos. Sub-componentes: Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/select/select.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "sheet",
-    description:
-      "Painel lateral (drawer) com 4 posições: top, bottom, left, right. Overlay, escape to close, animação slide-in. Sub-componentes: Sheet, SheetContent, SheetHeader, SheetFooter, SheetTitle, SheetDescription.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/sheet/sheet.tsx"],
-    dependencies: ["class-variance-authority", "clsx", "tailwind-merge"],
-  },
-  {
-    name: "switch",
-    description:
-      "Toggle switch com animação de transição. Suporte a checked, disabled e label.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/switch/switch.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "table",
-    description:
-      "Tabela responsiva com container rounded e border. Sub-componentes: Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/table/table.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "tabs",
-    description:
-      "Tabs com animação de troca. Sub-componentes: Tabs, TabsList, TabsTrigger, TabsContent.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/tabs/tabs.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "tooltip",
-    description:
-      "Tooltip com 4 posições (top, bottom, left, right), delay configurável e animação fade+zoom.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/tooltip/tooltip.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
     name: "marquee",
     description:
-      "Scroll infinito horizontal ou vertical com pause on hover, reverse e repeat configurável. Ideal para logos, testimonials e banners.",
+      "Scroll infinito horizontal ou vertical com pause on hover. CSS puro, sem deps de animacao.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/marquee/marquee.tsx"],
@@ -419,7 +405,7 @@ export const registry: RegistryEntry[] = [
   {
     name: "number-ticker",
     description:
-      "Animação de contagem numérica com spring physics. Suporte a casas decimais, direção up/down e delay. Usa IntersectionObserver.",
+      "Contador animado com spring physics. Incrementa/decrementa suavemente ao entrar no viewport.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/number-ticker/number-ticker.tsx"],
@@ -428,25 +414,25 @@ export const registry: RegistryEntry[] = [
   {
     name: "confetti",
     description:
-      "Efeito confetti com partículas animadas. Trigger via click ou programático. Cores, quantidade e duração configuráveis.",
+      "Explosão de confetes coloridos com partículas animadas. Ativação controlada via prop isActive.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/confetti/confetti.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge", "motion"],
   },
   {
     name: "arc-timeline",
     description:
-      "Timeline circular/arco animada com items posicionados ao longo do arco. Ideal para roadmaps e históricos.",
+      "Timeline circular interativa com steps clicáveis. Rotação suave, ícones e conteúdo por step.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/arc-timeline/arc-timeline.tsx"],
-    dependencies: ["clsx", "tailwind-merge", "motion"],
+    dependencies: ["clsx", "tailwind-merge"],
   },
   {
     name: "dot-grid",
     description:
-      "Background canvas com grid de dots animados por wave. Responde a prefers-reduced-motion. Gap, radius, velocidade e centro da onda configuráveis.",
+      "Grid de pontos animados com onda sinusoidal. Canvas 2D, zero deps externas. Ideal como background decorativo.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/dot-grid/dot-grid.tsx"],
@@ -455,7 +441,7 @@ export const registry: RegistryEntry[] = [
   {
     name: "animated-wave",
     description:
-      "Background canvas com ondas animadas. Cores, velocidade, amplitude e frequência configuráveis.",
+      "Onda ASCII animada com caracteres Unicode. Canvas 2D, respeita tema dark/light. Background decorativo.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/animated-wave/animated-wave.tsx"],
@@ -464,43 +450,43 @@ export const registry: RegistryEntry[] = [
   {
     name: "animated-sphere",
     description:
-      "Esfera 3D animada via WebGL (OGL). Cores, velocidade de rotação e wireframe configuráveis.",
+      "Esfera 3D wireframe renderizada com caracteres ASCII. Canvas 2D, rotação contínua. Background decorativo.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/animated-sphere/animated-sphere.tsx"],
-    dependencies: ["ogl", "clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge"],
   },
   {
     name: "grainient",
     description:
-      "Background gradiente animado com grain via WebGL (OGL). Cores, velocidade, warp, contraste, saturação e zoom configuráveis.",
+      "Gradiente animado com warp, grain e noise via WebGL 2 shader. Cores, velocidade e efeitos configuráveis.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/grainient/grainient.tsx"],
-    dependencies: ["ogl", "clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge", "ogl"],
   },
   {
     name: "light-rays",
     description:
-      "Raios de luz animados via WebGL (OGL). Origem configurável (8 posições), cor, velocidade, espalhamento, comprimento, fade, distorção e tracking de mouse com smoothing.",
+      "Raios de luz animados via WebGL shader. Origem configurável, mouse follow, pulsação e distorção.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/light-rays/light-rays.tsx"],
-    dependencies: ["ogl", "clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge", "ogl"],
   },
   {
     name: "dark-veil",
     description:
-      "Background procedural via CPPN (Compositional Pattern Producing Network) em WebGL. Hue shift, scanlines, noise, domain warp e escala de resolução configuráveis.",
+      "Background procedural via CPPN neural network shader. Hue shift, scanlines, noise e warp configuráveis.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/dark-veil/dark-veil.tsx"],
-    dependencies: ["ogl", "clsx", "tailwind-merge"],
+    dependencies: ["clsx", "tailwind-merge", "ogl"],
   },
   {
     name: "sparkle-button",
     description:
-      "Botão com borda giratória animada e partículas cintilantes ao hover. Usa var(--primary) e var(--primary-foreground) do tema. Sem dependências externas.",
+      "Botão com borda rotativa animada, glow e partículas sparkle no hover. Usa var(--primary) do tema.",
     version: "1.0.0",
     category: "animation",
     files: ["src/shared/ui/components/sparkle-button/sparkle-button.tsx"],
@@ -578,58 +564,61 @@ export const registry: RegistryEntry[] = [
     files: ["src/shared/ui/components/retro-grid/retro-grid.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
+  // Blocks
   {
-    name: "breadcrumb",
+    name: "hero-section",
     description:
-      "Navegação breadcrumb composável com Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator e BreadcrumbEllipsis.",
+      "Seção hero completa com badge, título com highlight, subtítulo e CTA buttons. Variantes de alinhamento centro ou esquerda.",
     version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/breadcrumb/breadcrumb.tsx"],
+    category: "block",
+    files: ["src/shared/ui/components/hero-section/hero-section.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
   {
-    name: "popover",
+    name: "features-grid",
     description:
-      "Popover flutuante com posicionamento automático, portal rendering e close on outside click/escape. Suporta controlled e uncontrolled.",
+      "Grid de features com ícone, título e descrição. Suporte a 2, 3 ou 4 colunas. Ideal para apresentar funcionalidades de um produto.",
     version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/popover/popover.tsx"],
+    category: "block",
+    files: ["src/shared/ui/components/features-grid/features-grid.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
   {
-    name: "toast",
+    name: "pricing-section",
     description:
-      "Sistema de notificações toast com variantes (default, success, error, warning). API imperativa via toast() function + Toaster component.",
+      "Seção de pricing completa com múltiplos planos, ancoragem de preço, badge de destaque e lista de features com check/x.",
     version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/toast/toast.tsx"],
+    category: "block",
+    files: ["src/shared/ui/components/pricing-section/pricing-section.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
+  },
+  {
+    name: "testimonials-section",
+    description:
+      "Seção de depoimentos em grid com rating por estrelas, avatar com fallback de iniciais e informações do autor.",
+    version: "1.0.0",
+    category: "block",
+    files: [
+      "src/shared/ui/components/testimonials-section/testimonials-section.tsx",
+    ],
     dependencies: ["clsx", "tailwind-merge"],
   },
   {
-    name: "skeleton",
+    name: "cta-section",
     description:
-      "Placeholder loading com animação pulse. Simples e composável para criar layouts skeleton.",
+      "Seção call-to-action final com título, descrição e botões. Variantes: default, bordered e filled (fundo escuro).",
     version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/skeleton/skeleton.tsx"],
+    category: "block",
+    files: ["src/shared/ui/components/cta-section/cta-section.tsx"],
     dependencies: ["clsx", "tailwind-merge"],
   },
   {
-    name: "scroll-area",
+    name: "faq-section",
     description:
-      "Área de scroll customizada com scrollbar estilizada que aparece no hover. Suporta orientação vertical, horizontal ou ambas.",
+      "Seção FAQ com accordion de perguntas e respostas. Suporte a múltiplos itens abertos simultaneamente. Animação de abertura/fechamento.",
     version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/scroll-area/scroll-area.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
-  },
-  {
-    name: "command",
-    description:
-      "Command palette composável com busca, grupos, items, shortcuts e dialog modal (Ctrl+K). Inclui Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandDialog.",
-    version: "1.0.0",
-    category: "base",
-    files: ["src/shared/ui/components/command/command.tsx"],
-    dependencies: ["clsx", "tailwind-merge"],
+    category: "block",
+    files: ["src/shared/ui/components/faq-section/faq-section.tsx"],
+    dependencies: ["clsx", "tailwind-merge", "lucide-react"],
   },
 ];

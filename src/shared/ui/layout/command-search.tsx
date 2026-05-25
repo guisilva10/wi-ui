@@ -21,6 +21,7 @@ import {
   Wand2,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { registry } from "@wi-ui/registry";
 
 interface SearchItem {
   name: string;
@@ -28,245 +29,52 @@ interface SearchItem {
   category: string;
 }
 
-const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  Base: <Layers className="size-3.5" />,
-  FOMO: <Zap className="size-3.5" />,
-  Animação: <Wand2 className="size-3.5" />,
-  Backgrounds: <Image className="size-3.5" />,
-  Blocos: <Layout className="size-3.5" />,
-  Páginas: <FileText className="size-3.5" />,
+const CATEGORY_LABELS: Record<string, string> = {
+  base: "Base",
+  fomo: "FOMO",
+  animation: "Animação",
+  block: "Blocos",
 };
 
-const SEARCH_ITEMS: SearchItem[] = [
-  { name: "Accordion", href: "/docs/components/accordion", category: "Base" },
-  { name: "Alert", href: "/docs/components/alert", category: "Base" },
-  { name: "Avatar", href: "/docs/components/avatar", category: "Base" },
-  { name: "Badge", href: "/docs/components/badge", category: "Base" },
-  { name: "Breadcrumb", href: "/docs/components/breadcrumb", category: "Base" },
-  { name: "Button", href: "/docs/components/button", category: "Base" },
-  { name: "Card", href: "/docs/components/card", category: "Base" },
-  { name: "Checkbox", href: "/docs/components/checkbox", category: "Base" },
-  { name: "Command", href: "/docs/components/command", category: "Base" },
-  { name: "Dialog", href: "/docs/components/dialog", category: "Base" },
-  {
-    name: "DropdownMenu",
-    href: "/docs/components/dropdown-menu",
-    category: "Base",
-  },
-  { name: "Input", href: "/docs/components/input", category: "Base" },
-  { name: "Label", href: "/docs/components/label", category: "Base" },
-  { name: "Popover", href: "/docs/components/popover", category: "Base" },
-  { name: "Progress", href: "/docs/components/progress", category: "Base" },
-  {
-    name: "ScrollArea",
-    href: "/docs/components/scroll-area",
-    category: "Base",
-  },
-  { name: "Select", href: "/docs/components/select", category: "Base" },
-  { name: "Separator", href: "/docs/components/separator", category: "Base" },
-  { name: "Sheet", href: "/docs/components/sheet", category: "Base" },
-  { name: "Skeleton", href: "/docs/components/skeleton", category: "Base" },
-  { name: "Spinner", href: "/docs/components/spinner", category: "Base" },
-  { name: "Switch", href: "/docs/components/switch", category: "Base" },
-  { name: "Table", href: "/docs/components/table", category: "Base" },
-  { name: "Tabs", href: "/docs/components/tabs", category: "Base" },
-  { name: "Textarea", href: "/docs/components/textarea", category: "Base" },
-  { name: "Toast", href: "/docs/components/toast", category: "Base" },
-  { name: "Tooltip", href: "/docs/components/tooltip", category: "Base" },
-  {
-    name: "CountdownTimer",
-    href: "/docs/components/countdown-timer",
-    category: "FOMO",
-  },
-  {
-    name: "PricingCard",
-    href: "/docs/components/pricing-card",
-    category: "FOMO",
-  },
-  {
-    name: "ScarcityBadge",
-    href: "/docs/components/scarcity-badge",
-    category: "FOMO",
-  },
-  {
-    name: "SocialProof",
-    href: "/docs/components/social-proof",
-    category: "FOMO",
-  },
-  {
-    name: "TestimonialCarousel",
-    href: "/docs/components/testimonial-carousel",
-    category: "FOMO",
-  },
-  {
-    name: "UrgencyBanner",
-    href: "/docs/components/urgency-banner",
-    category: "FOMO",
-  },
-  {
-    name: "VisitorCounter",
-    href: "/docs/components/visitor-counter",
-    category: "FOMO",
-  },
-  {
-    name: "ArcTimeline",
-    href: "/docs/components/arc-timeline",
-    category: "Animação",
-  },
-  {
-    name: "BentoGrid",
-    href: "/docs/components/bento-grid",
-    category: "Animação",
-  },
-  {
-    name: "BlurFade",
-    href: "/docs/components/blur-fade",
-    category: "Animação",
-  },
-  {
-    name: "BorderBeam",
-    href: "/docs/components/border-beam",
-    category: "Animação",
-  },
-  {
-    name: "CanvasRevealEffect",
-    href: "/docs/components/canvas-reveal-effect",
-    category: "Animação",
-  },
-  {
-    name: "CardSpotlight",
-    href: "/docs/components/card-spotlight",
-    category: "Animação",
-  },
-  { name: "Confetti", href: "/docs/components/confetti", category: "Animação" },
-  { name: "FadeIn", href: "/docs/components/fade-in", category: "Animação" },
-  { name: "Marquee", href: "/docs/components/marquee", category: "Animação" },
-  {
-    name: "NumberTicker",
-    href: "/docs/components/number-ticker",
-    category: "Animação",
-  },
-  {
-    name: "Particles",
-    href: "/docs/components/particles",
-    category: "Animação",
-  },
-  {
-    name: "RetroGrid",
-    href: "/docs/components/retro-grid",
-    category: "Animação",
-  },
-  { name: "Ripple", href: "/docs/components/ripple", category: "Animação" },
-  { name: "ScaleIn", href: "/docs/components/scale-in", category: "Animação" },
-  {
-    name: "ShineBorder",
-    href: "/docs/components/shine-border",
-    category: "Animação",
-  },
-  { name: "SlideIn", href: "/docs/components/slide-in", category: "Animação" },
-  {
-    name: "SparkleButton",
-    href: "/docs/components/sparkle-button",
-    category: "Animação",
-  },
-  {
-    name: "StaggerChildren",
-    href: "/docs/components/stagger-children",
-    category: "Animação",
-  },
-  {
-    name: "TextReveal",
-    href: "/docs/components/text-reveal",
-    category: "Animação",
-  },
-  {
-    name: "TypingAnimation",
-    href: "/docs/components/typing-animation",
-    category: "Animação",
-  },
-  {
-    name: "AnimatedSphere",
-    href: "/docs/components/animated-sphere",
-    category: "Backgrounds",
-  },
-  {
-    name: "AnimatedWave",
-    href: "/docs/components/animated-wave",
-    category: "Backgrounds",
-  },
-  {
-    name: "DarkVeil",
-    href: "/docs/components/dark-veil",
-    category: "Backgrounds",
-  },
-  {
-    name: "DotGrid",
-    href: "/docs/components/dot-grid",
-    category: "Backgrounds",
-  },
-  {
-    name: "Grainient",
-    href: "/docs/components/grainient",
-    category: "Backgrounds",
-  },
-  {
-    name: "LightRays",
-    href: "/docs/components/light-rays",
-    category: "Backgrounds",
-  },
-  {
-    name: "CTASection",
-    href: "/docs/components/cta-section",
-    category: "Blocos",
-  },
-  {
-    name: "FAQSection",
-    href: "/docs/components/faq-section",
-    category: "Blocos",
-  },
-  {
-    name: "FeaturesGrid",
-    href: "/docs/components/features-grid",
-    category: "Blocos",
-  },
-  {
-    name: "HeroSection",
-    href: "/docs/components/hero-section",
-    category: "Blocos",
-  },
-  {
-    name: "PricingSection",
-    href: "/docs/components/pricing-section",
-    category: "Blocos",
-  },
-  {
-    name: "TestimonialsSection",
-    href: "/docs/components/testimonials-section",
-    category: "Blocos",
-  },
+function toDisplayName(kebabName: string): string {
+  return kebabName
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
+const REGISTRY_ITEMS: SearchItem[] = registry.map((entry) => ({
+  name: toDisplayName(entry.name),
+  href: `/docs/components/${entry.name}`,
+  category: CATEGORY_LABELS[entry.category] ?? entry.category,
+}));
+
+const STATIC_ITEMS: SearchItem[] = [
   { name: "Primeiros Passos", href: "/docs", category: "Páginas" },
   { name: "Playground", href: "/playground", category: "Páginas" },
 ];
 
-const RECENT_SUGGESTIONS: SearchItem[] = [
-  { name: "Button", href: "/docs/components/button", category: "Base" },
-  { name: "Card", href: "/docs/components/card", category: "Base" },
-  {
-    name: "SparkleButton",
-    href: "/docs/components/sparkle-button",
-    category: "Animação",
-  },
-  {
-    name: "HeroSection",
-    href: "/docs/components/hero-section",
-    category: "Blocos",
-  },
-  {
-    name: "CountdownTimer",
-    href: "/docs/components/countdown-timer",
-    category: "FOMO",
-  },
+const SEARCH_ITEMS: SearchItem[] = [...REGISTRY_ITEMS, ...STATIC_ITEMS];
+
+const CATEGORY_ICONS: Record<string, React.ReactNode> = {
+  Base: <Layers className="size-3.5" />,
+  FOMO: <Zap className="size-3.5" />,
+  Animação: <Wand2 className="size-3.5" />,
+  Blocos: <Layout className="size-3.5" />,
+  Páginas: <FileText className="size-3.5" />,
+};
+
+const RECENT_SUGGESTION_NAMES = [
+  "button",
+  "card",
+  "sparkle-button",
+  "hero-section",
+  "countdown-timer",
 ];
+
+const RECENT_SUGGESTIONS: SearchItem[] = RECENT_SUGGESTION_NAMES.flatMap(
+  (name) => REGISTRY_ITEMS.filter((item) => item.href.endsWith(`/${name}`)),
+);
 
 function groupByCategory(items: SearchItem[]): Record<string, SearchItem[]> {
   return items.reduce<Record<string, SearchItem[]>>((acc, item) => {

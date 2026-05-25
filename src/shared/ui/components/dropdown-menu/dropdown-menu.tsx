@@ -50,12 +50,13 @@ function DropdownMenu({ children }: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
+    if (!open) return;
     function handleEscape(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
     }
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
-  }, []);
+  }, [open]);
 
   return (
     <DropdownContext.Provider
