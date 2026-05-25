@@ -1,5 +1,4 @@
 import { Header } from "@/shared/ui/layout/header";
-import { UserMenu } from "@/features/auth/presentation/user-menu";
 
 export default function PlaygroundLayout({
   children,
@@ -8,7 +7,7 @@ export default function PlaygroundLayout({
 }) {
   return (
     <>
-      <Header extraRight={<UserMenu />} />
+      <Header />
       <div className="flex-1 overflow-hidden">{children}</div>
     </>
   );
