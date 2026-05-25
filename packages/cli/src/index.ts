@@ -1,9 +1,14 @@
 import { defineCommand, runMain } from "citty";
+import { readPackageJSON } from "pkg-types";
+
+const pkg = await readPackageJSON(
+  new URL("../package.json", import.meta.url).pathname,
+);
 
 const main = defineCommand({
   meta: {
     name: "wi-ui",
-    version: "0.1.0",
+    version: pkg.version ?? "0.0.0",
     description: "Adicione componentes WI.UI ao seu projeto",
   },
   subCommands: {
