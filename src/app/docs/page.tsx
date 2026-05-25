@@ -1,9 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import { DocPage, DocSection } from "@/shared/ui/docs/doc-page";
-import { cn } from "@/lib/cn";
-import { Copy, Check, Terminal, Package } from "lucide-react";
+import { CommandBlock } from "@/shared/ui/docs/command-block";
+import { CodeBlock } from "@/shared/ui/docs/code-block";
 import Link from "next/link";
 import { SiNextdotjs, SiVite, SiRemix, SiAstro } from "react-icons/si";
 
@@ -14,86 +11,6 @@ const TOC = [
   { id: "adicionar-componente", label: "Adicionar componente", level: 2 },
   { id: "uso", label: "Uso", level: 2 },
 ];
-
-type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
-
-const INIT_COMMANDS: Record<PackageManager, string> = {
-  pnpm: "pnpm dlx @wi-ui/cli init",
-  npm: "npx @wi-ui/cli init",
-  yarn: "yarn dlx @wi-ui/cli init",
-  bun: "bunx @wi-ui/cli init",
-};
-
-const ADD_COMMANDS: Record<PackageManager, string> = {
-  pnpm: "pnpm dlx @wi-ui/cli add button",
-  npm: "npx @wi-ui/cli add button",
-  yarn: "yarn dlx @wi-ui/cli add button",
-  bun: "bunx @wi-ui/cli add button",
-};
-
-function CopyButton({ text }: { text: string }) {
-  const [copied, setCopied] = useState(false);
-
-  async function handleCopy() {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
-
-  return (
-    <button
-      onClick={handleCopy}
-      aria-label={copied ? "Copiado!" : "Copiar comando"}
-      className="text-muted-foreground hover:text-foreground shrink-0 transition-colors"
-    >
-      {copied ? (
-        <Check className="size-3.5 text-emerald-500" />
-      ) : (
-        <Copy className="size-3.5" />
-      )}
-    </button>
-  );
-}
-
-function CommandBlock({
-  commands,
-  icon: Icon = Terminal,
-}: {
-  commands: Record<PackageManager, string>;
-  icon?: typeof Terminal;
-}) {
-  const [pm, setPm] = useState<PackageManager>("pnpm");
-  const command = commands[pm];
-
-  return (
-    <div className="border-border overflow-hidden rounded-xl border">
-      <div className="bg-muted/30 border-border flex items-center gap-px border-b px-1 py-1">
-        {(["pnpm", "npm", "yarn", "bun"] as const).map((manager) => (
-          <button
-            key={manager}
-            onClick={() => setPm(manager)}
-            className={cn(
-              "rounded-md px-3 py-1 text-xs font-medium transition-colors",
-              pm === manager
-                ? "bg-background text-foreground shadow-sm"
-                : "text-muted-foreground hover:text-foreground",
-            )}
-          >
-            {manager}
-          </button>
-        ))}
-      </div>
-
-      <div className="flex items-center gap-3 overflow-x-auto px-4 py-3">
-        <Icon className="text-muted-foreground size-4 shrink-0" />
-        <code className="text-foreground flex-1 font-mono text-xs whitespace-nowrap sm:text-sm">
-          {command}
-        </code>
-        <CopyButton text={command} />
-      </div>
-    </div>
-  );
-}
 
 export default function DocsPage() {
   return (
@@ -177,7 +94,14 @@ export default function DocsPage() {
           base e prepara a pasta de componentes.
         </p>
 
-        <CommandBlock commands={INIT_COMMANDS} />
+        <CommandBlock
+          commands={{
+            pnpm: "pnpm dlx @wi-ui/cli init",
+            npm: "npx @wi-ui/cli init",
+            yarn: "yarn dlx @wi-ui/cli init",
+            bun: "bunx @wi-ui/cli init",
+          }}
+        />
 
         <p className="text-muted-foreground mt-4 text-sm">Isso vai criar:</p>
         <ul className="text-muted-foreground list-inside list-disc space-y-1 text-sm">
@@ -215,7 +139,15 @@ export default function DocsPage() {
           código e instala dependências automaticamente.
         </p>
 
-        <CommandBlock commands={ADD_COMMANDS} icon={Package} />
+        <CommandBlock
+          commands={{
+            pnpm: "pnpm dlx @wi-ui/cli add button",
+            npm: "npx @wi-ui/cli add button",
+            yarn: "yarn dlx @wi-ui/cli add button",
+            bun: "bunx @wi-ui/cli add button",
+          }}
+          icon="package"
+        />
 
         <p className="text-muted-foreground mt-3 text-sm">
           O componente será copiado para{" "}
@@ -231,10 +163,9 @@ export default function DocsPage() {
           Após adicionar um componente, importe e use normalmente:
         </p>
 
-        <div className="border-border overflow-hidden rounded-xl border">
-          <div className="bg-muted/30 px-4 py-3">
-            <pre className="text-foreground overflow-x-auto font-mono text-sm">
-              <code>{`import { Button } from "@/components/ui/button";
+        <CodeBlock
+          lang="tsx"
+          code={`import { Button } from "@/components/ui/button";
 
 export function Example() {
   return (
@@ -243,10 +174,8 @@ export function Example() {
       <Button variant="outline">Cancelar</Button>
     </div>
   );
-}`}</code>
-            </pre>
-          </div>
-        </div>
+}`}
+        />
       </DocSection>
     </DocPage>
   );
