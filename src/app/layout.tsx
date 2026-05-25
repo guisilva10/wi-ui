@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     template: "%s | WI.UI",
   },
   description:
-    "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo. 29+ componentes: base, FOMO, animação e blocos.",
+    "Componentes React bonitos, acessíveis e prontos para produção. Copy-paste, TypeScript, dark mode nativo. 60+ componentes: base, FOMO, animação e blocos.",
   keywords: [
     "react",
     "components",
@@ -52,8 +52,16 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("wi-ui-theme");if(t==="dark")document.documentElement.classList.add("dark")}catch(e){}`,
+          }}
+        />
+      </head>
       <body className="flex min-h-full flex-col overflow-x-hidden">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
