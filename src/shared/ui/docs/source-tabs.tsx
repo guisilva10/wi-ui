@@ -8,6 +8,7 @@ interface SourceFile {
   filename: string;
   content: string;
   path: string;
+  highlightedHtml?: string;
 }
 
 interface SourceTabsProps {
@@ -81,12 +82,19 @@ function SourceTabs({ files, className }: SourceTabsProps) {
       </div>
 
       {/* Code area */}
-      <div className="bg-[oklch(0.16_0_0)] dark:bg-[oklch(0.12_0_0)]">
-        <pre className="[scrollbar-width:none] overflow-x-auto p-5 text-[13px] leading-relaxed [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <code className="font-mono text-[oklch(0.85_0_0)]">
-            {currentFile?.content ?? ""}
-          </code>
-        </pre>
+      <div className="bg-secondary/50 dark:bg-secondary">
+        {currentFile?.highlightedHtml ? (
+          <div
+            className="[scrollbar-width:none] overflow-x-auto p-5 [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            dangerouslySetInnerHTML={{ __html: currentFile.highlightedHtml }}
+          />
+        ) : (
+          <pre className="[scrollbar-width:none] overflow-x-auto p-5 text-[13px] leading-relaxed [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            <code className="text-foreground/85 font-mono">
+              {currentFile?.content ?? ""}
+            </code>
+          </pre>
+        )}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { registry } from "@wi-ui/registry";
+import { highlightCode } from "@/lib/shiki";
 import { InstallTabs } from "./install-tabs";
 
 interface InstallSectionProps {
@@ -8,7 +9,10 @@ interface InstallSectionProps {
   className?: string;
 }
 
-function InstallSection({ componentName, className }: InstallSectionProps) {
+async function InstallSection({
+  componentName,
+  className,
+}: InstallSectionProps) {
   const entry = registry.find((r) => r.name === componentName);
 
   if (!entry) {
@@ -22,18 +26,28 @@ function InstallSection({ componentName, className }: InstallSectionProps) {
   const root = process.cwd();
   const command = `npx @wi-ui/cli add ${componentName}`;
 
-  const sourceFiles = entry.files.map((filePath) => {
-    const absolutePath = join(root, filePath);
-    let content = "";
-    try {
-      content = readFileSync(absolutePath, "utf-8");
-    } catch {
-      content = `// Arquivo nao encontrado: ${filePath}`;
-    }
+  const sourceFiles = await Promise.all(
+    entry.files.map(async (filePath) => {
+      const absolutePath = join(root, filePath);
+      let content = "";
+      try {
+        content = readFileSync(absolutePath, "utf-8");
+      } catch {
+        content = `// Arquivo nao encontrado: ${filePath}`;
+      }
 
-    const filename = filePath.split("/").pop() ?? filePath;
-    return { filename, content };
-  });
+      const filename = filePath.split("/").pop() ?? filePath;
+      const lang = filename.endsWith(".css") ? "css" : "tsx";
+      let highlightedHtml: string | undefined;
+      try {
+        highlightedHtml = await highlightCode(content, lang);
+      } catch {
+        highlightedHtml = undefined;
+      }
+
+      return { filename, content, highlightedHtml };
+    }),
+  );
 
   return (
     <InstallTabs
