@@ -21,7 +21,7 @@ function PropsTable({ props }: PropsTableProps) {
       </div>
 
       {/* Prop rows */}
-      <div className="border-border/40 divide-border/40 divide-y rounded-xl border">
+      <div className="border-border divide-border divide-y rounded-xl border">
         {props.map((prop) => (
           <div
             key={prop.name}

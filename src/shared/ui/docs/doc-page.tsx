@@ -28,7 +28,7 @@ function DocPage({
   children,
 }: DocPageProps) {
   return (
-    <div className="flex min-h-[calc(100vh-3.5rem)]">
+    <div className="flex flex-1">
       {/* Main content */}
       <main className="min-w-0 flex-1 px-4 py-8 sm:px-6 md:px-10 lg:px-12">
         <div className="mx-auto max-w-5xl">
@@ -65,7 +65,7 @@ function DocPage({
           {/* Page header */}
           <div className="mb-10 space-y-3">
             <div className="flex items-center gap-3">
-              <h1 className="text-foreground text-2xl font-bold tracking-tight sm:text-3xl">
+              <h1 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl">
                 {title}
               </h1>
               {badge && (
@@ -89,9 +89,14 @@ function DocPage({
 
       {/* Right sidebar - Table of Contents (xl screens only) */}
       {toc && toc.length > 0 && (
-        <aside className="sticky top-14 hidden h-fit max-h-[calc(100vh-3.5rem)] w-52 shrink-0 overflow-y-auto p-5 pt-10 xl:block">
-          <TableOfContents items={toc} />
-        </aside>
+        <>
+          {/* Spacer to reserve width */}
+          <div className="hidden w-52 shrink-0 xl:block" />
+          {/* Fixed TOC panel */}
+          <aside className="fixed top-14 right-0 hidden h-[calc(100vh-3.5rem)] w-52 overflow-y-auto p-5 pt-10 xl:block">
+            <TableOfContents items={toc} />
+          </aside>
+        </>
       )}
     </div>
   );
@@ -111,7 +116,7 @@ function DocSection({
 }) {
   return (
     <section id={id} className={cn("scroll-mt-20 space-y-4", className)}>
-      <h2 className="group text-foreground flex items-center gap-2 text-lg font-semibold tracking-tight">
+      <h2 className="group text-foreground flex items-center gap-2 text-base font-semibold tracking-tight">
         <a
           href={`#${id}`}
           className="hover:text-foreground flex items-center gap-2 no-underline transition-colors"

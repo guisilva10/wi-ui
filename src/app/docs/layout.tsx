@@ -7,12 +7,17 @@ export default function DocsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="flex h-screen flex-col">
       <Header />
-      <div className="flex min-h-[calc(100vh-3.5rem)] flex-col lg:flex-row">
+      <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
         <DocsSidebar />
-        <div className="min-w-0 flex-1 overflow-x-hidden">{children}</div>
+        <div
+          data-docs-scroll
+          className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto"
+        >
+          {children}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
