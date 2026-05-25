@@ -1,8 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import {
-  registry,
-  type RegistryEntry,
-} from "@/features/registry/domain/registry-data";
+import { registry, type RegistryEntry } from "@wi-ui/registry";
 
 const REGISTRY_VERSION = "0.1.0";
 
