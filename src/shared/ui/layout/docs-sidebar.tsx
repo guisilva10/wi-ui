@@ -36,7 +36,7 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Componentes Base",
-    defaultOpen: true,
+    defaultOpen: false,
     links: [
       { label: "Accordion", href: "/docs/components/accordion", isNew: false },
       { label: "Alert", href: "/docs/components/alert", isNew: false },
@@ -81,7 +81,7 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "FOMO & Conversao",
-    defaultOpen: true,
+    defaultOpen: false,
     links: [
       { label: "CountdownTimer", href: "/docs/components/countdown-timer" },
       { label: "PricingCard", href: "/docs/components/pricing-card" },
@@ -97,7 +97,7 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Animacao",
-    defaultOpen: true,
+    defaultOpen: false,
     links: [
       {
         label: "ArcTimeline",
@@ -163,7 +163,7 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Backgrounds",
-    defaultOpen: true,
+    defaultOpen: false,
     links: [
       {
         label: "AnimatedSphere",
@@ -183,7 +183,7 @@ const SIDEBAR_ITEMS: SidebarSection[] = [
   },
   {
     section: "Blocos",
-    defaultOpen: true,
+    defaultOpen: false,
     links: [
       {
         label: "CTASection",
@@ -228,38 +228,66 @@ function SidebarSectionItem({
 }) {
   const pathname = usePathname();
 
+  const isActive = section.links.some((link) => pathname === link.href);
+
+  const [open, setOpen] = useState(() => {
+    if (section.defaultOpen) return true;
+    return isActive;
+  });
+
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    if (isActive && !open) {
+      setOpen(true);
+    }
+  }
+
   return (
     <div>
-      <div className="text-foreground/80 py-1.5 text-xs font-semibold tracking-wide uppercase">
-        {section.section}
-      </div>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between py-1.5"
+      >
+        <span className="text-foreground/80 text-xs font-semibold tracking-wide uppercase">
+          {section.section}
+        </span>
+        <ChevronDown
+          className={cn(
+            "text-muted-foreground size-3.5 transition-transform duration-200",
+            open && "rotate-180",
+          )}
+        />
+      </button>
 
-      <ul className="border-border/50 mt-1 ml-1 space-y-px border-l pl-3">
-        {section.links.map(({ label, href, isNew }) => {
-          const isActive = pathname === href;
-          return (
-            <li key={href}>
-              <Link
-                href={href}
-                onClick={onLinkClick}
-                className={cn(
-                  "relative -ml-px block border-l py-1.5 pl-3 text-[13px] transition-colors",
-                  isActive
-                    ? "border-primary text-primary font-medium"
-                    : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
-                )}
-              >
-                {label}
-                {isNew && (
-                  <span className="ml-1.5 inline-flex rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[10px] leading-none font-medium text-emerald-600 dark:text-emerald-400">
-                    Novo
-                  </span>
-                )}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
+      {open && (
+        <ul className="border-border/50 mt-1 ml-1 space-y-px border-l pl-3">
+          {section.links.map(({ label, href, isNew }) => {
+            const isActiveLink = pathname === href;
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={onLinkClick}
+                  className={cn(
+                    "relative -ml-px block border-l py-1.5 pl-3 text-[13px] transition-colors",
+                    isActiveLink
+                      ? "border-accent-link text-accent-link font-medium"
+                      : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
+                  )}
+                >
+                  {label}
+                  {isNew && (
+                    <span className="ml-1.5 inline-flex rounded-full bg-emerald-500/10 px-1.5 py-0.5 text-[10px] leading-none font-medium text-emerald-600 dark:text-emerald-400">
+                      Novo
+                    </span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

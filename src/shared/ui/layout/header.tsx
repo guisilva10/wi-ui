@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { buttonVariants } from "@/shared/ui/components/button";
@@ -54,32 +55,47 @@ interface HeaderProps {
 
 function Header({ extraRight }: HeaderProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="bg-background/80 border-border sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <div className="relative flex h-14 items-center justify-between px-4 lg:px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center select-none">
+        <Link href="/" className="flex items-center gap-2 select-none">
           <Image
             src="/logo.png"
             alt="WI.UI"
-            width={28}
-            height={28}
-            className="size-8 rounded-lg"
+            width={24}
+            height={24}
+            className="size-6 rounded-md"
           />
+          <span className="text-foreground text-sm font-bold tracking-tight">
+            WI.UI
+          </span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(buttonVariants({ variant: "link", size: "sm" }))}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  buttonVariants({ variant: "link", size: "sm" }),
+                  isActive
+                    ? "text-accent-link font-medium"
+                    : "text-muted-foreground",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
 
           <div className="bg-border mx-1 h-4 w-px" />
 
@@ -140,19 +156,28 @@ function Header({ extraRight }: HeaderProps) {
         )}
       >
         <nav className="flex flex-col gap-1 pt-2">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "justify-start",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "justify-start",
+                  isActive
+                    ? "text-accent-link font-medium"
+                    : "text-muted-foreground",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
 
           <a
             href="https://github.com/guisilva10/wi-ui"

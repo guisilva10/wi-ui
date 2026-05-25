@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { cn } from "@/lib/cn";
 
 interface TocItem {
@@ -15,19 +15,43 @@ interface TableOfContentsProps {
 
 function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>("");
+  const atBottomRef = useRef(false);
 
   useEffect(() => {
     if (items.length === 0) return;
 
+    const lastId = items[items.length - 1].id;
+
+    // Detect scroll-to-bottom to activate last TOC item
+    const scrollContainer =
+      document.querySelector("[data-docs-scroll]") ?? window;
+    const isWindow = scrollContainer === window;
+
+    function handleScroll() {
+      const atBottom = isWindow
+        ? window.innerHeight + window.scrollY >= document.body.scrollHeight - 20
+        : (scrollContainer as HTMLElement).scrollTop +
+            (scrollContainer as HTMLElement).clientHeight >=
+          (scrollContainer as HTMLElement).scrollHeight - 20;
+
+      if (atBottom && !atBottomRef.current) {
+        setActiveId(lastId);
+      }
+      atBottomRef.current = atBottom;
+    }
+
+    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
+
     const observer = new IntersectionObserver(
       (entries) => {
+        if (atBottomRef.current) return;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
           }
         }
       },
-      { rootMargin: "-80px 0px -80% 0px", threshold: 0 },
+      { rootMargin: "-80px 0px -40% 0px", threshold: 0 },
     );
 
     for (const item of items) {
@@ -35,7 +59,10 @@ function TableOfContents({ items }: TableOfContentsProps) {
       if (el) observer.observe(el);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
   }, [items]);
 
   if (items.length === 0) return null;
@@ -63,7 +90,7 @@ function TableOfContents({ items }: TableOfContentsProps) {
                   "-ml-px block w-full border-l py-1.5 text-left text-[13px] transition-colors",
                   item.level === 3 ? "pl-6" : "pl-3",
                   isActive
-                    ? "border-primary text-primary font-medium"
+                    ? "border-accent-link text-accent-link font-medium"
                     : "text-muted-foreground hover:border-border hover:text-foreground border-transparent",
                 )}
               >
